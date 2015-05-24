@@ -1,0 +1,90 @@
+/** Globals **/
+* {
+    font-family: monospace;
+}
+a:hover {
+    text-decoration: none;
+}
+
+/** Site **/
+/* Header */
+.header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+.header a {
+    color: #EBECE4;
+}
+.header a:hover {
+    color: white;
+}
+div.header-logo {
+    text-align: left;
+}
+img.header-logo {
+    width: 32px;
+    height: 32px;
+}
+.header-title {
+    text-align: center;
+}
+.header-nav {
+    text-align: right;
+}
+
+/* Nav */
+.nav {
+    text-align: center;
+    margin: 10px;
+}
+.nav a {
+    color: black;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+}
+.nav a:hover {
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Body */
+body {
+    background-image: url('/bundles/music/images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.body {
+}
+.body .item {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 20px;
+}
+.body .item h3 {
+    font-size: 1.5em;
+    font-family: 'Copperplate / Copperplate Gothic Light, sans-serif'
+}
+
+/* Footer */
+.footer {
+    background-color: black;
+    color: black;
+    padding: 20px;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+/* Extra */
+.fos_user_content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    width: 50%;
+    padding: 20px;
+    margin: 0 auto;
+    color: white;
+}
+.fos_user_content input {
+    color: black;
+}

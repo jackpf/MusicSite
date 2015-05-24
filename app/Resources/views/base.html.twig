@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% stylesheets '@MusicBundle/Resources/public/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% block javascripts %}
+            {% javascripts '@MusicBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row header">
+                <div class="col-xs-3 header-logo">
+                    <img class="header-logo" src="{{ asset('bundles/music/images/logo.png') }}" />
+                </div>
+                <div class="col-xs-6 header-title">
+                    smiley audio
+                </div>
+                <ul class="list-inline col-xs-3 header-nav">
+                    <li><a href="">login</a></li>
+                    <li>|</li>
+                    <li><a href="">register</a></li>
+                </ul>
+            </div>
+            <div class="background">
+                <div class="row nav">
+                    <ul class="list-inline">
+                        <li><a href="">releases</a></li>
+                        <li>|</li>
+                        <li><a href="">mixes</a></li>
+                        <li>|</li>
+                        <li><a href="">news</a></li>
+                        <li>|</li>
+                        <li><a href="">about</a></li>
+                    </ul>
+                </div>
+                <div class="row body">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="row footer navbar-fixed-bottom">
+            &copy; Jack Farrelly
+        </div>
+    </body>
+</html>

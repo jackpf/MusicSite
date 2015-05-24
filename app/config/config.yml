@@ -83,3 +83,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: MusicBundle\Entity\User
+    registration:
+        confirmation:
+            enabled:    true
+    from_email:
+        address: %mailer_user%
+        sender_name: %mailer_name%
+    service:
+        mailer:  fos_user.mailer.twig_swift

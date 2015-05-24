@@ -5,6 +5,9 @@
 a:hover {
     text-decoration: none;
 }
+ul, li {
+    list-style: none;
+}
 
 /** Site **/
 /* Header */
@@ -87,4 +90,30 @@ body {
 }
 .fos_user_content input {
     color: black;
+}
+form {
+    margin: 0 auto;
+}
+label, input {
+    display: inline-block;
+}
+label {
+    width: 30%;
+    text-align: right;
+}
+label + input {
+    width: 30%;
+    margin: 0 30% 0 4%;
+}
+input + input {
+    float: right;
+}
+form div.submit {
+    margin-top: 10px;
+}
+.profile-info {
+    text-align: left;
+}
+.profile-info ul {
+    padding: 0;
 }

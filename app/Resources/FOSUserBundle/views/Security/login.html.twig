@@ -2,6 +2,10 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}
+    | login
+{% endblock %}
+
 {% block content %}
     <div class="row fos_user_content">
         {% if error %}
@@ -20,7 +24,12 @@
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
             <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label><br />
 
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            <div class="submit">
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            </div>
+
+            <br />
+            <a href="{{ path('fos_user_resetting_request') }}">Durrr I forgot my passwerd</a>
         </form>
     </div>
 {% endblock %}

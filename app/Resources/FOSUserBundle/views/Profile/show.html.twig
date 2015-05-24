@@ -1,5 +1,12 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block content %}
+    <div class="row fos_user_content profile-info">
+        <div class="col-md-4">
+            {% include 'FOSUserBundle:Profile:profile_sidebar.html.twig' %}
+        </div>
+        <div class="col-md-8">
+            {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+        </div>
+    </div>
+{% endblock %}

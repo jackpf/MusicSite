@@ -1,12 +1,12 @@
 parameters:
     database_host: 127.0.0.1
     database_port: null
-    database_name: ~
+    database_name: Music
     database_user: root
     database_password: ~
     mailer_transport: smtp
     mailer_host: ~
-    mailer_user: ~
-    mailer_name: ~
+    mailer_user: john@doe.com
+    mailer_name: "John Doe"
     mailer_password: ~
     secret: ThisTokenIsNotSoSecretChangeIt

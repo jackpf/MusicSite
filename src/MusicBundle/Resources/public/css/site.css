@@ -8,6 +8,10 @@ a:hover {
 ul, li {
     list-style: none;
 }
+h1, h2, h3 {
+    padding: 0;
+    margin: 0;
+}
 
 /** Site **/
 /* Header */
@@ -31,6 +35,7 @@ img.header-logo {
 }
 .header-title {
     text-align: center;
+    font-size: 1.4em;
 }
 .header-nav {
     text-align: right;
@@ -46,7 +51,7 @@ img.header-logo {
     padding: 10px;
     background: rgba(255, 255, 255, 0.5);
 }
-.nav a:hover {
+.nav a:hover, .nav .active {
     color: white;
     background: rgba(0, 0, 0, 0.5);
 }
@@ -59,23 +64,50 @@ body {
     background-size: cover;
 }
 .body {
+    margin-bottom: 30px;
+}
+.body .item-container {
+    margin-bottom: 10px;
 }
 .body .item {
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 5px 20px;
+    padding: 10px 20px;
+    height: 300px;
 }
-.body .item h3 {
+.body .item .title {
     font-size: 1.5em;
     font-family: 'Copperplate / Copperplate Gothic Light, sans-serif'
+}
+.item a {
+    color: #EBECE4;
+}
+.item a:hover {
+    color: white;
+}
+.pagination-container {
+    padding-left: 50px;
+}
+.pagination span a, .pagination span.current {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 7px;
+    margin: 2px;
+    text-align: center;
+}
+.pagination a {
+    color: white;
+}
+.pagination a:hover, .pagination span.current {
+    color: black;
+    background: rgba(255, 255, 255, 0.8);
 }
 
 /* Footer */
 .footer {
     background-color: black;
     color: black;
-    padding: 20px;
-    height: 60px;
+    padding: 5px 20px 10px;
+    height: 30px;
     background-color: #f5f5f5;
 }
 
@@ -116,4 +148,21 @@ form div.submit {
 }
 .profile-info ul {
     padding: 0;
+}
+
+.single-item {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    width: 70%;
+    padding: 20px;
+    margin: 0 auto;
+    color: white;
+}
+.single-item .item-content {
+    text-align: left;
+}
+.author {
+    float: right;
+    font-style: italic;
+    font-size: 0.8em;
 }

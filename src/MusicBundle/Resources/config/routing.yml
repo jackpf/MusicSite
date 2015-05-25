@@ -1,3 +1,27 @@
 music_homepage:
     path:     /
     defaults: { _controller: MusicBundle:Music:index }
+
+music_news:
+    path:     /news
+    defaults: { _controller: MusicBundle:Music:index, type: news }
+
+music_release:
+    path:     /releases
+    defaults: { _controller: MusicBundle:Music:index, type: release }
+
+music_mix:
+    path:     /mixes
+    defaults: { _controller: MusicBundle:Music:index, type: mix }
+
+music_news_item:
+    path:     /news/{url}
+    defaults: { _controller: MusicBundle:Music:news }
+
+music_release_item:
+    path:     /release/{url}
+    defaults: { _controller: MusicBundle:Music:release }
+
+music_mix_item:
+    path:     /mix/{url}
+    defaults: { _controller: MusicBundle:Music:mix }

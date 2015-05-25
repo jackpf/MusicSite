@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="MusicBundle\Entity\MediaItem" table="media" inheritance-type="SINGLE_TABLE">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="title" />
+        <field name="shortContent" column="short_content" />
+        <field name="content" />
+        <field name="image" nullable="true" />
+        <field name="url" />
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <many-to-one field="author" target-entity="MusicBundle\Entity\User" />
+
+        <discriminator-column name="type" type="integer" />
+        <discriminator-map>
+            <discriminator-mapping value="0" class="MusicBundle\Entity\NewsItem"/>
+            <discriminator-mapping value="1" class="MusicBundle\Entity\ReleaseItem"/>
+            <discriminator-mapping value="2" class="MusicBundle\Entity\MixItem"/>
+        </discriminator-map>
+        
+        <unique-constraints>
+            <unique-constraint columns="url,type" />
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

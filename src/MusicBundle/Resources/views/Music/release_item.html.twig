@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{%block content %}
+    <div class="single-item">
+        <h1 class="title">{{ item.title }}</h1>
+        <div class="item-content">
+            {{ item.content }}
+        </div>
+    </div>
+{% endblock %}

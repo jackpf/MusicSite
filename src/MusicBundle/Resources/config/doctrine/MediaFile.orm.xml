@@ -9,7 +9,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <many-to-one target-entity="MusicBundle\Entity\MediaItem" field="mediaItem" inversed-by="mediaFile" />
+        <many-to-one target-entity="MusicBundle\Entity\MediaItem" field="mediaItem" />
         <field name="name" />
         <field name="path" />
         <lifecycle-callbacks>

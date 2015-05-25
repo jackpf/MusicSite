@@ -13,12 +13,20 @@ class NewsAdmin extends MediaAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+
+        $formMapper
+            ->add('author')
+        ;
     }
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         parent::configureDatagridFilters($datagridMapper);
+
+        $datagridMapper
+            ->add('author')
+        ;
     }
 
     // Fields to be shown on lists

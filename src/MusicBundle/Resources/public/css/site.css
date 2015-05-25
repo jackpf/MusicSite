@@ -201,3 +201,8 @@ form div.submit {
     font-style: italic;
     font-size: 0.8em;
 }
+
+/* Audio JS fix */
+.play-pause {
+    width: 40px !important;
+}

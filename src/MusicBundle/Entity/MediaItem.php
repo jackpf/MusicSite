@@ -28,8 +28,6 @@ class MediaItem
 
     protected $updatedAt;
 
-    protected $author;
-
     public function getId()
     {
         return $this->id;
@@ -135,16 +133,6 @@ class MediaItem
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    public function setAuthor($author)
-    {
-        $this->author = $author;
     }
 
     public function lifecycleFileUpload()

@@ -14,7 +14,6 @@ abstract class MediaAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('author', null, ['class' => 'Application\Sonata\UserBundle\Entity\User'])
             ->add('shortContent', 'textarea')
             ->add('content', 'textarea')
             ->add('imageFile', 'file', ['required' => false, 'label' => 'Image'])
@@ -27,7 +26,6 @@ abstract class MediaAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
-            ->add('author')
         ;
     }
 
@@ -36,7 +34,7 @@ abstract class MediaAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
-            ->add('author')
+            ->add('slug')
         ;
     }
 }

@@ -8,6 +8,21 @@
                 <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
             {% endif %}
             {{ item.content|nl2br }}
+
+            <br />
+
+            {% if item.mediaFiles|length > 0 %}
+                {{ item.mediaFiles[0].name }}<br />
+                <audio src="{{ upload_path(item.mediaFiles[0].path) }}" preload="auto"></audio>
+            {% endif %}
+
+            <br />
+
+            {% if item.downloadLink and item.mediaFiles|length > 0 %}
+                <a href="{{ path('music_download', {path: item.mediaFiles[0].path}) }}">Download mix</a>
+            {% else %}
+                Download not available
+            {% endif %}
             <br clear="both" />
         </div>
     </div>

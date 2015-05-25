@@ -25,3 +25,7 @@ music_release_item:
 music_mix_item:
     path:     /mixes/{slug}
     defaults: { _controller: MusicBundle:Music:mix }
+
+music_download:
+    path:     /download
+    defaults: { _controller: MusicBundle:Download:download }

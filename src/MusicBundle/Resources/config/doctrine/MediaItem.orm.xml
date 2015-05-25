@@ -24,7 +24,6 @@
         <field name="updatedAt" column="updated_at" type="datetime">
             <gedmo:timestampable on="update"/>
         </field>
-        <many-to-one field="author" target-entity="Application\Sonata\UserBundle\Entity\User" />
 
         <discriminator-column name="type" type="integer" />
         <discriminator-map>

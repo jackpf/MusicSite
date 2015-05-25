@@ -11,6 +11,8 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        <field name="downloadLink" column="download_link" type="boolean" nullable="true" />
+
         <lifecycle-callbacks>
             <lifecycle-callback type="preFlush" method="onPreFlush"/>
         </lifecycle-callbacks>

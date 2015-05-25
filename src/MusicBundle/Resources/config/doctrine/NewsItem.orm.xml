@@ -6,5 +6,6 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="MusicBundle\Entity\NewsItem" table="media">
+        <many-to-one field="author" target-entity="Application\Sonata\UserBundle\Entity\User" />
     </entity>
 </doctrine-mapping>

@@ -6,6 +6,8 @@ class MixItem extends MediaItem
 {
     private $mediaFiles = [];
 
+    private $downloadLink;
+
     public function getMediaFiles()
     {
         return $this->mediaFiles;
@@ -24,5 +26,15 @@ class MixItem extends MediaItem
                 $mediaFile->setMediaItem($this);
             }
         }
+    }
+
+    public function getDownloadLink()
+    {
+        return $this->downloadLink;
+    }
+
+    public function setDownloadLink($downloadLink)
+    {
+        $this->downloadLink = $downloadLink;
     }
 }

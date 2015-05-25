@@ -9,6 +9,11 @@
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+        <script>
+            audiojs.events.ready(function() {
+                var as = audiojs.createAll();
+            });
+        </script>
         <title>Smiley audio {% block title %}{% endblock %}</title>
     </head>
     <body>

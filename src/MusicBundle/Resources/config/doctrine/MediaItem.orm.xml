@@ -12,8 +12,9 @@
         </id>
         <field name="title" />
         <field name="shortContent" column="short_content" />
-        <field name="content" />
+        <field name="content" type="text" />
         <field name="image" nullable="true" />
+        <field name="background" nullable="true" />
         <field name="slug">
             <gedmo:slug unique="true" style="default" updatable="true" separator="-" fields="title" />
         </field>

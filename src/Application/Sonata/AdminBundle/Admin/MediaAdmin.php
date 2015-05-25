@@ -17,7 +17,8 @@ abstract class MediaAdmin extends Admin
             ->add('author', null, ['class' => 'Application\Sonata\UserBundle\Entity\User'])
             ->add('shortContent', 'textarea')
             ->add('content', 'textarea')
-            ->add('file', 'file', ['required' => false])
+            ->add('imageFile', 'file', ['required' => false, 'label' => 'Image'])
+            ->add('backgroundFile', 'file', ['required' => false, 'label' => 'Background'])
         ;
     }
 

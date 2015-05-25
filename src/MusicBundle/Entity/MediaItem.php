@@ -16,7 +16,11 @@ class MediaItem
 
     protected $image;
 
-    private $file;
+    private $imageFile;
+
+    protected $background;
+
+    private $backgroundFile;
 
     protected $slug;
 
@@ -71,15 +75,36 @@ class MediaItem
         $this->image = $image;
     }
 
-    public function getFile()
+    public function getImageFile()
     {
-        return $this->file;
+        return $this->imageFile;
     }
 
-    public function setFile($file)
+    public function setImageFile($imageFile)
     {
         $this->setUpdatedAt(new \DateTime());
-        $this->file = $file;
+        $this->imageFile = $imageFile;
+    }
+
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    public function setBackground($background)
+    {
+        $this->background = $background;
+    }
+
+    public function getBackgroundFile()
+    {
+        return $this->backgroundFile;
+    }
+
+    public function setBackgroundFile($backgroundFile)
+    {
+        $this->setUpdatedAt(new \DateTime());
+        $this->backgroundFile = $backgroundFile;
     }
 
     public function getSlug()
@@ -124,21 +149,24 @@ class MediaItem
 
     public function lifecycleFileUpload()
     {
-        if (!$this->getFile()) {
-            return;
+        if ($this->getImageFile()) {
+            $original = $this->getImageFile()->getClientOriginalName();
+            $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
+
+            $this->getImageFile()->move(Data::UPLOAD_DIR, $path);
+
+            $this->setImage($path);
+            $this->setImageFile(null);
         }
 
-        $original = $this->getFile()->getClientOriginalName();
-        $parts = explode('.', $original);
-        $ext = end($parts);
-        $path = sha1($original + rand()) . '.' . $ext;
+        if ($this->getBackgroundFile()) {
+            $original = $this->getBackgroundFile()->getClientOriginalName();
+            $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
 
-        $this->getFile()->move(
-            Data::UPLOAD_DIR,
-            $path
-        );
+            $this->getBackgroundFile()->move(Data::UPLOAD_DIR, $path);
 
-        $this->setImage($path);
-        $this->setFile(null);
+            $this->setBackground($path);
+            $this->setBackgroundFile(null);
+        }
     }
 }

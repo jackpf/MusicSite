@@ -9,11 +9,23 @@
         </property>
         <property name="shortContent">
             <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="max">255</option>
+            </constraint>
         </property>
         <property name="content">
             <constraint name="NotBlank" />
         </property>
-        <property name="file">
+        <property name="imageFile">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>image/jpeg</value>
+                    <value>image/png</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid image.</option>
+            </constraint>
+        </property>
+        <property name="backgroundFile">
             <constraint name="File">
                 <option name="mimeTypes">
                     <value>image/jpeg</value>

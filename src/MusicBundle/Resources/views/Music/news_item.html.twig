@@ -1,11 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {%block content %}
-    <div class="single-item">
+    <div class="col-md-9 single-item">
         <h1 class="title">{{ item.title }}</h1>
         <div class="item-content">
-            {{ item.content }}
+            {% if item.image %}
+                <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
+            {% endif %}
+            {{ item.content|nl2br }}
         </div>
-        <div class="col-lg-12 author">Published by {{ item.author.username }}</div><br clear="both" />
+        <br clear="both" />
+        <div class="col-lg-12 author">
+            {% if item.author %}
+                Published by {{ item.author.username }}
+            {% endif %}
+        </div>
+        <br clear="both" />
     </div>
 {% endblock %}

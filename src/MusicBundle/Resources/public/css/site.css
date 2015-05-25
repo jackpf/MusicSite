@@ -88,7 +88,7 @@ body {
     background-size: cover;
     padding: 0 0 0 16px;
     margin-right: 16px;
-    opacity: 0.5;
+    opacity: 0.6;
     top: 0;
     left: 0;
     bottom: 0;
@@ -97,8 +97,13 @@ body {
     z-index: -1;
 }
 .body .item .title {
-    font-size: 1.5em;
-    font-family: 'Copperplate / Copperplate Gothic Light, sans-serif'
+    margin-bottom: 5px;
+}
+.item img {
+    float: left;
+    max-width: 160px;
+    max-height: 160px;
+    padding: 10px 10px 0 5px;
 }
 .item a {
     color: #EBECE4;
@@ -175,6 +180,18 @@ form div.submit {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     color: white;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    float: none;
+}
+.single-item h1 {
+    margin-bottom: 10px;
+}
+.single-item img {
+    float:left;
+    max-width: 50%;
+    max-height: 50%;
+    padding: 10px 20px 10px 10px;
 }
 .single-item .item-content {
     text-align: left;

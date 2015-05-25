@@ -4,7 +4,11 @@
     <div class="col-md-9 single-item centered">
         <h1 class="title">{{ item.title }}</h1>
         <div class="item-content">
-            {{ item.content }}
+            {% if item.image %}
+                <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
+            {% endif %}
+            {{ item.content|nl2br }}
+            <br clear="both" />
         </div>
     </div>
 {% endblock %}

@@ -3,21 +3,25 @@
 {%block content %}
     {% for item in items %}
         <div class="col-sm-4 item-container">
-            <div class="item {{ item.image is empty ? 'item-no-background' : '' }}">
+            <div class="item {{ item.background is empty ? 'item-no-background' : '' }}">
                 <h3 class="title"><a href="{{ item_path(item) }}">{{ item.title }}</a></h3>
-                {{ item.content }}
+                {% if item.image is not empty %}
+                    <a href="{{ item_path(item) }}">
+                        <img src="{{ upload_path(item.image) }}" />
+                    </a>
+                {% endif %}
+                {{ item.shortContent }}
+                <br clear="both" />
             </div>
-            {% if item.image is not empty %}
-                <div class="item-background" style="background-image: url({{ upload_path(item.image) }});"></div>
+            {% if item.background is not empty %}
+                <div class="item-background" style="background-image: url({{ upload_path(item.background) }});"></div>
             {% endif %}
         </div>
     {% endfor %}
 {% endblock %}
 
 {% block pagination %}
-    <div class="row pagination-container">
-        {{ knp_pagination_render(items) }}
-    </div>
+    {{ knp_pagination_render(items) }}
 {% endblock %}
 
 {% block javascript %}
@@ -35,4 +39,5 @@
                 });
             }
         });
-    </script>{% endblock %}
+    </script>
+{% endblock %}

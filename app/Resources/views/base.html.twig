@@ -10,9 +10,9 @@
             {% endjavascripts %}
         {% endblock %}
         <script>
-            audiojs.events.ready(function() {
-                var as = audiojs.createAll();
-            });
+            //audiojs.events.ready(function() {
+            //    var as = audiojs.createAll();
+            //});
         </script>
         <title>Regulation XVII {% block title %}{% endblock %}</title>
     </head>
@@ -61,5 +61,6 @@
         <div class="row footer navbar-fixed-bottom">
             &copy; Jack Farrelly
         </div>
+        {% block javascript %}{% endblock %}
     </body>
 </html>

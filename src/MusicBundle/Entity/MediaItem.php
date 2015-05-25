@@ -2,6 +2,8 @@
 
 namespace MusicBundle\Entity;
 
+use MusicBundle\Data\Data;
+
 class MediaItem
 {
     protected $id;
@@ -14,7 +16,9 @@ class MediaItem
 
     protected $image;
 
-    protected $url;
+    private $file;
+
+    protected $slug;
 
     protected $createdAt;
 
@@ -67,14 +71,25 @@ class MediaItem
         $this->image = $image;
     }
 
-    public function getUrl()
+    public function getFile()
     {
-        return $this->url;
+        return $this->file;
     }
 
-    public function setUrl($url)
+    public function setFile($file)
     {
-        $this->url = $url;
+        $this->setUpdatedAt(new \DateTime());
+        $this->file = $file;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     public function getCreatedAt()
@@ -105,5 +120,25 @@ class MediaItem
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    public function lifecycleFileUpload()
+    {
+        if (!$this->getFile()) {
+            return;
+        }
+
+        $original = $this->getFile()->getClientOriginalName();
+        $parts = explode('.', $original);
+        $ext = end($parts);
+        $path = sha1($original + rand()) . '.' . $ext;
+
+        $this->getFile()->move(
+            Data::UPLOAD_DIR,
+            $path
+        );
+
+        $this->setImage($path);
+        $this->setFile(null);
     }
 }

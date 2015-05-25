@@ -73,10 +73,28 @@ body {
     margin-bottom: 10px;
 }
 .body .item {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px 20px;
     height: 300px;
+}
+.item-no-background {
+    background: rgba(0, 0, 0, 0.8);
+}
+.item-background {
+    content: "";
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    padding: 0 0 0 16px;
+    margin-right: 16px;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
 }
 .body .item .title {
     font-size: 1.5em;

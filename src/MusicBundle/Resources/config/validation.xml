@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="MusicBundle\Entity\MediaItem">
+        <property name="title">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="shortContent">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="content">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="file">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>image/jpeg</value>
+                    <value>image/png</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid image.</option>
+            </constraint>
+        </property>
+    </class>
+    <class name="MusicBundle\Entity\MixItem">
+        <property name="mediaFiles">
+            <constraint name="Valid" />
+        </property>
+    </class>
+    <class name="MusicBundle\Entity\MediaFile">
+        <property name="name">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="file">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>audio/mpeg3</value>
+                    <value>audio/x-mpeg-3</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

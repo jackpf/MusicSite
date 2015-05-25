@@ -15,13 +15,13 @@ music_mix:
     defaults: { _controller: MusicBundle:Music:index, type: mix }
 
 music_news_item:
-    path:     /news/{url}
+    path:     /news/{slug}
     defaults: { _controller: MusicBundle:Music:news }
 
 music_release_item:
-    path:     /releases/{url}
+    path:     /releases/{slug}
     defaults: { _controller: MusicBundle:Music:release }
 
 music_mix_item:
-    path:     /mixes/{url}
+    path:     /mixes/{slug}
     defaults: { _controller: MusicBundle:Music:mix }

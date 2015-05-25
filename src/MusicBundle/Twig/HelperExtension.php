@@ -21,6 +21,7 @@ class HelperExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('item_path', array($this, 'itemPath')),
+            new \Twig_SimpleFunction('upload_path', array($this, 'uploadPath')),
         );
     }
 
@@ -36,7 +37,12 @@ class HelperExtension extends \Twig_Extension
             return '';
         }
 
-        return $this->router->generate($path, ['url' => $item->getUrl()]);
+        return $this->router->generate($path, ['slug' => $item->getSlug()]);
+    }
+
+    public function uploadPath($path)
+    {
+        return '/uploads/' . $path;
     }
 
     public function getName()

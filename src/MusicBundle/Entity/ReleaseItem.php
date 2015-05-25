@@ -4,15 +4,25 @@ namespace MusicBundle\Entity;
 
 class ReleaseItem extends MediaItem
 {
-    private $path;
+    private $mediaFiles = [];
 
-    public function getPath()
+    public function getMediaFiles()
     {
-        return $this->path;
+        return $this->mediaFiles;
     }
 
-    public function setPath($path)
+    public function setMediaFiles($mediaFiles)
     {
-        $this->path = $path;
+        $this->mediaFiles = $mediaFiles;
+    }
+
+    public function onPreFlush()
+    {
+        // Doctrine doesn't seem to be setting the inverse relation
+        foreach ($this->mediaFiles as $mediaFile) {
+            if ($mediaFile) {
+                $mediaFile->setMediaItem($this);
+            }
+        }
     }
 }

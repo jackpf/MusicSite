@@ -3,10 +3,13 @@
 {%block content %}
     {% for item in items %}
         <div class="col-sm-4 item-container">
-            <div class="item">
+            <div class="item {{ item.image is empty ? 'item-no-background' : '' }}">
                 <h3 class="title"><a href="{{ item_path(item) }}">{{ item.title }}</a></h3>
                 {{ item.content }}
             </div>
+            {% if item.image is not empty %}
+                <div class="item-background" style="background-image: url({{ upload_path(item.image) }});"></div>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}
@@ -16,3 +19,20 @@
         {{ knp_pagination_render(items) }}
     </div>
 {% endblock %}
+
+{% block javascript %}
+    <script>
+        var rgba;
+        $(document).ready(function() {
+            if ($('.item').length > 0) {
+                rgba = $('.item').css('background-color').replace('rgba(', '').replace(')', '').split(',');
+
+                $('.item').mouseover(function() {
+                    $(this).css('background', 'rgba('+rgba[0]+', '+rgba[1]+', '+rgba[2]+', '+(parseFloat(rgba[3]) + 0.2)+')');
+                });
+                $('.item').mouseout(function() {
+                    $(this).css('background', 'rgba('+rgba[0]+', '+rgba[1]+', '+rgba[2]+', '+rgba[3]+')');
+                });
+            }
+        });
+    </script>{% endblock %}

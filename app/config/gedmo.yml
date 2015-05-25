@@ -39,7 +39,7 @@ stof_doctrine_extensions:
         mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
         default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
     orm:
-        default: ~
-    orm:
         default:
             timestampable: true
+            sluggable: true
+            uploadable: true

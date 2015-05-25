@@ -1,0 +1,28 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sonata.admin.news" class="Application\Sonata\AdminBundle\Admin\NewsAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="News Item"/>
+            <argument />
+            <argument>MusicBundle\Entity\NewsItem</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.release" class="Application\Sonata\AdminBundle\Admin\ReleaseAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Release Item"/>
+            <argument />
+            <argument>MusicBundle\Entity\ReleaseItem</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.mix" class="Application\Sonata\AdminBundle\Admin\MixAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Mix Item"/>
+            <argument />
+            <argument>MusicBundle\Entity\MixItem</argument>
+            <argument />
+        </service>
+        <service id="sonata.kernel_listener" class="Application\Sonata\AdminBundle\EventListener\KernelListener">
+            <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+    </services>
+</container>

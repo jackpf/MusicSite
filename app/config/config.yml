@@ -129,3 +129,7 @@ sonata_user:
 security:
     acl:
         connection: default
+
+sonata_admin:
+    title:      Regluation XVII Admin
+    title_logo: bundles/music/images/logo.png

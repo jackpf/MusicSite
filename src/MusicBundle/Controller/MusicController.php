@@ -24,6 +24,7 @@ class MusicController extends Controller
         $items = $em->getRepository(sprintf('MusicBundle\Entity\%s', $repo))
             ->createQueryBuilder('i')
             ->select('i')
+            ->orderBy('i.createdAt', 'desc')
             ->getQuery();
         $items = $this->get('knp_paginator')
             ->paginate($items, $request->get('page', 1), 6);
@@ -33,12 +34,12 @@ class MusicController extends Controller
         ]);
     }
 
-    public function newsAction($url)
+    public function newsAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
         $item = $em->getRepository('MusicBundle\Entity\NewsItem')
-            ->findOneByUrl($url);
+            ->findOneBySlug($slug);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
@@ -49,12 +50,12 @@ class MusicController extends Controller
         ]);
     }
 
-    public function releaseAction($url)
+    public function releaseAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
         $item = $em->getRepository('MusicBundle\Entity\ReleaseItem')
-            ->findOneByUrl($url);
+            ->findOneBySlug($slug);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
@@ -65,12 +66,12 @@ class MusicController extends Controller
         ]);
     }
 
-    public function mixAction($url)
+    public function mixAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
         $item = $em->getRepository('MusicBundle\Entity\MixItem')
-            ->findOneByUrl($url);
+            ->findOneBySlug($slug);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');

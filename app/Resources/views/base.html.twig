@@ -49,6 +49,8 @@
                 <div class="row nav">
                     <ul class="list-inline">
                         {% set route = app.request.attributes.get('_route') %}
+                        <li>|</li>
+                        <li><a href="">search</a></li>
                         <li><a {{ route in ['music_release', 'music_release_item'] ? 'class="active"' : '' }} href="{{ path('music_release') }}">releases</a></li>
                         <li>|</li>
                         <li><a {{ route in ['music_mix', 'music_mix_item'] ? 'class="active"' : '' }} href="{{ path('music_mix') }}">mixes</a></li>

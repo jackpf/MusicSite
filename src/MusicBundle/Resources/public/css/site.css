@@ -113,7 +113,7 @@ body {
 }
 .pagination-container {
     padding-left: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
 }
 .pagination span a, .pagination span.current {
     background: rgba(0, 0, 0, 0.8);

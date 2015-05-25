@@ -64,7 +64,6 @@ body {
     background-size: cover;
 }
 .body {
-    margin-bottom: 30px;
 }
 .body .item-container {
     margin-bottom: 10px;
@@ -87,6 +86,7 @@ body {
 }
 .pagination-container {
     padding-left: 50px;
+    margin-bottom: 30px;
 }
 .pagination span a, .pagination span.current {
     background: rgba(0, 0, 0, 0.8);

@@ -11,6 +11,7 @@
             <tag name="twig.extension" />
             <argument type="service" id="router" />
         </service>
+        <service id="music.audio.processor" class="MusicBundle\Service\AudioProcessor"></service>
     </services>
 
 </container>

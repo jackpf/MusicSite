@@ -13,6 +13,12 @@
             <argument />
             <argument>MusicBundle\Entity\ReleaseItem</argument>
             <argument />
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <call method="setAudioProcessor">
+                <argument type="service" id="music.audio.processor" />
+            </call>
         </service>
         <service id="sonata.admin.mix" class="Application\Sonata\AdminBundle\Admin\MixAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Content" label="Mix Item"/>
@@ -20,6 +26,7 @@
             <argument>MusicBundle\Entity\MixItem</argument>
             <argument />
         </service>
+
         <service id="sonata.kernel_listener" class="Application\Sonata\AdminBundle\EventListener\KernelListener">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
             <argument type="service" id="doctrine.orm.entity_manager" />

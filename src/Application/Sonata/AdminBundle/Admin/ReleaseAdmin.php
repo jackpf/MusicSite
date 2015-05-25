@@ -2,6 +2,9 @@
 
 namespace Application\Sonata\AdminBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
+use MusicBundle\Data\Data;
+use MusicBundle\Service\AudioProcessor;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -9,6 +12,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ReleaseAdmin extends MediaAdmin
 {
+    private $em;
+
+    private $ap;
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -34,5 +41,46 @@ class ReleaseAdmin extends MediaAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         parent::configureListFields($listMapper);
+    }
+
+    public function setEntityManager(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
+    public function setAudioProcessor(AudioProcessor $ap)
+    {
+        $this->ap = $ap;
+    }
+
+    public function postPersist($object)
+    {
+        $this->createPreview($object);
+    }
+
+    public function postUpdate($object)
+    {
+        $this->createPreview($object);
+    }
+
+    public function createPreview($object)
+    {
+        foreach ($object->getMediaFiles() as $file) {
+            if ($file->getFile()) {
+                $parts = explode('.', $file->getPath());
+                $previewPath = $parts[0] . '-preview.' . $parts[1];
+
+                $this->ap->trim(
+                    Data::UPLOAD_DIR . '/' . $file->getPath(),
+                    Data::UPLOAD_DIR . '/' . $previewPath,
+                    120,
+                    2
+                );
+
+                $file->setPreviewPath($previewPath);
+            }
+        }
+
+        $this->em->flush();
     }
 }

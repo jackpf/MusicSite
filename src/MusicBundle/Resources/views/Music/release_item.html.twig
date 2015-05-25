@@ -13,7 +13,7 @@
             <h2>Previews</h2>
             {% for media in item.mediaFiles %}
                 {{ media.name }}<br />
-                <audio src="{{ upload_path(media.path) }}" preload="auto"></audio>
+                <audio src="{{ upload_path(media.previewPath) }}" preload="auto"></audio>
             {% endfor %}
         </div>
     </div>

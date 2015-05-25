@@ -13,9 +13,13 @@ class MediaFile
 
     private $path;
 
+    private $previewPath;
+
     private $mediaItem;
 
     private $file;
+
+    private $previewFile;
 
     public function getId()
     {
@@ -30,6 +34,16 @@ class MediaFile
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    public function getPreviewPath()
+    {
+        return $this->previewPath;
+    }
+
+    public function setPreviewPath($previewPath)
+    {
+        $this->previewPath = $previewPath;
     }
 
     public function getName()
@@ -62,6 +76,16 @@ class MediaFile
         return $this->file;
     }
 
+    public function getPreviewFile()
+    {
+        return $this->previewFile;
+    }
+
+    public function setPreviewFile($previewFile)
+    {
+        $this->previewFile = $previewFile;
+    }
+
     public function lifecycleFileUpload()
     {
         if (!$this->getFile()) {
@@ -80,5 +104,14 @@ class MediaFile
 
         $this->setPath($path);
         $this->setFile(null);
+    }
+
+    public function lifecycleFileDelete()
+    {
+        $path = Data::UPLOAD_DIR . '/' . $this->getPath();
+
+        if ($this->getPath() != null && file_exists($path)) {
+            unlink($path);
+        }
     }
 }

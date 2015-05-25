@@ -12,7 +12,12 @@
         <br clear="both" />
         <div class="col-lg-12 author">
             {% if item.author %}
-                Published by {{ item.author.username }}
+                {% set createdAt = item.createdAt|date('jS \\of F, Y') %}
+                {% set updatedAt = item.updatedAt|date('jS \\of F, Y') %}
+                Published by {{ item.author.username }} on the {{ createdAt }}.
+                {% if item.createdAt != item.updatedAt %}
+                    <br />Last edited on the {{ updatedAt }}.
+                {% endif %}
             {% endif %}
         </div>
         <br clear="both" />

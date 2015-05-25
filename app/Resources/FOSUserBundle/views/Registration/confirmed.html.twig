@@ -3,7 +3,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block content %}
-    <div class="col-md-6 fos_user_content centered">
+    <div class="col-sm-6 fos_user_content centered">
         <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
         {% if app.session is not empty %}
             {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}

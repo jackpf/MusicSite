@@ -6,6 +6,9 @@
     <class name="MusicBundle\Entity\MediaItem">
         <property name="title">
             <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="max">40</option>
+            </constraint>
         </property>
         <property name="shortContent">
             <constraint name="NotBlank" />
@@ -47,6 +50,8 @@
         <property name="file">
             <constraint name="File">
                 <option name="mimeTypes">
+                    <value>audio/mp3</value>
+                    <value>audio/mpeg</value>
                     <value>audio/mpeg3</value>
                     <value>audio/x-mpeg-3</value>
                 </option>

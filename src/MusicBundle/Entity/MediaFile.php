@@ -21,6 +21,10 @@ class MediaFile
 
     private $previewFile;
 
+    private $createdAt;
+
+    private $updatedAt;
+
     public function getId()
     {
         return $this->id;
@@ -69,6 +73,7 @@ class MediaFile
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function getFile()
@@ -84,6 +89,26 @@ class MediaFile
     public function setPreviewFile($previewFile)
     {
         $this->previewFile = $previewFile;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function lifecycleFileUpload()
@@ -103,6 +128,7 @@ class MediaFile
         );
 
         $this->setPath($path);
+        $this->setPreviewFile($this->getFile());
         $this->setFile(null);
     }
 
@@ -112,6 +138,12 @@ class MediaFile
 
         if ($this->getPath() != null && file_exists($path)) {
             unlink($path);
+        }
+
+        $previewPath = Data::UPLOAD_DIR . '/' . $this->getPreviewPath();
+
+        if ($this->getPreviewPath() != null && file_exists($previewPath)) {
+            unlink($previewPath);
         }
     }
 }

@@ -55,18 +55,22 @@ class ReleaseAdmin extends MediaAdmin
 
     public function postPersist($object)
     {
+        parent::postPersist($object);
+
         $this->createPreview($object);
     }
 
     public function postUpdate($object)
     {
+        parent::postUpdate($object);
+
         $this->createPreview($object);
     }
 
     public function createPreview($object)
     {
         foreach ($object->getMediaFiles() as $file) {
-            if ($file->getFile()) {
+            if ($file->getPreviewFile()) {
                 $parts = explode('.', $file->getPath());
                 $previewPath = $parts[0] . '-preview.' . $parts[1];
 

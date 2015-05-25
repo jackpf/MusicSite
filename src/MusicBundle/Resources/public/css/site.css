@@ -12,6 +12,10 @@ h1, h2, h3 {
     padding: 0;
     margin: 0;
 }
+.centered {
+    margin: 0 auto;
+    float: none;
+}
 
 /** Site **/
 /* Header */
@@ -115,9 +119,7 @@ body {
 .fos_user_content {
     text-align: center;
     background: rgba(0, 0, 0, 0.8);
-    width: 50%;
     padding: 20px;
-    margin: 0 auto;
     color: white;
 }
 .fos_user_content input {
@@ -153,9 +155,7 @@ form div.submit {
 .single-item {
     text-align: center;
     background: rgba(0, 0, 0, 0.8);
-    width: 70%;
     padding: 20px;
-    margin: 0 auto;
     color: white;
 }
 .single-item .item-content {

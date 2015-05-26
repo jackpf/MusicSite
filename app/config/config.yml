@@ -138,4 +138,4 @@ sonata_admin:
     title_logo: bundles/music/images/logo.png
 
 music:
-    upload_path: %upload_dir%
+    upload_path: %upload_path%

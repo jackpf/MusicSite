@@ -10,4 +10,4 @@ parameters:
     mailer_name: "John Doe"
     mailer_password: ~
     secret: ThisTokenIsNotSoSecretChangeIt
-    upload_dir: ~
+    upload_path: ~

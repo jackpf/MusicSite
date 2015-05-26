@@ -72,18 +72,6 @@
             {% javascripts '@MusicBundle/Resources/public/js/*' %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
-
-            <script>
-                audiojs.events.ready(function() {
-                    var aj = audiojs.createAll();
-                    $('.audiojs .play-pause').on('click', function(){
-                        var thisIndex = $(this).parents('.audiojs').index('.audiojs');
-                        $.each(aj, function(index,val){
-                            if ( index != thisIndex && aj[index].playing ) aj[index].pause();
-                        });
-                    });
-                });
-            </script>
         {% endblock %}
         {% block javascript %}{% endblock %}
     </body>

@@ -3,31 +3,29 @@
 {% block title %} | {{ item.title }}{% endblock %}
 
 {%block content %}
-    <div class="row">
-        <div class="col-md-9 single-item centered">
-            <h1 class="title">{{ item.title }}</h1>
-            <div class="item-content">
-                {% if item.image %}
-                    <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
-                {% endif %}
-                {{ item.content|nl2br }}
-                <br clear="both" />
+    <div class="col-md-9 single-item centered">
+        <h1 class="title">{{ item.title }}</h1>
+        <div class="item-content">
+            {% if item.image %}
+                <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
+            {% endif %}
+            {{ item.content|nl2br }}
+            <br clear="both" />
 
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h2>Previews</h2>
-                        {% for media in item.mediaFiles %}
-                            {{ media.name }}<br />
-                            <audio src="{{ upload_path(media.previewPath) }}" preload="auto"></audio>
-                        {% endfor %}
-                    </div>
-                    <div class="col-sm-4" style="padding-top: 50px;">
-                        12": <em>Out of stock</em><br /><br />
-                        Digital download: &pound;2.95<br />
-                        <a href="">
-                            <img src="https://www.paypalobjects.com/en_US/i/btn/x-click-but5.gif" />
-                        </a>
-                    </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Previews</h2>
+                    {% for media in item.mediaFiles %}
+                        {{ media.name }}<br />
+                        <audio src="{{ upload_path(media.previewPath) }}" preload="auto"></audio>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-4" style="padding-top: 50px;">
+                    12": <em>Out of stock</em><br /><br />
+                    Digital download: &pound;2.95<br />
+                    <a href="">
+                        <img src="https://www.paypalobjects.com/en_US/i/btn/x-click-but5.gif" />
+                    </a>
                 </div>
             </div>
         </div>

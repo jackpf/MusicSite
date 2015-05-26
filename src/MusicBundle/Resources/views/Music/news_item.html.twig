@@ -3,7 +3,6 @@
 {% block title %} | {{ item.title }}{% endblock %}
 
 {%block content %}
-    <div class="row">
         <div class="col-md-9 single-item">
             <h1 class="title">{{ item.title }}</h1>
             <div class="item-content">
@@ -25,8 +24,7 @@
             </div>
             <br clear="both" />
         </div>
-    </div>
-
+    </div> <!-- Bit of a hack... -->
     <div class="row">
         <div class="col-md-9 single-item">
             <div id="disqus_thread"></div>
@@ -43,5 +41,4 @@
             </script>
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
         </div>
-    </div>
 {% endblock %}

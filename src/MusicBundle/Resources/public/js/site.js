@@ -1,4 +1,4 @@
-$('#search-link').click(function() {
+$('#search-link').click(function(e) {
     $box = $('#search-box');
     if (!$box.is(':visible')) {
         $box.slideDown();
@@ -8,4 +8,6 @@ $('#search-link').click(function() {
         $box.slideUp();
         $(this).removeClass('active');
     }
+
+    e.preventDefault();
 });

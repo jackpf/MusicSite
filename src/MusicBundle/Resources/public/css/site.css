@@ -201,7 +201,7 @@ form div.submit {
 .single-item h1 {
     margin-bottom: 10px;
 }
-.single-item img {
+.single-item .image {
     float:left;
     max-width: 50%;
     max-height: 50%;

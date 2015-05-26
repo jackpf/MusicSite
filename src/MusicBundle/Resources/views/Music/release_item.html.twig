@@ -7,7 +7,7 @@
         <h1 class="title">{{ item.title }}</h1>
         <div class="item-content">
             {% if item.image %}
-                <a href="{{ upload_path(item.image) }}"><img src="{{ upload_path(item.image) }}" /></a>
+                <a href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) }}" /></a>
             {% endif %}
             {{ item.content|nl2br }}
             <br clear="both" />
@@ -21,12 +21,17 @@
                     {% endfor %}
                 </div>
                 <div class="col-sm-4" style="padding-top: 50px;">
-                    12": &pound;7.99<br />
-                    <em>Out of stock</em><br /><br />
-                    Digital download: &pound;2.95<br />
-                    <a href="{{ path('music_download', {id: item.id}) }}">
-                        <img src="https://www.paypalobjects.com/en_US/i/btn/x-click-but5.gif" />
-                    </a>
+                    {% for variant in item.mediaVariants %}
+                        {{ variant.name }}: &pound;{{ variant.price }}<br />
+                        {% if variant.isAvailable %}
+                            <a href="{{ path('music_download', {id: item.id}) }}">
+                                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
+                            </a>
+                        {% else %}
+                            <em>Currently unavailable</em>
+                        {% endif %}
+                        <br /><br />
+                    {% endfor %}
                 </div>
             </div>
         </div>

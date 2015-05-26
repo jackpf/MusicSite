@@ -22,7 +22,7 @@ class MixAdmin extends MediaAdmin
                 'required' => false,
                 'cascade_validation' => true,
             ])
-            ->add('downloadLink', null, ['value' => false])
+            ->add('downloadLink', null)
         ;
     }
 

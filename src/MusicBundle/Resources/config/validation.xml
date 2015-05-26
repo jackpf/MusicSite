@@ -59,4 +59,19 @@
             </constraint>
         </property>
     </class>
+    <class name="MusicBundle\Entity\MediaVariant">
+        <property name="type">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="price">
+            <constraint name="Currency">
+                <option name="message">
+                    <value>Please enter a valid price.</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">40</option>
+            </constraint>
+        </property>
+    </class>
 </constraint-mapping>

@@ -6,6 +6,8 @@ class ReleaseItem extends MediaItem
 {
     private $mediaFiles = [];
 
+    private $mediaVariants;
+
     public function getMediaFiles()
     {
         return $this->mediaFiles;
@@ -16,12 +18,22 @@ class ReleaseItem extends MediaItem
         $this->mediaFiles = $mediaFiles;
     }
 
+    public function getMediaVariants()
+    {
+        return $this->mediaVariants;
+    }
+
+    public function setMediaVariants($mediaVariants)
+    {
+        $this->mediaVariants = $mediaVariants;
+    }
+
     public function onPreFlush()
     {
         // Doctrine doesn't seem to be setting the inverse relation
-        foreach ($this->mediaFiles as $mediaFile) {
-            if ($mediaFile) {
-                $mediaFile->setMediaItem($this);
+        foreach (array_merge($this->mediaFiles->toArray(), $this->mediaVariants->toArray()) as $object) {
+            if ($object) {
+                $object->setMediaItem($this);
             }
         }
     }

@@ -28,6 +28,13 @@ class ReleaseAdmin extends MediaAdmin
                 'allow_delete' => true,
                 'required' => false,
             ])
+            ->add('mediaVariants', 'collection', [
+                'type' => new MediaVariantType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+                'cascade_validation' => true,
+            ])
         ;
     }
 

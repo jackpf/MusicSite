@@ -2,11 +2,19 @@
 
 namespace MusicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class MixItem extends MediaItem
 {
-    private $mediaFiles = [];
+    private $mediaFiles;
 
     private $downloadLink;
+
+    public function __construct()
+    {
+        $this->mediaFiles = new ArrayCollection();
+        $this->mediaVariants = new ArrayCollection();
+    }
 
     public function getMediaFiles()
     {
@@ -18,16 +26,6 @@ class MixItem extends MediaItem
         $this->mediaFiles = $mediaFiles;
     }
 
-    public function onPreFlush()
-    {
-        // Doctrine doesn't seem to be setting the inverse relation
-        foreach ($this->mediaFiles as $mediaFile) {
-            if ($mediaFile) {
-                $mediaFile->setMediaItem($this);
-            }
-        }
-    }
-
     public function getDownloadLink()
     {
         return $this->downloadLink;
@@ -36,5 +34,15 @@ class MixItem extends MediaItem
     public function setDownloadLink($downloadLink)
     {
         $this->downloadLink = $downloadLink;
+    }
+
+    public function onPreFlush()
+    {
+        // Doctrine doesn't seem to be setting the inverse relation
+        foreach (array_merge($this->mediaFiles->toArray(), $this->mediaVariants->toArray()) as $object) {
+            if ($object) {
+                $object->setMediaItem($this);
+            }
+        }
     }
 }

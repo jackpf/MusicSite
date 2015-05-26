@@ -5,7 +5,7 @@ namespace MusicBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class MusicController extends Controller
+class MainController extends Controller
 {
     public function indexAction(Request $request, $type = null)
     {
@@ -58,6 +58,7 @@ class MusicController extends Controller
     public function releaseAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
+        $tokenManager = $this->get('music.token_manager');
 
         $item = $em->getRepository('MusicBundle\Entity\ReleaseItem')
             ->findOneBySlug($slug);
@@ -66,14 +67,18 @@ class MusicController extends Controller
             throw $this->createNotFoundException('Item not found');
         }
 
+        $tokens = $tokenManager->createTokens($item);
+
         return $this->render('MusicBundle:Music:release_item.html.twig', [
-            'item' => $item
+            'item' => $item,
+            'tokens' => $tokens,
         ]);
     }
 
     public function mixAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
+        $tokenManager = $this->get('music.token_manager');
 
         $item = $em->getRepository('MusicBundle\Entity\MixItem')
             ->findOneBySlug($slug);
@@ -82,8 +87,11 @@ class MusicController extends Controller
             throw $this->createNotFoundException('Item not found');
         }
 
+        $tokens = $tokenManager->createTokens($item);
+
         return $this->render('MusicBundle:Music:mix_item.html.twig', [
-            'item' => $item
+            'item' => $item,
+            'tokens' => $tokens,
         ]);
     }
 }

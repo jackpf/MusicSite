@@ -1,31 +1,35 @@
 music_homepage:
     path:     /
-    defaults: { _controller: MusicBundle:Music:index }
+    defaults: { _controller: MusicBundle:Main:index }
 
 music_news:
     path:     /news/
-    defaults: { _controller: MusicBundle:Music:index, type: news }
+    defaults: { _controller: MusicBundle:Main:index, type: news }
 
 music_release:
     path:     /releases/
-    defaults: { _controller: MusicBundle:Music:index, type: release }
+    defaults: { _controller: MusicBundle:Main:index, type: release }
 
 music_mix:
     path:     /mixes/
-    defaults: { _controller: MusicBundle:Music:index, type: mix }
+    defaults: { _controller: MusicBundle:Main:index, type: mix }
 
 music_news_item:
     path:     /news/{slug}
-    defaults: { _controller: MusicBundle:Music:news }
+    defaults: { _controller: MusicBundle:Main:news }
 
 music_release_item:
     path:     /releases/{slug}
-    defaults: { _controller: MusicBundle:Music:release }
+    defaults: { _controller: MusicBundle:Main:release }
 
 music_mix_item:
     path:     /mixes/{slug}
-    defaults: { _controller: MusicBundle:Music:mix }
+    defaults: { _controller: MusicBundle:Main:mix }
+
+music_play:
+    path:     /play/{id}/{token}
+    defaults: { _controller: MusicBundle:Media:play }
 
 music_download:
     path:     /download/{id}
-    defaults: { _controller: MusicBundle:Download:download }
+    defaults: { _controller: MusicBundle:Media:download }

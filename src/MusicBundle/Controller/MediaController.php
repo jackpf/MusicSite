@@ -10,8 +10,33 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class DownloadController extends Controller
+class MediaController extends Controller
 {
+    public function playAction(Request $request, $id, $token)
+    {
+        $file = $this->getDoctrine()->getEntityManager()
+            ->getRepository('MusicBundle\Entity\MediaFile')
+            ->find($id);
+
+        if (!$file) {
+            throw $this->createNotFoundException('File not found');
+        }
+
+        if (!$this->get('music.token_manager')->consumeToken($file, $token)) {
+            throw $this->createAccessDeniedException('Invalid token');
+        }
+
+        $response = new BinaryFileResponse(Data::UPLOAD_DIR . '/' . $file->getPreviewPath());
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_INLINE,
+            $file->getPreviewPath(),
+            iconv('UTF-8', 'ASCII//TRANSLIT', $file->getPreviewPath())
+        );
+
+        return $response;
+    }
+
     public function downloadAction(Request $request, $id)
     {
         $downloadManager = $this->get('music.download_manager');

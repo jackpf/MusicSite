@@ -17,11 +17,12 @@
                     <h2>Previews</h2>
                     {% for media in item.mediaFiles %}
                         {{ media.name }}<br />
-                        <audio src="{{ upload_path(media.previewPath) }}" preload="auto"></audio>
+                        <audio src="{{ path('music_play', {id: media.id, token: tokens[media.id].token}) }}" preload="auto"></audio>
                     {% endfor %}
                 </div>
                 <div class="col-sm-4" style="padding-top: 50px;">
-                    12": <em>Out of stock</em><br /><br />
+                    12": &pound;7.99<br />
+                    <em>Out of stock</em><br /><br />
                     Digital download: &pound;2.95<br />
                     <a href="{{ path('music_download', {id: item.id}) }}">
                         <img src="https://www.paypalobjects.com/en_US/i/btn/x-click-but5.gif" />

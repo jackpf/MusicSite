@@ -15,7 +15,7 @@
 
             {% if item.mediaFiles|length > 0 %}
                 {{ item.mediaFiles[0].name }}<br />
-                <audio src="{{ upload_path(item.mediaFiles[0].path) }}" preload="auto"></audio>
+                <audio src="{{ path('music_play', {id: item.mediaFiles[0].id, token: tokens[item.mediaFiles[0].id].token}) }}" preload="auto"></audio>
             {% endif %}
 
             <br />

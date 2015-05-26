@@ -82,8 +82,8 @@ class ReleaseAdmin extends MediaAdmin
                 $previewPath = $parts[0] . '-preview.' . $parts[1];
 
                 $this->ap->trim(
-                    Data::$UPLOAD_PATH . '/' . $file->getPath(),
-                    Data::$UPLOAD_PATH . '/' . $previewPath,
+                    Data::getUploadPath() . '/' . $file->getPath(),
+                    Data::getUploadPath() . '/' . $previewPath,
                     120,
                     2
                 );

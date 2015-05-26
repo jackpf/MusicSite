@@ -26,7 +26,7 @@ class MediaController extends Controller
             throw $this->createAccessDeniedException('Invalid token');
         }
 
-        $response = new BinaryFileResponse(Data::$UPLOAD_PATH . '/' . $file->getPreviewPath());
+        $response = new BinaryFileResponse(Data::getUploadPath() . '/' . $file->getPreviewPath());
         $response->trustXSendfileTypeHeader();
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_INLINE,

@@ -41,7 +41,7 @@ class DownloadManager
 
         foreach ($item->getMediaFiles() as $file) {
             $zip->addFile(
-                Data::$UPLOAD_PATH . '/' . $file->getPath(),
+                Data::getUploadPath() . '/' . $file->getPath(),
                 $this->createName($file->getPath(), $file->getName())
             );
         }
@@ -65,7 +65,7 @@ class DownloadManager
         }
 
         return [
-            Data::$UPLOAD_PATH . '/' . $file->getPath(),
+            Data::getUploadPath() . '/' . $file->getPath(),
             $this->createName($file->getPath(), $file->getName())
         ];
     }

@@ -153,7 +153,7 @@ class MediaItem
             $original = $this->getImageFile()->getClientOriginalName();
             $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
 
-            $this->getImageFile()->move(Data::$UPLOAD_PATH, $path);
+            $this->getImageFile()->move(Data::getUploadPath(), $path);
             $this->setImage($path);
             $this->setImageFile(null);
         }
@@ -162,7 +162,7 @@ class MediaItem
             $original = $this->getBackgroundFile()->getClientOriginalName();
             $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
 
-            $this->getBackgroundFile()->move(Data::$UPLOAD_PATH, $path);
+            $this->getBackgroundFile()->move(Data::getUploadPath(), $path);
             $this->setBackground($path);
             $this->setBackgroundFile(null);
         }
@@ -170,13 +170,13 @@ class MediaItem
 
     public function lifecycleFileDelete()
     {
-        $imagePath = Data::$UPLOAD_PATH . '/' . $this->getImage();
+        $imagePath = Data::getUploadPath() . '/' . $this->getImage();
 
         if ($this->getImage() != null && file_exists($imagePath)) {
             unlink($imagePath);
         }
 
-        $backgroundPath = Data::$UPLOAD_PATH . '/' . $this->getBackground();
+        $backgroundPath = Data::getUploadPath() . '/' . $this->getBackground();
 
         if ($this->getBackground() != null && file_exists($backgroundPath)) {
             unlink($backgroundPath);

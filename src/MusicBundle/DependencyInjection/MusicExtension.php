@@ -25,7 +25,5 @@ class MusicExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-        Data::$UPLOAD_PATH = $config['upload_path'];
     }
 }

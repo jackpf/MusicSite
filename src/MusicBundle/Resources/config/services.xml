@@ -12,6 +12,7 @@
             <argument type="service" id="router" />
         </service>
         <service id="music.audio.processor" class="MusicBundle\Service\AudioProcessor"></service>
+        <service id="music.download_manager" class="MusicBundle\Service\DownloadManager"></service>
     </services>
 
 </container>

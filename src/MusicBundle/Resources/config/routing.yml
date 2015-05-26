@@ -27,5 +27,5 @@ music_mix_item:
     defaults: { _controller: MusicBundle:Music:mix }
 
 music_download:
-    path:     /download
+    path:     /download/{id}
     defaults: { _controller: MusicBundle:Download:download }

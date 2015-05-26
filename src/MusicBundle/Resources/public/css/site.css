@@ -59,6 +59,17 @@ img.header-logo {
     color: white;
     background: rgba(0, 0, 0, 0.5);
 }
+#search-box input:focus {
+    outline: 0;
+}
+#search-box {
+    display: none;
+    opacity: 0.8;
+}
+#search-box input {
+    float: none;
+    margin: 0 auto;
+}
 
 /* Body */
 body {

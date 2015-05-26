@@ -19,3 +19,10 @@ set  :keep_releases,  3
 
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL
+
+set :shared_files,      ["app/config/parameters.yml"]
+set :dump_assetic_assets, true
+
+after 'deploy:create_symlink' do
+    run "cd #{deploy_to}/current && sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs && sudo setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs"
+end

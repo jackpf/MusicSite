@@ -4,11 +4,6 @@
         {% stylesheets '@MusicBundle/Resources/public/css/*' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-        {% block javascripts %}
-            {% javascripts '@MusicBundle/Resources/public/js/*' %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
         <script>
             audiojs.events.ready(function() {
                 var aj = audiojs.createAll();
@@ -25,15 +20,15 @@
     <body>
         <div class="container-fluid">
             <div class="row header">
-                <div class="col-xs-3 header-logo">
+                <div class="col-md-3 header-logo">
                     <a href="{{ path('music_homepage') }}">
                         <img class="header-logo" src="{{ asset('bundles/music/images/logo.png') }}" />
                     </a>
                 </div>
-                <div class="col-xs-6 header-title">
+                <div class="col-md-6 header-title">
                     REGULATION XVII
                 </div>
-                <ul class="list-inline col-xs-3 header-nav">
+                <ul class="list-inline col-md-3 header-nav">
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
                         <li>|</li>
@@ -47,18 +42,24 @@
             </div>
             <div class="background">
                 <div class="row nav">
+                    <div class="row">
                     <ul class="list-inline">
                         {% set route = app.request.attributes.get('_route') %}
-                        <li>|</li>
-                        <li><a href="">search</a></li>
-                        <li><a {{ route in ['music_release', 'music_release_item'] ? 'class="active"' : '' }} href="{{ path('music_release') }}">releases</a></li>
+                       <li><a {{ route in ['music_release', 'music_release_item'] ? 'class="active"' : '' }} href="{{ path('music_release') }}">releases</a></li>
                         <li>|</li>
                         <li><a {{ route in ['music_mix', 'music_mix_item'] ? 'class="active"' : '' }} href="{{ path('music_mix') }}">mixes</a></li>
                         <li>|</li>
                         <li><a {{ route in ['music_news', 'music_news_item'] ? 'class="active"' : '' }} href="{{ path('music_news') }}">news</a></li>
                         <li>|</li>
+                        <li><a href="#" id="search-link">search</a></li>
+                        <li>|</li>
                         <li><a href="">about</a></li>
                     </ul>
+                        </div>
+                    <form class="row" id="search-box" style="" action="{{ path('music_homepage') }}" method="get">
+                        <input class="col-xs-2" type="text" name="search" value="{{ app.request.query.get('search') }}" />
+                        <input class="col-xs-1" type="submit" />
+                    </div>
                 </div>
                 <div class="row body">
                     {% block content %}{% endblock %}
@@ -77,6 +78,12 @@
                 <a href="">Contact</a>
             </div>
         </div>
+
+        {% block javascripts %}
+            {% javascripts '@MusicBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
         {% block javascript %}{% endblock %}
     </body>
 </html>

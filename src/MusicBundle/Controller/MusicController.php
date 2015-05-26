@@ -21,13 +21,18 @@ class MusicController extends Controller
             $repo = 'MediaItem';
         }
 
-        $items = $em->getRepository(sprintf('MusicBundle\Entity\%s', $repo))
+        $qb = $em->getRepository(sprintf('MusicBundle\Entity\%s', $repo))
             ->createQueryBuilder('i')
             ->select('i')
-            ->orderBy('i.createdAt', 'desc')
-            ->getQuery();
+            ->orderBy('i.createdAt', 'desc');
+
+        if ($request->query->has('search')) {
+            $s = $qb->expr()->literal('%' . str_replace(' ', '%', $request->query->get('search')) . '%');
+            $qb->andWhere($qb->expr()->like('i.title', $s));
+        }
+
         $items = $this->get('knp_paginator')
-            ->paginate($items, $request->get('page', 1), 6);
+            ->paginate($qb->getQuery(), $request->get('page', 1), 9);
 
         return $this->render('MusicBundle:Music:index.html.twig', [
             'items' => $items

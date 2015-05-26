@@ -28,10 +28,15 @@ class DownloadManager
     public function getReleasePath(ReleaseItem $item)
     {
         $path = tempnam(sys_get_temp_dir(), 'release');
+
+        if ($path == false) {
+            throw new \RuntimeException('Unable to create temp file');
+        }
+
         $zip = new \ZipArchive();
 
         if (!$zip->open($path, \ZipArchive::OVERWRITE)) {
-            throw new \RuntimeException('Could not create zip file');
+            throw new \RuntimeException('Unable to create zip file');
         }
 
         foreach ($item->getMediaFiles() as $file) {

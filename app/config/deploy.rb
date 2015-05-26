@@ -25,4 +25,7 @@ set :dump_assetic_assets, true
 
 after 'deploy:create_symlink' do
     run "cd #{deploy_to}/current && sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs && sudo setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs"
+    run "cd #{deploy_to}/current && php app/console doctrine:schema:update --force --env=prod"
 end
+
+after "deploy:update", "deploy:cleanup"

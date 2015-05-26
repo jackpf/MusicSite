@@ -28,6 +28,8 @@ class MediaItem
 
     protected $updatedAt;
 
+    protected $deletedAt;
+
     public function getId()
     {
         return $this->id;
@@ -133,6 +135,16 @@ class MediaItem
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getDeletedAt()
+    {
+        return $this->deletdAt;
+    }
+
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletdAt = $deletedAt;
     }
 
     public function lifecycleFileUpload()

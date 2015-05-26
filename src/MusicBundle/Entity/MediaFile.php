@@ -123,7 +123,7 @@ class MediaFile
         $path = sha1($original + rand()) . '.' . $ext;
 
         $this->getFile()->move(
-            Data::UPLOAD_DIR,
+            Data::$UPLOAD_PATH,
             $path
         );
 
@@ -134,13 +134,13 @@ class MediaFile
 
     public function lifecycleFileDelete()
     {
-        $path = Data::UPLOAD_DIR . '/' . $this->getPath();
+        $path = Data::$UPLOAD_PATH . '/' . $this->getPath();
 
         if ($this->getPath() != null && file_exists($path)) {
             unlink($path);
         }
 
-        $previewPath = Data::UPLOAD_DIR . '/' . $this->getPreviewPath();
+        $previewPath = Data::$UPLOAD_PATH . '/' . $this->getPreviewPath();
 
         if ($this->getPreviewPath() != null && file_exists($previewPath)) {
             unlink($previewPath);

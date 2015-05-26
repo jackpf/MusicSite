@@ -4,5 +4,6 @@ namespace MusicBundle\Data;
 
 class Data
 {
-    const UPLOAD_DIR = "/home/jack/workspace/Music/web/uploads";
+    // Set from MusicExtension
+    public static $UPLOAD_PATH;
 }

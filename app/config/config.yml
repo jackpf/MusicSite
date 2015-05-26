@@ -136,3 +136,6 @@ security:
 sonata_admin:
     title:      Regluation XVII Admin
     title_logo: bundles/music/images/logo.png
+
+music:
+    upload_path: %upload_dir%

@@ -2,11 +2,19 @@
 
 namespace MusicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class ReleaseItem extends MediaItem
 {
-    private $mediaFiles = [];
+    private $mediaFiles;
 
     private $mediaVariants;
+
+    public function __construct()
+    {
+        $this->mediaFiles = new ArrayCollection();
+        $this->mediaVariants = new ArrayCollection();
+    }
 
     public function getMediaFiles()
     {

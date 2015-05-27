@@ -57,6 +57,11 @@
                 </option>
                 <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
             </constraint>
+            <constraint name="MusicBundle\Validation\Mp3QualityConstraint">
+                <option name="minBitRate">
+                    <value>320</value>
+                </option>
+            </constraint>
         </property>
         <property name="losslessFile">
             <constraint name="File">

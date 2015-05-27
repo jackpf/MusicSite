@@ -35,10 +35,6 @@
             <discriminator-mapping value="2" class="MusicBundle\Entity\MixItem"/>
         </discriminator-map>
         
-        <unique-constraints>
-            <unique-constraint columns="slug,type" />
-        </unique-constraints>
-
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="lifecycleFileUpload"/>
             <lifecycle-callback type="preUpdate" method="lifecycleFileUpload"/>

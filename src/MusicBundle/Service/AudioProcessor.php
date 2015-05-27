@@ -15,8 +15,8 @@ class AudioProcessor
             $fadeTime
         ), $output, $returnCode);
 
-        if ($returnCode != 0) {die(var_dump($output,$returnCode));
-            throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', implode("\n", $returnCode), $output));
+        if ($returnCode != 0) {
+            throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', $returnCode, implode("\n", $output)));
         }
     }
 }

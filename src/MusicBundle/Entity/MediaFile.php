@@ -3,6 +3,7 @@
 namespace MusicBundle\Entity;
 
 use MusicBundle\Data\Data;
+use MusicBundle\Service\DownloadManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaFile
@@ -15,11 +16,15 @@ class MediaFile
 
     private $previewPath;
 
+    private $losslessPath;
+
     private $mediaItem;
 
     private $file;
 
     private $previewFile;
+
+    private $losslessFile;
 
     private $createdAt;
 
@@ -43,6 +48,16 @@ class MediaFile
     public function getPreviewPath()
     {
         return $this->previewPath;
+    }
+
+    public function getLosslessPath()
+    {
+        return $this->losslessPath;
+    }
+
+    public function setLosslessPath($losslessPath)
+    {
+        $this->losslessPath = $losslessPath;
     }
 
     public function setPreviewPath($previewPath)
@@ -91,6 +106,17 @@ class MediaFile
         $this->previewFile = $previewFile;
     }
 
+    public function getLosslessFile()
+    {
+        return $this->losslessFile;
+    }
+
+    public function setLosslessFile(UploadedFile $losslessFile = null)
+    {
+        $this->losslessFile = $losslessFile;
+        $this->setUpdatedAt(new \DateTime());
+    }
+
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -113,23 +139,30 @@ class MediaFile
 
     public function lifecycleFileUpload()
     {
-        if (!$this->getFile()) {
-            return;
+        if ($this->getFile()) {
+            $path = DownloadManager::createPath($this->getFile()->getClientOriginalName());
+
+            $this->getFile()->move(
+                Data::getUploadPath(),
+                $path
+            );
+
+            $this->setPath($path);
+            $this->setPreviewFile($this->getFile());
+            $this->setFile(null);
         }
 
-        $original = $this->getFile()->getClientOriginalName();
-        $parts = explode('.', $original);
-        $ext = end($parts);
-        $path = sha1($original + rand()) . '.' . $ext;
+        if ($this->getLosslessFile()) {
+            $path = DownloadManager::createPath($this->getLosslessFile()->getClientOriginalName());
 
-        $this->getFile()->move(
-            Data::getUploadPath(),
-            $path
-        );
+            $this->getLosslessFile()->move(
+                Data::getUploadPath(),
+                $path
+            );
 
-        $this->setPath($path);
-        $this->setPreviewFile($this->getFile());
-        $this->setFile(null);
+            $this->setLosslessPath($path);
+            $this->setLosslessFile(null);
+        }
     }
 
     public function lifecycleFileDelete()
@@ -144,6 +177,12 @@ class MediaFile
 
         if ($this->getPreviewPath() != null && file_exists($previewPath)) {
             unlink($previewPath);
+        }
+
+        $losslessPath = Data::getUploadPath() . '/' . $this->getLosslessPath();
+
+        if ($this->getLosslessPath() != null && file_exists($losslessPath)) {
+            unlink($losslessPath);
         }
     }
 }

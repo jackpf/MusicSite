@@ -9,9 +9,16 @@ use MusicBundle\Entity\ReleaseItem;
 
 class DownloadManager
 {
-    private function createName($path, $name)
+    public static function createName($path, $name)
     {
         return $name . substr($path, strrpos($path, '.'));
+    }
+
+    public static function createPath($original)
+    {
+        $parts = explode('.', $original);
+        $ext = end($parts);
+        return sha1($original + rand()) . '.' . $ext;
     }
 
     public function getPath(MediaItem $item)
@@ -42,7 +49,7 @@ class DownloadManager
         foreach ($item->getMediaFiles() as $file) {
             $zip->addFile(
                 Data::getUploadPath() . '/' . $file->getPath(),
-                $this->createName($file->getPath(), $file->getName())
+                self::createName($file->getPath(), $file->getName())
             );
         }
 
@@ -66,7 +73,7 @@ class DownloadManager
 
         return [
             Data::getUploadPath() . '/' . $file->getPath(),
-            $this->createName($file->getPath(), $file->getName())
+            self::createName($file->getPath(), $file->getName())
         ];
     }
 }

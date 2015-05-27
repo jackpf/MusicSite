@@ -14,6 +14,7 @@
         <field name="name" />
         <field name="path" />
         <field name="previewPath" column="preview_path" nullable="true" />
+        <field name="losslessPath" column="lossless_path" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

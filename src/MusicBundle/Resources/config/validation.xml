@@ -58,6 +58,17 @@
                 <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
             </constraint>
         </property>
+        <property name="losslessFile">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>audio/aiff</value>
+                    <value>audio/x-aiff</value>
+                    <value>audio/wav</value>
+                    <value>audio/x-wav</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
+            </constraint>
+        </property>
     </class>
     <class name="MusicBundle\Entity\MediaVariant">
         <property name="type">

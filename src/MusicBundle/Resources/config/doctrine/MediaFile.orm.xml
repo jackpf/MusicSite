@@ -12,10 +12,9 @@
         </id>
         <many-to-one target-entity="MusicBundle\Entity\MediaItem" field="mediaItem" />
         <field name="name" />
-        <!--<field name="path" />-->
-        <field name="path" nullable="true" /><!-- Not really what we want, but validation... -->
-        <field name="previewPath" column="preview_path" nullable="true" />
-        <field name="losslessPath" column="lossless_path" nullable="true" />
+        <field name="path" />
+        <field name="previewPath" column="preview_path" />
+        <field name="losslessPath" column="lossless_path" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

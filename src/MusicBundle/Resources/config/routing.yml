@@ -31,5 +31,5 @@ music_play:
     defaults: { _controller: MusicBundle:Media:play }
 
 music_download:
-    path:     /download/{id}
-    defaults: { _controller: MusicBundle:Media:download }
+    path:     /download/{id}/{type}
+    defaults: { _controller: MusicBundle:Media:download, type: 320 }

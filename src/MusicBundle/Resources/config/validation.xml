@@ -82,6 +82,22 @@
                 <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
             </constraint>
         </property>
+        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
+            <option name="file">
+                <value>file</value>
+            </option>
+            <option name="path">
+                <value>path</value>
+            </option>
+        </constraint>
+        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
+            <option name="file">
+                <value>losslessFile</value>
+            </option>
+            <option name="path">
+                <value>losslessPath</value>
+            </option>
+        </constraint>
     </class>
     <class name="MusicBundle\Entity\MediaVariant">
         <property name="type">

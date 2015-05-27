@@ -3,7 +3,6 @@
 namespace Application\Sonata\AdminBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class KernelListener
@@ -27,7 +26,7 @@ class KernelListener
         if ($event->getRequest()->isMethod('POST')) {
             try {
                 $this->em->flush();
-            } catch (ORMException $e) {
+            } catch (\Exception $e) {
 
             }
         }

@@ -26,13 +26,14 @@ class ReleaseAdmin extends MediaAdmin
                 'type' => new MediaFileType(),
                 'allow_add' => true,
                 'allow_delete' => true,
-                'required' => false,
+                'required' => true,
+                'cascade_validation' => true,
             ])
             ->add('mediaVariants', 'collection', [
                 'type' => new MediaVariantType(),
                 'allow_add' => true,
                 'allow_delete' => true,
-                'required' => false,
+                'required' => true,
                 'cascade_validation' => true,
             ])
         ;
@@ -84,7 +85,7 @@ class ReleaseAdmin extends MediaAdmin
                 $this->ap->process(
                     Data::getUploadPath() . '/' . $file->getPath(),
                     Data::getUploadPath() . '/' . $previewPath,
-                    120,
+                    150,
                     2,
                     Data::getUploadPath() . '/watermark.mp3',
                     15

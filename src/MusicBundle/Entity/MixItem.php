@@ -13,7 +13,6 @@ class MixItem extends MediaItem
     public function __construct()
     {
         $this->mediaFiles = new ArrayCollection();
-        $this->mediaVariants = new ArrayCollection();
     }
 
     public function getMediaFiles()
@@ -39,7 +38,7 @@ class MixItem extends MediaItem
     public function onPreFlush()
     {
         // Doctrine doesn't seem to be setting the inverse relation
-        foreach (array_merge($this->mediaFiles->toArray(), $this->mediaVariants->toArray()) as $object) {
+        foreach ($this->mediaFiles->toArray() as $object) {
             if ($object) {
                 $object->setMediaItem($this);
             }

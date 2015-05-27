@@ -43,6 +43,14 @@
             <constraint name="Valid" />
         </property>
     </class>
+    <class name="MusicBundle\Entity\ReleaseItem">
+        <property name="mediaFiles">
+            <constraint name="Valid" />
+        </property>
+        <property name="mediaVariants">
+            <constraint name="Valid" />
+        </property>
+    </class>
     <class name="MusicBundle\Entity\MediaFile">
         <property name="name">
             <constraint name="NotBlank" />
@@ -80,6 +88,7 @@
             <constraint name="NotBlank" />
         </property>
         <property name="price">
+            <constraint name="NotBlank" />
             <constraint name="Regex">
                 <option name="pattern">/^\d+\.\d+/</option>
             </constraint>

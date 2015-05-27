@@ -19,7 +19,7 @@ class MixAdmin extends MediaAdmin
                 'type' => new MediaFileType(),
                 'allow_add' => true,
                 'allow_delete' => true,
-                'required' => false,
+                'required' => true,
                 'cascade_validation' => true,
             ])
             ->add('downloadLink', null)

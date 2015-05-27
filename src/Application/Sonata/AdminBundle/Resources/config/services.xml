@@ -26,6 +26,18 @@
             <argument>MusicBundle\Entity\MixItem</argument>
             <argument />
         </service>
+        <service id="sonata.admin.media_file" class="Application\Sonata\AdminBundle\Admin\MediaFileAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Media File" show_in_dashboard="false"/>
+            <argument />
+            <argument>MusicBundle\Entity\MediaFile</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.media_variant" class="Application\Sonata\AdminBundle\Admin\MediaVariantAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Media Variant" show_in_dashboard="false"/>
+            <argument />
+            <argument>MusicBundle\Entity\MediaVariant</argument>
+            <argument />
+        </service>
 
         <service id="sonata.kernel_listener" class="Application\Sonata\AdminBundle\EventListener\KernelListener">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />

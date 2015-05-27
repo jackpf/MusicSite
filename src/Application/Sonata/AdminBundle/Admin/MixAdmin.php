@@ -15,12 +15,14 @@ class MixAdmin extends MediaAdmin
         parent::configureFormFields($formMapper);
 
         $formMapper
-            ->add('mediaFiles', 'collection', [
-                'type' => new MediaFileType(),
-                'allow_add' => true,
-                'allow_delete' => true,
+            ->add('mediaFiles', 'sonata_type_collection', [
+                'type' => 'sonata_type_admin',
                 'required' => true,
                 'cascade_validation' => true,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
             ])
             ->add('downloadLink', null)
         ;

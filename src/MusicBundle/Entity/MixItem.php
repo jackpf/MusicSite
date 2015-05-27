@@ -25,6 +25,20 @@ class MixItem extends MediaItem
         $this->mediaFiles = $mediaFiles;
     }
 
+    public function addMediaFile($mediaFile)
+    {
+        $this->mediaFiles[] = $mediaFile;
+    }
+
+    public function removeMediaFile($mediaFile)
+    {
+        foreach ($this->mediaFiles as $key => $file) {
+            if ($mediaFile->getId() == $file->getId()) {
+                unset($this->mediaFiles[$key]);
+            }
+        }
+    }
+
     public function getDownloadLink()
     {
         return $this->downloadLink;

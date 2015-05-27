@@ -11,7 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 abstract class MediaAdmin extends Admin
 {
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     // Fields to be shown on create/edit forms

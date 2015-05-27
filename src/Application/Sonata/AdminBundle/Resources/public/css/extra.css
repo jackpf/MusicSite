@@ -2,3 +2,7 @@ img.admin-preview {
     max-height: 200px;
     max-width: 200px;
 }
+
+.sonata-ba-field-error-messages ul {
+    color: red;
+}

@@ -26,6 +26,20 @@ class ReleaseItem extends MediaItem
         $this->mediaFiles = $mediaFiles;
     }
 
+    public function addMediaFile($mediaFile)
+    {
+        $this->mediaFiles[] = $mediaFile;
+    }
+
+    public function removeMediaFile($mediaFile)
+    {
+        foreach ($this->mediaFiles as $key => $file) {
+            if ($mediaFile->getId() == $file->getId()) {
+                unset($this->mediaFiles[$key]);
+            }
+        }
+    }
+
     public function getMediaVariants()
     {
         return $this->mediaVariants;
@@ -34,6 +48,20 @@ class ReleaseItem extends MediaItem
     public function setMediaVariants($mediaVariants)
     {
         $this->mediaVariants = $mediaVariants;
+    }
+
+    public function addMediaVariant($mediaVariant)
+    {
+        $this->mediaVariants[] = $mediaVariant;
+    }
+
+    public function removeMediaVariant($mediaVariant)
+    {
+        foreach ($this->mediaVariant as $key => $variant) {
+            if ($mediaVariant->getId() == $variant->getId()) {
+                unset($this->mediaVariant[$key]);
+            }
+        }
     }
 
     public function onPreFlush()

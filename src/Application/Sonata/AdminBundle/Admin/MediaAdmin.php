@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\AdminBundle\Admin;
 
+use MusicBundle\Data\Data;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -20,8 +21,16 @@ abstract class MediaAdmin extends Admin
             ->add('title')
             ->add('shortContent', 'textarea')
             ->add('content', 'textarea')
-            ->add('imageFile', 'file', ['required' => false, 'label' => 'Image'])
-            ->add('backgroundFile', 'file', ['required' => false, 'label' => 'Background'])
+            ->add('imageFile', 'file', [
+                'required' => false,
+                'label' => 'Image',
+                'help' => '<img src="/uploads/' . $this->getSubject()->getImage() . '" class="admin-preview" />',
+            ])
+            ->add('backgroundFile', 'file', [
+                'required' => false,
+                'label' => 'Background',
+                'help' => '<img src="/uploads/' . $this->getSubject()->getBackground() . '" class="admin-preview" />',
+            ])
         ;
     }
 

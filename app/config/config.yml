@@ -136,11 +136,3 @@ security:
 sonata_admin:
     title:      Regluation XVII Admin
     title_logo: bundles/music/images/logo.png
-
-snowcap_im:
-    formats:
-        160x160:
-            resize: 160x160^
-            gravity: center
-            crop: 160x160+0+0
-            quality: 100

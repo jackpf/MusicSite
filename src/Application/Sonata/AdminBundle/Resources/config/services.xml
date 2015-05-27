@@ -16,9 +16,6 @@
             <call method="setEntityManager">
                 <argument type="service" id="doctrine.orm.entity_manager" />
             </call>
-            <call method="setAudioProcessor">
-                <argument type="service" id="music.audio.processor" />
-            </call>
         </service>
         <service id="sonata.admin.mix" class="Application\Sonata\AdminBundle\Admin\MixAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Content" label="Mix Item"/>

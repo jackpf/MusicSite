@@ -60,11 +60,6 @@ class ReleaseAdmin extends MediaAdmin
         $this->em = $em;
     }
 
-    public function setAudioProcessor(AudioProcessor $ap)
-    {
-        $this->ap = $ap;
-    }
-
     public function postPersist($object)
     {
         parent::postPersist($object);
@@ -86,7 +81,7 @@ class ReleaseAdmin extends MediaAdmin
                 $parts = explode('.', $file->getPath());
                 $previewPath = $parts[0] . '-preview.' . $parts[1];
 
-                $this->ap->process(
+                AudioProcessor::process(
                     Data::getUploadPath() . '/' . $file->getPath(),
                     Data::getUploadPath() . '/' . $previewPath,
                     150,

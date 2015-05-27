@@ -33,3 +33,8 @@ $('#search-link').click(function(e) {
 
     e.preventDefault();
 });
+
+// Fancybox
+$(document).ready(function() {
+    $(".fancybox").fancybox();
+});

@@ -81,11 +81,13 @@ class ReleaseAdmin extends MediaAdmin
                 $parts = explode('.', $file->getPath());
                 $previewPath = $parts[0] . '-preview.' . $parts[1];
 
-                $this->ap->trim(
+                $this->ap->process(
                     Data::getUploadPath() . '/' . $file->getPath(),
                     Data::getUploadPath() . '/' . $previewPath,
                     120,
-                    2
+                    2,
+                    Data::getUploadPath() . '/watermark.mp3',
+                    15
                 );
 
                 $file->setPreviewPath($previewPath);

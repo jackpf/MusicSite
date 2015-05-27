@@ -80,13 +80,8 @@
             <constraint name="NotBlank" />
         </property>
         <property name="price">
-            <constraint name="Currency">
-                <option name="message">
-                    <value>Please enter a valid price.</value>
-                </option>
-            </constraint>
-            <constraint name="Length">
-                <option name="max">40</option>
+            <constraint name="Regex">
+                <option name="pattern">/^\d+\.\d+/</option>
             </constraint>
         </property>
     </class>

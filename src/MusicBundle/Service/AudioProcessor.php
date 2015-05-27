@@ -2,18 +2,26 @@
 
 namespace MusicBundle\Service;
 
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+
 class AudioProcessor
 {
-    public function trim($input, $output, $time, $fadeTime = 2)
+    public function process($input, $output, $time, $fadeTime, $watermark, $watermarkTime)
     {
+        if (!file_exists($watermark)) {
+            throw new FileNotFoundException($watermark);
+        }
+
         exec(sprintf(
-            'sox "%s" "%s" fade %d %d %d',
+            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d',
+            $watermark,
+            $watermarkTime,
             $input,
             $output,
             $fadeTime,
             $time,
             $fadeTime
-        ), $output, $returnCode);
+        ), $o, $returnCode);
 
         if ($returnCode != 0) {
             throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', $returnCode, implode("\n", $output)));

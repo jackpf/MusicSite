@@ -3,6 +3,7 @@
 namespace MusicBundle\Entity;
 
 use MusicBundle\Data\Data;
+use MusicBundle\Service\DownloadManager;
 
 class MediaItem
 {
@@ -150,8 +151,9 @@ class MediaItem
     public function lifecycleFileUpload()
     {
         if ($this->getImageFile()) {
-            $original = $this->getImageFile()->getClientOriginalName();
-            $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
+            $path = DownloadManager::createPath($this->getImageFile()->getClientOriginalName());
+
+            $this->delete($this->getImage());
 
             $this->getImageFile()->move(Data::getUploadPath(), $path);
             $this->setImage($path);
@@ -159,8 +161,9 @@ class MediaItem
         }
 
         if ($this->getBackgroundFile()) {
-            $original = $this->getBackgroundFile()->getClientOriginalName();
-            $path = sha1($original + rand()) . '.' . @end(explode('.', $original));
+            $path = DownloadManager::createPath($this->getBackgroundFile()->getClientOriginalName());
+
+            $this->delete($this->getBackground());
 
             $this->getBackgroundFile()->move(Data::getUploadPath(), $path);
             $this->setBackground($path);
@@ -170,16 +173,16 @@ class MediaItem
 
     public function lifecycleFileDelete()
     {
-        $imagePath = Data::getUploadPath() . '/' . $this->getImage();
+        $this->delete($this->getImage());
+        $this->delete($this->getBackground());
+    }
 
-        if ($this->getImage() != null && file_exists($imagePath)) {
-            unlink($imagePath);
-        }
+    private function delete($filename)
+    {
+        $path = Data::getUploadPath() . '/' . $filename;
 
-        $backgroundPath = Data::getUploadPath() . '/' . $this->getBackground();
-
-        if ($this->getBackground() != null && file_exists($backgroundPath)) {
-            unlink($backgroundPath);
+        if ($filename != null && file_exists($path)) {
+            unlink($path);
         }
     }
 }

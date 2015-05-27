@@ -147,8 +147,11 @@ class MediaFile
                 $path
             );
 
+            $this->delete($this->getPath());
+            $this->delete($this->getPreviewPath());
+
             $this->setPath($path);
-            $this->setPreviewFile($this->getFile());
+            $this->setPreviewFile($this->getFile()); // Handled later
             $this->setFile(null);
         }
 
@@ -160,6 +163,8 @@ class MediaFile
                 $path
             );
 
+            $this->delete($this->getLosslessPath());
+
             $this->setLosslessPath($path);
             $this->setLosslessFile(null);
         }
@@ -167,22 +172,17 @@ class MediaFile
 
     public function lifecycleFileDelete()
     {
-        $path = Data::getUploadPath() . '/' . $this->getPath();
+        $this->delete($this->getPath());
+        $this->delete($this->getPreviewPath());
+        $this->delete($this->getLosslessPath());
+    }
 
-        if ($this->getPath() != null && file_exists($path)) {
+    private function delete($filename)
+    {
+        $path = Data::getUploadPath() . '/' . $filename;
+
+        if ($filename != null && file_exists($path)) {
             unlink($path);
-        }
-
-        $previewPath = Data::getUploadPath() . '/' . $this->getPreviewPath();
-
-        if ($this->getPreviewPath() != null && file_exists($previewPath)) {
-            unlink($previewPath);
-        }
-
-        $losslessPath = Data::getUploadPath() . '/' . $this->getLosslessPath();
-
-        if ($this->getLosslessPath() != null && file_exists($losslessPath)) {
-            unlink($losslessPath);
         }
     }
 }

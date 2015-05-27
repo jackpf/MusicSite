@@ -24,12 +24,12 @@ abstract class MediaAdmin extends Admin
             ->add('imageFile', 'file', [
                 'required' => false,
                 'label' => 'Image',
-                'help' => '<img src="/uploads/' . $this->getSubject()->getImage() . '" class="admin-preview" />',
+                'help' => $this->getSubject()->getImage() ? '<img src="/uploads/' . $this->getSubject()->getImage() . '" class="admin-preview" />' : '',
             ])
             ->add('backgroundFile', 'file', [
                 'required' => false,
                 'label' => 'Background',
-                'help' => '<img src="/uploads/' . $this->getSubject()->getBackground() . '" class="admin-preview" />',
+                'help' => $this->getSubject()->getBackground() ? '<img src="/uploads/' . $this->getSubject()->getBackground() . '" class="admin-preview" />' : '',
             ])
         ;
     }

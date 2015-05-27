@@ -37,7 +37,7 @@ class MediaController extends Controller
         return $response;
     }
 
-    public function downloadAction(Request $request, $id)
+    public function downloadAction(Request $request, $id, $type = '320')
     {
         $downloadManager = $this->get('music.download_manager');
         $key = $request->query->get('key');
@@ -50,7 +50,7 @@ class MediaController extends Controller
             throw $this->createNotFoundException('Media not found');
         }
 
-        list($path, $filename) = $downloadManager->getPath($item);
+        list($path, $filename) = $downloadManager->getPath($item, $type);
 
         $response = new BinaryFileResponse($path);
         $response->trustXSendfileTypeHeader();

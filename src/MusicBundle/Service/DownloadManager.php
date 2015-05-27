@@ -21,18 +21,18 @@ class DownloadManager
         return sha1($original + rand()) . '.' . $ext;
     }
 
-    public function getPath(MediaItem $item)
+    public function getPath(MediaItem $item, $type = null)
     {
         if ($item instanceof ReleaseItem) {
-            return $this->getReleasePath($item);
+            return $this->getReleasePath($item, $type);
         } else if ($item instanceof MixItem) {
-            return $this->getMixPath($item);
+            return $this->getMixPath($item, $type);
         } else {
-            throw new \RuntimeException('Unsupported media');
+            throw new \RuntimeException(sprintf('Unsupported media: "%s"', get_class($item)));
         }
     }
 
-    public function getReleasePath(ReleaseItem $item)
+    public function getReleasePath(ReleaseItem $item, $type)
     {
         $path = tempnam(sys_get_temp_dir(), 'release');
 
@@ -47,8 +47,16 @@ class DownloadManager
         }
 
         foreach ($item->getMediaFiles() as $file) {
+            if ($type == '320') {
+                $path = $file->getPath();
+            } else if ($type == 'lossless') {
+                $path = $file->getLosslessPath();
+            } else {
+                throw new \RuntimeException(sprintf('Unsupported type: "%s"', $type));
+            }
+
             $zip->addFile(
-                Data::getUploadPath() . '/' . $file->getPath(),
+                Data::getUploadPath() . '/' . $path,
                 self::createName($file->getPath(), $file->getName())
             );
         }

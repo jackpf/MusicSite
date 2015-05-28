@@ -11,7 +11,7 @@ class Order extends ArrayObject
 
     private $user;
 
-    private $ReleaseVariant;
+    private $releaseVariant;
 
     private $price;
 
@@ -38,12 +38,12 @@ class Order extends ArrayObject
 
     public function getReleaseVariant()
     {
-        return $this->ReleaseVariant;
+        return $this->releaseVariant;
     }
 
-    public function setReleaseVariant($ReleaseVariant)
+    public function setReleaseVariant($releaseVariant)
     {
-        $this->ReleaseVariant = $ReleaseVariant;
+        $this->releaseVariant = $releaseVariant;
     }
 
     public function getPrice()

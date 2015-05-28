@@ -11,7 +11,7 @@ class OrderController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $orders = $this->getDoctrine()->getEntityManager()
             ->getRepository('MusicBundle\Entity\Order')
-            ->findByUser($user);
+            ->findByUser($user, ['createdAt' => 'desc']);
 
         return $this->render('FOSUserBundle:Profile:orders.html.twig',[
             'orders' => $orders,

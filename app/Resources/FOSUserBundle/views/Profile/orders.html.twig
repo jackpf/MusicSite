@@ -12,7 +12,11 @@
                 <div class="row">
                     <ul>
                         {% for order in orders %}
-                            <li>Order: {{ order.id }}, status: {{ order.status }}</li>
+                            {% if order.status == 'authorized' %}
+                                <li><a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">{{ order.releaseVariant.mediaItem.title }}</a></li>
+                            {% else %}
+                                <li>{{ order.releaseVariant.mediaItem.title }} ({{ order.status == 'new' ? 'unpaid' : 'payment ' ~ order.status }})</li>
+                            {% endif %}
                         {% else %}
                             <li>You have no orders to show.</li>
                         {% endfor %}

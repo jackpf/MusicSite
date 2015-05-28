@@ -143,8 +143,7 @@ payum:
             MusicBundle\Entity\PaymentToken: { doctrine: orm }
 
     storages:
-        MusicBundle\Entity\Payment: { doctrine: orm }
-        MusicBundle\Entity\PaymentDetails: { doctrine: orm }
+        MusicBundle\Entity\Order: { doctrine: orm }
 
     gateways:
         paypal:

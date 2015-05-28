@@ -30,6 +30,9 @@ class AppKernel extends Kernel
             new \MusicBundle\MusicBundle(),
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Payum\Bundle\PayumBundle\PayumBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

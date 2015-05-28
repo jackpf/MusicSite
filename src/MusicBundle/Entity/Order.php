@@ -2,7 +2,10 @@
 
 namespace MusicBundle\Entity;
 
-class Order
+use Payum\Core\Model\ArrayObject;
+use Payum\Core\Request\GetHumanStatus;
+
+class Order extends ArrayObject
 {
     private $id;
 
@@ -12,7 +15,7 @@ class Order
 
     private $price;
 
-    private $status;
+    private $status = GetHumanStatus::STATUS_NEW;
 
     private $createdAt;
 

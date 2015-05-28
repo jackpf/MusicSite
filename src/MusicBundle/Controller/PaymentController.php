@@ -22,48 +22,58 @@ class PaymentController extends Controller
         }
 
         $storage = $this->get('payum')
-            ->getStorage('MusicBundle\Entity\PaymentDetails');
+            ->getStorage('MusicBundle\Entity\Order');
 
-        $details = $storage->create();
-        $details['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';
-        $details['PAYMENTREQUEST_0_AMT'] = $variant->getPrice();
-        $storage->update($details);
+        /** @var \MusicBundle\Entity\Order $order */
+        $order = $storage->create();
+
+        $order->setUser([$this->get('security.context')->getToken()->getUser()]);
+        $order->setMediaVariant([$variant]);
+        $order->setPrice($variant->getPrice());
+
+        $order['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';
+        $order['PAYMENTREQUEST_0_AMT'] = $order->getPrice();
+
+        $storage->update($order);
 
         $captureToken = $this->get('payum.security.token_factory')->createCaptureToken(
             self::GATEWAY_NAME,
-            $details,
-            'music_order_complete' // the route to redirect after capture;
+            $order,
+            'music_order_purchase' // the route to redirect after capture;
         );
 
         return $this->redirect($captureToken->getTargetUrl());
     }
 
-    public function completeAction(Request $request)
+    public function purchaseAction(Request $request)
     {
-        $token = $this->get('payum.security.http_request_verifier')->verify($request);
-
-        $identity = $token->getDetails();
-        $model = $this->get('payum')->getStorage($identity->getClass())->find($identity);
-
+        $token = $this->get('payum.security.http_request_verifier')
+            ->verify($request);
         $gateway = $this->get('payum')->getGateway($token->getGatewayName());
+        $identity = $token->getDetails();
 
-        // you can invalidate the token. The url could not be requested any more.
-        // $this->get('payum.security.http_request_verifier')->invalidate($token);
+        $this->get('payum.security.http_request_verifier')
+            ->invalidate($token);
 
-        // Once you have token you can get the model from the storage directly.
-        //$identity = $token->getDetails();
-        //$details = $payum->getStorage($identity->getClass())->find($identity);
+        $order = $this->get('payum')
+            ->getStorage($identity->getClass())
+            ->find($identity);
 
         // or Payum can fetch the model for you while executing a request (Preferred).
         $gateway->execute($status = new GetHumanStatus($token));
-        $details = $status->getFirstModel();
+
+        /** @var \MusicBundle\Entity\Order $order */
+        $order = $status->getFirstModel();
+        $order->setStatus($status->getValue());
+
+        $this->getDoctrine()->getEntityManager()
+            ->flush();
 
         // you have order and payment status
         // so you can do whatever you want for example you can just print status and payment details.
 
-        return new JsonResponse(array(
-            'status' => $status->getValue(),
-            'details' => iterator_to_array($details),
-        ));
+        return $this->render('MusicBundle:Music:order_complete.html.twig', [
+            'order' => $order,
+        ]);
     }
 }

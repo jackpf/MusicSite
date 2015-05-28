@@ -67,3 +67,9 @@ security:
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+jms_security_extra:
+    expressions: true
+    method_access_control:
+        'MusicBundle:Payment:*': 'hasRole("ROLE_USER")'

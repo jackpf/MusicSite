@@ -31,7 +31,7 @@
             </join-table>
         </many-to-many>
         <field name="price" type="float" />
-        <field name="status" type="integer" />
+        <field name="status" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

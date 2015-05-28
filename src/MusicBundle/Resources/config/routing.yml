@@ -38,6 +38,6 @@ music_order:
     path:     /order/{id}
     defaults: { _controller: MusicBundle:Payment:order }
 
-music_order_complete:
-    path:     /order-complete
-    defaults: { _controller: MusicBundle:Payment:complete }
+music_order_purchase:
+    path:     /order-purchase
+    defaults: { _controller: MusicBundle:Payment:purchase }

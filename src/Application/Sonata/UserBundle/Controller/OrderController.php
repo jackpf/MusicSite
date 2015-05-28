@@ -14,7 +14,7 @@ class OrderController extends Controller
             ->findByUser($user);
 
         return $this->render('FOSUserBundle:Profile:orders.html.twig',[
-            'orders' => []//$orders,
+            'orders' => $orders,
         ]);
     }
 }

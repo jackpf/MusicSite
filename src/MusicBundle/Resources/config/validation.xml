@@ -47,7 +47,7 @@
         <property name="mediaFiles">
             <constraint name="Valid" />
         </property>
-        <property name="mediaVariants">
+        <property name="ReleaseVariants">
             <constraint name="Valid" />
         </property>
     </class>
@@ -99,7 +99,7 @@
             </option>
         </constraint>
     </class>
-    <class name="MusicBundle\Entity\MediaVariant">
+    <class name="MusicBundle\Entity\ReleaseVariant">
         <property name="type">
             <constraint name="NotBlank" />
         </property>

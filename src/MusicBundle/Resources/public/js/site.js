@@ -34,7 +34,8 @@ $('#search-link').click(function(e) {
     e.preventDefault();
 });
 
-// Fancybox
+// Other stuff
 $(document).ready(function() {
     $(".fancybox").fancybox();
+    $(".js-tooltip").tooltipster();
 });

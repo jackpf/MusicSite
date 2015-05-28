@@ -2,9 +2,9 @@
 
 namespace MusicBundle\Entity;
 
-use MusicBundle\Entity\Data\MediaVariantTypes;
+use MusicBundle\Entity\Data\ReleaseVariantTypes;
 
-class MediaVariant
+class ReleaseVariant
 {
     private $id;
 
@@ -59,10 +59,5 @@ class MediaVariant
     public function setIsAvailable($isAvailable)
     {
         $this->isAvailable = $isAvailable;
-    }
-
-    public function getName()
-    {
-        return MediaVariantTypes::$TYPES[$this->getType()];
     }
 }

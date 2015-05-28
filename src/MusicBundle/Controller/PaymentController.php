@@ -14,7 +14,7 @@ class PaymentController extends Controller
     public function orderAction($id)
     {
         $variant = $this->getDoctrine()->getEntityManager()
-            ->getRepository('MusicBundle\Entity\MediaVariant')
+            ->getRepository('MusicBundle\Entity\ReleaseVariant')
             ->find($id);
 
         if (!$variant) {
@@ -28,11 +28,11 @@ class PaymentController extends Controller
         $order = $storage->create();
 
         $order->setUser($this->get('security.context')->getToken()->getUser());
-        $order->setMediaVariant($variant);
+        $order->setReleaseVariant($variant);
         $order->setPrice($variant->getPrice());
 
-        $order['L_PAYMENTREQUEST_0_NAM0']       = $order->getMediaVariant()->getMediaItem()->getTitle();
-        $order['L_PAYMENTREQUEST_0_NUMBER0']    = $order->getMediaVariant()->getMediaItem()->getId();
+        $order['L_PAYMENTREQUEST_0_NAM0']       = $order->getReleaseVariant()->getMediaItem()->getTitle();
+        $order['L_PAYMENTREQUEST_0_NUMBER0']    = $order->getReleaseVariant()->getMediaItem()->getId();
         $order['L_PAYMENTREQUEST_0_AMT0']       = $order->getPrice();
         $order['L_PAYMENTREQUEST_0_QTY0']       = 1;
         $order['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';

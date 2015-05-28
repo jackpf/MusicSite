@@ -10,7 +10,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <many-to-one target-entity="MusicBundle\Entity\MediaVariant" field="mediaVariant" />
+        <many-to-one target-entity="MusicBundle\Entity\ReleaseVariant" field="ReleaseVariant" />
         <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="user" />
         <field name="price" type="float" />
         <field name="status" />

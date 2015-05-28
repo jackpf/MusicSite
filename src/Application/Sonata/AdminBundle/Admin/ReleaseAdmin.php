@@ -31,7 +31,7 @@ class ReleaseAdmin extends MediaAdmin
                 'inline' => 'table',
                 'sortable' => 'position',
             ])
-            ->add('mediaVariants', 'sonata_type_collection', [
+            ->add('ReleaseVariants', 'sonata_type_collection', [
                 'type' => 'sonata_type_admin',
                 'required' => true,
                 'cascade_validation' => true,

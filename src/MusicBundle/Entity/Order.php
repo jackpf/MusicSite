@@ -11,7 +11,7 @@ class Order extends ArrayObject
 
     private $user;
 
-    private $mediaVariant;
+    private $ReleaseVariant;
 
     private $price;
 
@@ -36,14 +36,14 @@ class Order extends ArrayObject
         $this->user = $user;
     }
 
-    public function getMediaVariant()
+    public function getReleaseVariant()
     {
-        return $this->mediaVariant;
+        return $this->ReleaseVariant;
     }
 
-    public function setMediaVariant($mediaVariant)
+    public function setReleaseVariant($ReleaseVariant)
     {
-        $this->mediaVariant = $mediaVariant;
+        $this->ReleaseVariant = $ReleaseVariant;
     }
 
     public function getPrice()

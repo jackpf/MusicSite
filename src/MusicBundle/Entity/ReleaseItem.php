@@ -8,12 +8,12 @@ class ReleaseItem extends MediaItem
 {
     private $mediaFiles;
 
-    private $mediaVariants;
+    private $ReleaseVariants;
 
     public function __construct()
     {
         $this->mediaFiles = new ArrayCollection();
-        $this->mediaVariants = new ArrayCollection();
+        $this->ReleaseVariants = new ArrayCollection();
     }
 
     public function getMediaFiles()
@@ -40,26 +40,26 @@ class ReleaseItem extends MediaItem
         }
     }
 
-    public function getMediaVariants()
+    public function getReleaseVariants()
     {
-        return $this->mediaVariants;
+        return $this->ReleaseVariants;
     }
 
-    public function setMediaVariants($mediaVariants)
+    public function setReleaseVariants($ReleaseVariants)
     {
-        $this->mediaVariants = $mediaVariants;
+        $this->ReleaseVariants = $ReleaseVariants;
     }
 
-    public function addMediaVariant($mediaVariant)
+    public function addReleaseVariant($ReleaseVariant)
     {
-        $this->mediaVariants[] = $mediaVariant;
+        $this->ReleaseVariants[] = $ReleaseVariant;
     }
 
-    public function removeMediaVariant($mediaVariant)
+    public function removeReleaseVariant($ReleaseVariant)
     {
-        foreach ($this->mediaVariant as $key => $variant) {
-            if ($mediaVariant->getId() == $variant->getId()) {
-                unset($this->mediaVariant[$key]);
+        foreach ($this->ReleaseVariant as $key => $variant) {
+            if ($ReleaseVariant->getId() == $variant->getId()) {
+                unset($this->ReleaseVariant[$key]);
             }
         }
     }
@@ -67,7 +67,7 @@ class ReleaseItem extends MediaItem
     public function onPreFlush()
     {
         // Doctrine doesn't seem to be setting the inverse relation
-        foreach (array_merge($this->mediaFiles->toArray(), $this->mediaVariants->toArray()) as $object) {
+        foreach (array_merge($this->mediaFiles->toArray(), $this->ReleaseVariants->toArray()) as $object) {
             if ($object) {
                 $object->setMediaItem($this);
             }

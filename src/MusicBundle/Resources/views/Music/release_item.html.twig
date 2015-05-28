@@ -21,8 +21,9 @@
                     {% endfor %}
                 </div>
                 <div class="col-sm-4" style="padding-top: 50px;">
-                    {% for variant in item.mediaVariants %}
-                        {{ variant.name }}: &pound;{{ variant.price }}<br />
+                    {% for variant in item.ReleaseVariants %}
+                        {{ variant.type.name }}{% if variant.type.description is not empty %}<sup>[<a href="#" onclick="javascript: return false;" class="js-tooltip" title="{{ variant.type.description }}">?</a>]</sup>{% endif %}:
+                        &pound;{{ variant.price }}<br />
                         {% if variant.isAvailable %}
                             <a href="{{ path('music_order', {id: variant.id}) }}">
                                 <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />

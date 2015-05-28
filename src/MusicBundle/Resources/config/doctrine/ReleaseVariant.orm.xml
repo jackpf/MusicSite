@@ -6,12 +6,12 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="MusicBundle\Entity\MediaVariant" table="media_variants">
+    <entity name="MusicBundle\Entity\ReleaseVariant" table="media_variants">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <many-to-one target-entity="MusicBundle\Entity\MediaItem" field="mediaItem"  />
-        <field name="type" type="integer" />
+        <many-to-one target-entity="MusicBundle\Entity\ReleaseType" field="type"  />
         <field name="price" type="float" />
         <field name="isAvailable" type="boolean" />
     </entity>

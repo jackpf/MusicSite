@@ -29,10 +29,16 @@
             <argument>MusicBundle\Entity\MediaFile</argument>
             <argument />
         </service>
-        <service id="sonata.admin.media_variant" class="Application\Sonata\AdminBundle\Admin\MediaVariantAdmin">
+        <service id="sonata.admin.media_variant" class="Application\Sonata\AdminBundle\Admin\ReleaseVariantAdmin">
             <tag name="sonata.admin" manager_type="orm" label="Media Variant" show_in_dashboard="false"/>
             <argument />
-            <argument>MusicBundle\Entity\MediaVariant</argument>
+            <argument>MusicBundle\Entity\ReleaseVariant</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.release_type" class="Application\Sonata\AdminBundle\Admin\ReleaseTypeAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Configuration" label="Release Types"/>
+            <argument />
+            <argument>MusicBundle\Entity\ReleaseType</argument>
             <argument />
         </service>
 

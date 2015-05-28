@@ -6,14 +6,14 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use MusicBundle\Entity\Data\MediaVariantTypes;
+use MusicBundle\Entity\Data\ReleaseVariantTypes;
 
-class MediaVariantAdmin extends Admin
+class ReleaseVariantAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'choice', ['choices' => MediaVariantTypes::$TYPES])
+            ->add('type', null, ['property' => 'name'])
             ->add('price')
             ->add('isAvailable', null, ['required' => false])
         ;

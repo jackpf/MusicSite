@@ -2,6 +2,10 @@ music_homepage:
     path:     /
     defaults: { _controller: MusicBundle:Main:index }
 
+music_about:
+    path:     /about
+    defaults: { _controller: MusicBundle:Main:about }
+
 music_news:
     path:     /news/
     defaults: { _controller: MusicBundle:Main:index, type: news }

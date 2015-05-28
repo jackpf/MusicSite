@@ -2,6 +2,10 @@ application_sonata_admin:
     resource: "@ApplicationSonataAdminBundle/Resources/config/routing.yml"
     prefix:   /
 
+application_sonata_user:
+    resource: "@ApplicationSonataUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@MusicBundle/Resources/config/routing.yml"
     type:     yaml

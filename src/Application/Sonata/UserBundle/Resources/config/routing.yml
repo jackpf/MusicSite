@@ -1,0 +1,3 @@
+user_orders:
+    path:     /profile/orders
+    defaults: { _controller: ApplicationSonataUserBundle:Order:orders }

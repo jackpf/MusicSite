@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block title %} | Profile{% endblock %}
+
+{% block content %}
+    <div class="col-sm-6 fos_user_content centered profile-info">
+        <div class="row">
+            <div class="col-xs-4">
+                {% include 'FOSUserBundle:Profile:profile_sidebar.html.twig' %}
+            </div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <ul>
+                        {% for order in orders %}
+                            <li>Order: {{ order.id }}, status: {{ order.status }}</li>
+                        {% else %}
+                            <li>You have no orders to show.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

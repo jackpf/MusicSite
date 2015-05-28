@@ -10,26 +10,8 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <many-to-many target-entity="MusicBundle\Entity\MediaVariant" field="mediaVariant">
-            <join-table name="orders_variants">
-                <join-columns>
-                    <join-column/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column/>
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-        <many-to-many target-entity="Application\Sonata\UserBundle\Entity\User" field="user">
-            <join-table name="orders_users">
-                <join-columns>
-                    <join-column/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column/>
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
+        <many-to-one target-entity="MusicBundle\Entity\MediaVariant" field="mediaVariant" />
+        <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="user" />
         <field name="price" type="float" />
         <field name="status" />
         <field name="createdAt" column="created_at" type="datetime">

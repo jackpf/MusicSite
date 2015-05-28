@@ -27,8 +27,8 @@ class PaymentController extends Controller
         /** @var \MusicBundle\Entity\Order $order */
         $order = $storage->create();
 
-        $order->setUser([$this->get('security.context')->getToken()->getUser()]);
-        $order->setMediaVariant([$variant]);
+        $order->setUser($this->get('security.context')->getToken()->getUser());
+        $order->setMediaVariant($variant);
         $order->setPrice($variant->getPrice());
 
         $order['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';

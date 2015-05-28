@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="MusicBundle\Entity\Order" table="orders">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <many-to-many target-entity="MusicBundle\Entity\MediaVariant" field="mediaVariant">
+            <join-table name="orders_variants">
+                <join-columns>
+                    <join-column/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many target-entity="Application\Sonata\UserBundle\Entity\User" field="user">
+            <join-table name="orders_users">
+                <join-columns>
+                    <join-column/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <field name="price" type="float" />
+        <field name="status" type="integer" />
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </entity>
+</doctrine-mapping>

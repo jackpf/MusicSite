@@ -151,4 +151,4 @@ payum:
                 username:  %paypal_username%
                 password:  %paypal_password%
                 signature: %paypal_signature%
-                sandbox:   %payal_sandbox%
+                sandbox:   %paypal_sandbox%

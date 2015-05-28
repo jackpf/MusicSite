@@ -4,8 +4,13 @@
 
 {%block content %}
     <div class="col-md-9 single-item centered">
-        Your order has been received.<br />
-        You can check order statuses and download items in your profile.<br /><br />
-        <a href="{{ path('user_orders') }}">View my orders &amp; downloads</a>
+        {% if order.status == 'failed' %}
+            Your order has failed.<br /><br />
+            Please try again or contact us if the problem persists.
+        {% else %}
+            Your order has been received.<br />
+            You can check order statuses and download items in your profile.<br /><br />
+            <a href="{{ path('user_orders') }}">View my orders &amp; downloads</a>
+        {% endif %}
     </div>
 {% endblock %}

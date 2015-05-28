@@ -31,8 +31,14 @@ class PaymentController extends Controller
         $order->setMediaVariant($variant);
         $order->setPrice($variant->getPrice());
 
+        $order['L_PAYMENTREQUEST_0_NAM0']       = $order->getMediaVariant()->getMediaItem()->getTitle();
+        $order['L_PAYMENTREQUEST_0_NUMBER0']    = $order->getMediaVariant()->getMediaItem()->getId();
+        $order['L_PAYMENTREQUEST_0_AMT0']       = $order->getPrice();
+        $order['L_PAYMENTREQUEST_0_QTY0']       = 1;
         $order['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';
-        $order['PAYMENTREQUEST_0_AMT'] = $order->getPrice();
+        $order['PAYMENTREQUEST_0_ITEMAMT']      = $order->getPrice();
+        $order['PAYMENTREQUEST_0_AMT']          = $order->getPrice() + 3.30;
+        $order['PAYMENTREQUEST_0_SHIPPINGAMT']  = 3.30;
 
         $storage->update($order);
 

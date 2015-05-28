@@ -56,3 +56,12 @@ sonata_user:
 #sonata_user_change_password:
 #    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
 #    prefix: /profile
+
+payum_capture:
+    resource: "@PayumBundle/Resources/config/routing/capture.xml"
+
+payum_authorize:
+    resource: "@PayumBundle/Resources/config/routing/authorize.xml"
+
+payum_notify:
+    resource: "@PayumBundle/Resources/config/routing/notify.xml"

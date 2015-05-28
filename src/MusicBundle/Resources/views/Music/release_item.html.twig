@@ -24,7 +24,7 @@
                     {% for variant in item.mediaVariants %}
                         {{ variant.name }}: &pound;{{ variant.price }}<br />
                         {% if variant.isAvailable %}
-                            <a href="{{ path('music_download', {id: item.id}) }}">
+                            <a href="{{ path('music_order', {id: item.id}) }}">
                                 <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
                             </a>
                         {% else %}

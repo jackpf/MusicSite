@@ -11,9 +11,7 @@
             <generator strategy="AUTO" />
         </id>
         <many-to-one target-entity="MusicBundle\Entity\MediaFile" field="mediaFile">
-            <cascade>
-                <cascade-remove/>
-            </cascade>
+            <join-column on-delete="CASCADE" />
         </many-to-one>
         <field name="token" />
         <field name="createdAt" column="created_at" type="datetime" />

@@ -40,6 +40,9 @@ class PaymentController extends Controller
         $order['PAYMENTREQUEST_0_AMT']          = $order->getPrice() + 3.30;
         $order['PAYMENTREQUEST_0_SHIPPINGAMT']  = 3.30;
 
+        $notifyToken = $this->get('payum.security.token_factory')->createNotifyToken(self::GATEWAY_NAME, $order);
+        $order['NOTIFYURL'] = $notifyToken->getTargetUrl();
+
         $storage->update($order);
 
         $captureToken = $this->get('payum.security.token_factory')->createCaptureToken(

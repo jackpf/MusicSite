@@ -6,7 +6,7 @@ use MusicBundle\Data\Data;
 use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\ReleaseItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -52,16 +52,14 @@ class MediaController extends Controller
 
         list($path, $filename) = $downloadManager->getPath($item, $type);
 
-        $response = new BinaryFileResponse($path);
-        $response->trustXSendfileTypeHeader();
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_INLINE,
-            $filename,
-            iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
-        );
-        $response->headers->set('Content-Description', 'File Transfer');
-        $response->headers->set('Content-Type', 'application/octet-stream');
-        $response->headers->set('Content-Length', filesize($path));
+        $response = new Response();
+
+        $response->headers->set('Cache-Control', 'private');
+        $response->headers->set('Content-type', mime_content_type($path));
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $filename . '";');
+        $response->headers->set('Content-length', filesize($path));
+
+        $response->setContent(file_get_contents($path));
 
         return $response;
     }

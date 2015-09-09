@@ -48,15 +48,15 @@ class DownloadManager
 
         foreach ($item->getMediaFiles() as $file) {
             if ($type == '320') {
-                $path = $file->getPath();
+                $filePath = $file->getPath();
             } else if ($type == 'lossless') {
-                $path = $file->getLosslessPath();
+                $filePath = $file->getLosslessPath();
             } else {
                 throw new \RuntimeException(sprintf('Unsupported type: "%s"', $type));
             }
 
             $zip->addFile(
-                Data::getUploadPath() . '/' . $path,
+                Data::getUploadPath() . '/' . $filePath,
                 self::createName($file->getPath(), $file->getName())
             );
         }

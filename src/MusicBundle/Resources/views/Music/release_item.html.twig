@@ -23,7 +23,7 @@
                 <div class="col-sm-4" style="padding-top: 50px;">
                     {% for variant in item.ReleaseVariants %}
                         {{ variant.type.name }}{% if variant.type.description is not empty %}<sup>[<a href="#" onclick="javascript: return false;" class="js-tooltip" title="{{ variant.type.description }}">?</a>]</sup>{% endif %}:
-                        {% if variant.price is null %}
+                        {% if variant.price == 0 %}
                             Free<br />
                             {% if variant.isAvailable %}
                                 <a href="{{ path('music_order', {id: variant.id}) }}">Free purchase</a>

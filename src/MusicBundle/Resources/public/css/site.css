@@ -112,8 +112,8 @@ body {
 }
 .item img {
     float: left;
-    max-width: 160px;
-    max-height: 160px;
+    max-width: 1400px;
+    max-height: 140px;
     padding: 10px 10px 0 5px;
 }
 .item a {

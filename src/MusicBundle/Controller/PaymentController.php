@@ -37,25 +37,49 @@ class PaymentController extends Controller
         $order['L_PAYMENTREQUEST_0_QTY0']       = 1;
         $order['PAYMENTREQUEST_0_CURRENCYCODE'] = 'GBP';
         $order['PAYMENTREQUEST_0_ITEMAMT']      = $order->getPrice();
-        $order['PAYMENTREQUEST_0_AMT']          = $order->getPrice() + 3.30;
-        $order['PAYMENTREQUEST_0_SHIPPINGAMT']  = 3.30;
+        $order['PAYMENTREQUEST_0_AMT']          = $order->getPrice() + $order->getReleaseVariant()->getType()->getShippingPrice();
+        $order['PAYMENTREQUEST_0_SHIPPINGAMT']  = $order->getReleaseVariant()->getType()->getShippingPrice();
 
-        $notifyToken = $this->get('payum.security.token_factory')->createNotifyToken(self::GATEWAY_NAME, $order);
+        $notifyToken = $this->get('payum.security.token_factory')
+            ->createNotifyToken(self::GATEWAY_NAME, $order);
         $order['NOTIFYURL'] = $notifyToken->getTargetUrl();
 
         $storage->update($order);
 
-        $captureToken = $this->get('payum.security.token_factory')->createCaptureToken(
-            self::GATEWAY_NAME,
-            $order,
-            'music_order_purchase' // the route to redirect after capture;
-        );
+        if ($variant->getPrice() == 0) {
+            $route = $this->get('router')->generate('music_order_purchase', ['id' => $order->getId()]);
+        } else {
+            $route = $this->get('payum.security.token_factory')->createCaptureToken(
+                self::GATEWAY_NAME,
+                $order,
+                'music_order_purchase' // the route to redirect after capture;
+            )->getTargetUrl();
+        }
 
-        return $this->redirect($captureToken->getTargetUrl());
+        return $this->redirect($route);
     }
 
-    public function purchaseAction(Request $request)
+    public function purchaseAction(Request $request, $id = null)
     {
+        // Free download?
+        if ($id != null) {
+            $order = $this->getDoctrine()->getManager()
+                ->getRepository('MusicBundle\Entity\Order')
+                ->find($id);
+
+            if ($order && $order->getReleaseVariant()->getPrice() == 0) {
+                $order->setStatus(GetHumanStatus::STATUS_AUTHORIZED);
+
+                $this->getDoctrine()->getEntityManager()
+                    ->flush();
+
+                return $this->render('MusicBundle:Music:order_complete.html.twig', [
+                    'order' => $order,
+                ]);
+            }
+        }
+
+        // Not free!
         $token = $this->get('payum.security.http_request_verifier')
             ->verify($request);
         $gateway = $this->get('payum')->getGateway($token->getGatewayName());

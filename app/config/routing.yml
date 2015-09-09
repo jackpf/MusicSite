@@ -69,3 +69,6 @@ payum_authorize:
 
 payum_notify:
     resource: "@PayumBundle/Resources/config/routing/notify.xml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

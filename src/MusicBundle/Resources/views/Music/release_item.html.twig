@@ -23,13 +23,27 @@
                 <div class="col-sm-4" style="padding-top: 50px;">
                     {% for variant in item.ReleaseVariants %}
                         {{ variant.type.name }}{% if variant.type.description is not empty %}<sup>[<a href="#" onclick="javascript: return false;" class="js-tooltip" title="{{ variant.type.description }}">?</a>]</sup>{% endif %}:
-                        &pound;{{ variant.price }}<br />
-                        {% if variant.isAvailable %}
-                            <a href="{{ path('music_order', {id: variant.id}) }}">
-                                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
-                            </a>
+                        {% if variant.price is null %}
+                            Free<br />
+                            {% if variant.isAvailable %}
+                                <a href="{{ path('music_order', {id: variant.id}) }}">Free purchase</a>
+                            {% else %}
+                                <em style="color: grey;">Currently unavailable</em>
+                            {% endif %}
                         {% else %}
-                            <em>Currently unavailable</em>
+                            &pound;{{ variant.price|number_format(2) }}
+                            {% if variant.type.shippingPrice > 0.0 %}
+                                (+ &pound;{{ variant.type.shippingPrice|number_format(2) }} postage)
+                            {% endif %}
+                            <br />
+                            {% if variant.isAvailable %}
+                                <a href="{{ path('music_order', {id: variant.id}) }}">
+                                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
+                                </a>
+                            {% else %}
+                                <em style="color: grey;">Currently unavailable</em>
+                            {% endif %}
+                            <br />
                         {% endif %}
                         <br /><br />
                     {% endfor %}

@@ -43,5 +43,5 @@ music_order:
     defaults: { _controller: MusicBundle:Payment:order }
 
 music_order_purchase:
-    path:     /order-purchase
-    defaults: { _controller: MusicBundle:Payment:purchase }
+    path:     /order-purchase/{id}
+    defaults: { _controller: MusicBundle:Payment:purchase, id: null }

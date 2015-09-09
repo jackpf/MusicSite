@@ -12,7 +12,7 @@ class ReleaseVariant
 
     private $type;
 
-    private $price;
+    private $price = 0.0;
 
     private $isAvailable;
 

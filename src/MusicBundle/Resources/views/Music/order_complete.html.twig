@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} | Order Complete{% endblock %}
+{% block title %} | Order {{ order.status != 'failed' ? 'Complete' : 'Failed' }}{% endblock %}
 
 {%block content %}
     <div class="col-md-9 single-item centered">
         {% if order.status == 'failed' %}
             Your order has failed.<br /><br />
-            Please try again or contact us if the problem persists.
+            Please try again or contact us if the problem persists.<br /><br />
         {% else %}
             Your order has been received.<br />
             You can check order statuses and download items in your profile.<br /><br />

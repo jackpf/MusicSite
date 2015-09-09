@@ -152,3 +152,15 @@ payum:
                 password:  %paypal_password%
                 signature: %paypal_signature%
                 sandbox:   %paypal_sandbox%
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        item:
+            quality: 100
+            filters:
+                thumbnail: { size: [140, 140], mode: outbound }

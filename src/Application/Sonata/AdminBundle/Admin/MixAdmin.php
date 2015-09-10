@@ -39,4 +39,26 @@ class MixAdmin extends MediaAdmin
     {
         parent::configureListFields($listMapper);
     }
+
+    public function postPersist($object)
+    {
+        parent::postPersist($object);
+
+        $this->createPreview($object);
+    }
+
+    public function postUpdate($object)
+    {
+        parent::postUpdate($object);
+
+        $this->createPreview($object);
+    }
+
+    public function createPreview($object)
+    {
+        // For mixes, the preview path is gonna be the actual path
+        foreach ($object->getMediaFiles() as $file) {
+            $file->setPreviewPath($file->getPath());
+        }
+    }
 }

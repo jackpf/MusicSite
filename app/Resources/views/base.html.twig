@@ -17,17 +17,28 @@
                 <div class="col-md-6 header-title">
                     REGULATION XVII
                 </div>
-                <ul class="list-inline col-md-3 header-nav">
-                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
-                        <li>|</li>
-                        <li><a href="{{ path('fos_user_registration_register') }}">register</a></li>
-                    {% else %}
-                        <li><a href="{{ path('fos_user_profile_edit') }}">{{ app.user.username }}</a></li>
-                        <li>|</li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
-                    {% endif %}
-                </ul>
+                <nav>
+                    <ul class="list-inline col-md-3 header-nav">
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
+                            <li>|</li>
+                            <li><a href="{{ path('fos_user_registration_register') }}">register</a></li>
+                        {% else %}
+                            <li>
+                                <a href="#" onclick="return false;">
+                                    {{ app.user.username }}
+                                    <img src="{{ asset('bundles/music/images/menu.png') }}" />
+                                </a>
+                                <ul class="fallback">
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">Update profile</a></li>
+                                    <li><a href="{{ path('user_orders') }}">Orders &amp; downloads</a></li>
+                                </ul>
+                            </li>
+                            <li>|</li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
             <div class="background">
                 <div class="row nav">

@@ -44,6 +44,34 @@ img.header-logo {
 .header-nav {
     text-align: right;
 }
+nav ul li ul {
+    text-align: left;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding: 0 0 10px;
+    z-index: 999;
+}
+nav ul li ul li {
+    margin: 0;
+    width: 100%;
+}
+nav ul li ul li a {
+    display: inline-block;
+    padding: 10px 10px 0;
+    color: #444;
+    width: 100%;
+    color: grey !important;
+}
+nav ul li ul li:hover a {
+    color: white !important;
+}
+nav ul li ul.fallback {
+    display: none;
+}
+nav ul li:hover ul.fallback {
+    display: block;
+}
 
 /* Nav */
 .nav {
@@ -215,6 +243,9 @@ form div.submit {
     font-style: italic;
     font-size: 0.8em;
     text-align: right;
+}
+.order-pagination {
+    float: right;
 }
 
 /* Audio JS fix */

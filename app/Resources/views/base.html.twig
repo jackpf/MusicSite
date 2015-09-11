@@ -5,20 +5,24 @@
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         <title>Regulation XVII {% block title %}{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="HandheldFriendly" content="true" />
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row header">
-                <div class="col-md-3 header-logo">
+            <!-- Desktop menu -->
+            <div class="row header visible-md visible-lg">
+                <div class="col-xs-3 header-logo">
                     <a href="{{ path('music_homepage') }}">
                         <img class="header-logo" src="{{ asset('bundles/music/images/logo.png') }}" />
                     </a>
                 </div>
-                <div class="col-md-6 header-title">
+                <div class="col-xs-6 header-title">
                     REGULATION XVII
                 </div>
                 <nav>
-                    <ul class="list-inline col-md-3 header-nav">
+                    <ul class="list-inline col-xs-3 header-nav">
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
                             <li>|</li>
@@ -27,7 +31,7 @@
                             <li>
                                 <a href="#" onclick="return false;">
                                     {{ app.user.username }}
-                                    <img src="{{ asset('bundles/music/images/menu.png') }}" />
+                                    <img class="menu-icon" src="{{ asset('bundles/music/images/menu.png') }}" />
                                 </a>
                                 <ul class="fallback">
                                     <li><a href="{{ path('fos_user_profile_edit') }}">Update profile</a></li>
@@ -40,10 +44,42 @@
                     </ul>
                 </nav>
             </div>
+            <!-- Mobile menu -->
+            <div class="row header hidden-md hidden-lg">
+                <div class="col-xs-6 header-logo">
+                    <a href="{{ path('music_homepage') }}">
+                        <img class="header-logo" src="{{ asset('bundles/music/images/logo.png') }}" />
+                    </a>
+                </div>
+                <div class="col-xs-6 header-nav">
+                    <a id="mobile-menu-icon" href="#">
+                        <img src="{{ asset('bundles/music/images/menu.png') }}" />
+                    </a>
+                </div>
+                <div id="mobile-menu">
+                    <ul>
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
+                            <li><a href="{{ path('fos_user_registration_register') }}">register</a></li>
+                        {% else %}
+                            <li>
+                                <a href="#" onclick="return false;">
+                                    {{ app.user.username }}
+                                    <img class="menu-icon" src="{{ asset('bundles/music/images/menu.png') }}" />
+                                </a>
+                                <ul class="fallback">
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">Update profile</a></li>
+                                    <li><a href="{{ path('user_orders') }}">Orders &amp; downloads</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
             <div class="background">
-                <div class="row nav">
-                    <div class="row">
-                    <ul class="list-inline">
+                <div class="row nav visible-md visible-lg">
+                    <ul class="row list-inline">
                         {% set route = app.request.attributes.get('_route') %}
                        <li><a {{ route in ['music_release', 'music_release_item'] ? 'class="active"' : '' }} href="{{ path('music_release') }}">releases</a></li>
                         <li>|</li>
@@ -55,7 +91,6 @@
                         <li>|</li>
                         <li><a href="{{ path('music_about') }}">about</a></li>
                     </ul>
-                        </div>
                     <form class="row" id="search-box" style="" action="{{ path('music_homepage') }}" method="get">
                         <input class="col-xs-2" type="text" name="search" value="{{ app.request.query.get('search') }}" />
                         <input class="col-xs-1" type="submit" />
@@ -71,10 +106,10 @@
             </div>
         </div>
         <div class="row footer navbar-fixed-bottom">
-            <div class="col-sm-6">
+            <div class="col-xs-6">
                 &copy; Jack Farrelly
             </div>
-            <div class="col-sm-6 contact">
+            <div class="col-xs-6 contact">
                 <a href="mailto: {{ mailerUser }}">Contact</a>
             </div>
         </div>

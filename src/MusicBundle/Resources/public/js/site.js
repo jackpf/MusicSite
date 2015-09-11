@@ -34,6 +34,13 @@ $('#search-link').click(function(e) {
     e.preventDefault();
 });
 
+// Mobile menu
+$('#mobile-menu-icon').click(function(e) {
+    $('#mobile-menu').slideToggle();
+
+    e.preventDefault();
+});
+
 // Other stuff
 $(document).ready(function() {
     $(".fancybox").fancybox();

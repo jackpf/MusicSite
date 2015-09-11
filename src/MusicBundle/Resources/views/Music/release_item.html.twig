@@ -6,13 +6,13 @@
     <div class="col-md-9 single-item centered">
         <h1 class="title">{{ item.title }}</h1>
         <div class="item-content">
-            {% if item.image %}
-                <a class="fancybox" href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) }}" /></a>
-            {% endif %}
-            {{ item.content|nl2br }}
-            <br clear="both" />
-
             <div class="row">
+                {% if item.image %}
+                    <a class="fancybox" href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) | imagine_filter('itemwide') }}" /></a>
+                {% endif %}
+                {{ item.content|nl2br }}
+            </div>
+            <div class="row previews">
                 <div class="col-sm-8">
                     <h2>Previews</h2>
                     {% for media in item.mediaFiles %}
@@ -20,7 +20,7 @@
                         <audio src="{{ path('music_play', {id: media.id, token: tokens[media.id].token}) }}" preload="auto"></audio>
                     {% endfor %}
                 </div>
-                <div class="col-sm-4" style="padding-top: 50px;">
+                <div class="col-sm-4 variants">
                     {% for variant in item.releaseVariants %}
                         {{ variant.type.name }}{% if variant.type.description is not empty %}<sup>[<a href="#" onclick="javascript: return false;" class="js-tooltip" title="{{ variant.type.description }}">?</a>]</sup>{% endif %}:
                         {% if variant.price == 0 %}

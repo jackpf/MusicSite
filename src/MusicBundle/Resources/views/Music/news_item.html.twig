@@ -7,7 +7,7 @@
             <h1 class="title">{{ item.title }}</h1>
             <div class="item-content">
                 {% if item.image %}
-                    <a href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) }}" /></a>
+                    <a href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) | imagine_filter('item') }}" /></a>
                 {% endif %}
                 {{ item.content|nl2br }}
             </div>

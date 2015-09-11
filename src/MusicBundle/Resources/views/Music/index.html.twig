@@ -2,12 +2,12 @@
 
 {%block content %}
     {% for item in items %}
-        <div class="col-sm-4 item-container">
+        <div class="col-md-4 item-container">
             <div class="item {{ item.background is empty ? 'item-no-background' : '' }}">
                 <h3 class="title"><a href="{{ item_path(item) }}">{{ item.title }}</a></h3>
                 {% if item.image is not empty %}
                     <a href="{{ item_path(item) }}">
-                        <img src="{{ upload_path(item.image) | imagine_filter('item') }}" />
+                        <img class="img-responsive" src="{{ upload_path(item.image) | imagine_filter('item') }}" />
                     </a>
                 {% endif %}
                 {{ item.shortContent }}

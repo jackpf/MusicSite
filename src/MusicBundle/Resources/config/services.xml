@@ -16,6 +16,16 @@
         <service id="music.token_manager" class="MusicBundle\Service\PlayTokenManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+        <service id="music.mailer" class="MusicBundle\Email\Mailer">
+            <argument type="service" id="mailer" />
+            <argument>%mailer_user%</argument>
+            <argument>%mailer_name%</argument>
+            <argument type="service" id="twig" />
+        </service>
+        <service id="music.email_listener" class="MusicBundle\Email\EmailListener">
+            <argument type="service" id="music.mailer" />
+            <tag name="kernel.event_listener" event="event.order" method="orderEvent" />
+        </service>
     </services>
 
 </container>

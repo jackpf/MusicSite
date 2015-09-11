@@ -3,6 +3,8 @@
 namespace MusicBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Payum\Core\Request\GetHumanStatus;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -73,6 +75,8 @@ class PaymentController extends Controller
                 $this->getDoctrine()->getEntityManager()
                     ->flush();
 
+                $this->get('event_dispatcher')->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
+
                 return $this->render('MusicBundle:Music:order_complete.html.twig', [
                     'order' => $order,
                 ]);
@@ -101,6 +105,8 @@ class PaymentController extends Controller
 
         $this->getDoctrine()->getEntityManager()
             ->flush();
+
+        $this->get('event_dispatcher')->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
 
         // you have order and payment status
         // so you can do whatever you want for example you can just print status and payment details.

@@ -1,0 +1,22 @@
+{% extends '::email.html.twig' %}
+
+{% block subject %}Order placed{% endblock %}
+
+{% block body %}
+    Hi,<br /><br />
+
+    Thank you for your order with Regulation XVII:<br /><br />
+
+    <strong style="font-size: 1.2em;">{{ order.releaseVariant.mediaItem.title }}</strong><br />
+    Media type: {{ order.releaseVariant.type.name }}<br />
+    Price: &pound;{{ order.releaseVariant.price|number_format(2) }}<br />
+    Shipping: &pound;{{ order.releaseVariant.type.shippingPrice|number_format(2) }}<br /><br />
+
+    Once payment has been received, applicable downloads will be available in your <a href="{{ path('user_orders') }}">orders &amp; downloads</a>, and any shipments will be dispatched shortly.<br /><br />
+
+    If there are any problems with your order, please <a href="#">get in touch</a>.<br /><br />
+
+    Enjoy :)<br /><br />
+
+    Regulation XVII
+{% endblock %}

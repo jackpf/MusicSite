@@ -1,11 +1,15 @@
-{% block subject %}Account Confirmation{% endblock %}
-{% block body_html %}
-{% autoescape false %}
-Hello {{ user.username }},
-<br><br>
-To activate your account, please <a href="{{ confirmationUrl }}">click here</a>.
-<br><br>
-Kind regards,<br>
-Regulation XVII
-{% endautoescape %}
+{% extends '::email.html.twig' %}
+
+{% block subject %}Regulation XVII Account Confirmation{% endblock %}
+
+{% block body %}
+    Hi,<br /><br />
+
+    Welcome to Regulation XVII.<br /><br />
+
+    To activate your account, please <a href="{{ confirmationUrl }}">click here</a>.<br /><br />
+
+    If there are any problems with your account, please <a href="#">get in touch</a>.<br /><br />
+
+    Regulation XVII
 {% endblock %}

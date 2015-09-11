@@ -12,11 +12,18 @@
                 <div class="row">
                     <ul>
                         {% for order in orders %}
+                            <li>
                             {% if order.status == 'authorized' %}
-                                <li><a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">{{ order.releaseVariant.mediaItem.title }}</a></li>
+                                <a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">
+                                    <img src="{{ asset('bundles/music/images/download.png') }}" />
+                                    {{ order.releaseVariant.mediaItem.title }}
+                                </a>
                             {% else %}
-                                <li>{{ order.releaseVariant.mediaItem.title }} ({{ order.status == 'new' ? 'unpaid' : 'payment ' ~ order.status }})</li>
+                                ({{ order.status == 'new' ? 'unpaid' : 'payment ' ~ order.status }})
+                                {{ order.releaseVariant.mediaItem.title }}
                             {% endif %}
+                            <em style="color: grey;">{{ order.createdAt|date('d/m/Y') }}</em>
+                            </li>
                         {% else %}
                             <li>You have no orders to show.</li>
                         {% endfor %}

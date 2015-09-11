@@ -15,12 +15,24 @@ class PaymentController extends Controller
 
     public function orderAction($id)
     {
-        $variant = $this->getDoctrine()->getEntityManager()
-            ->getRepository('MusicBundle\Entity\ReleaseVariant')
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $variant = $em->getRepository('MusicBundle\Entity\ReleaseVariant')
             ->find($id);
 
         if (!$variant) {
             throw $this->createNotFoundException('Variant not found');
+        }
+
+        $existingOrders = $em->getRepository('MusicBundle\Entity\Order')
+            ->findBy([
+                'user' => $this->get('security.context')->getToken()->getUser(),
+                'releaseVariant' => $variant,
+                'status' => 'authorized'
+            ]);
+
+        if (count($existingOrders) > 0) {
+            return $this->redirectToRoute('music_order_duplicate');
         }
 
         $storage = $this->get('payum')
@@ -63,53 +75,42 @@ class PaymentController extends Controller
 
     public function purchaseAction(Request $request, $id = null)
     {
+        $em = $this->getDoctrine()->getManager();
+        $freePurchase = false;
+
         // Free download?
         if ($id != null) {
-            $order = $this->getDoctrine()->getManager()
-                ->getRepository('MusicBundle\Entity\Order')
+            $order = $em->getRepository('MusicBundle\Entity\Order')
                 ->find($id);
 
             if ($order && $order->getReleaseVariant()->getPrice() == 0) {
                 $order->setStatus(GetHumanStatus::STATUS_AUTHORIZED);
-
-                $this->getDoctrine()->getEntityManager()
-                    ->flush();
-
-                $this->get('event_dispatcher')->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
-
-                return $this->render('MusicBundle:Music:order_complete.html.twig', [
-                    'order' => $order,
-                ]);
+                $freePurchase = true;
             }
         }
 
         // Not free!
-        $token = $this->get('payum.security.http_request_verifier')
-            ->verify($request);
-        $gateway = $this->get('payum')->getGateway($token->getGatewayName());
-        $identity = $token->getDetails();
+        if (!$freePurchase) {
+            $token = $this->get('payum.security.http_request_verifier')
+                ->verify($request);
+            $gateway = $this->get('payum')->getGateway($token->getGatewayName());
+            $identity = $token->getDetails();
 
-        $this->get('payum.security.http_request_verifier')
-            ->invalidate($token);
+            $this->get('payum.security.http_request_verifier')
+                ->invalidate($token);
 
-        $order = $this->get('payum')
-            ->getStorage($identity->getClass())
-            ->find($identity);
+            // or Payum can fetch the model for you while executing a request (Preferred).
+            $gateway->execute($status = new GetHumanStatus($token));
 
-        // or Payum can fetch the model for you while executing a request (Preferred).
-        $gateway->execute($status = new GetHumanStatus($token));
+            /** @var \MusicBundle\Entity\Order $order */
+            $order = $status->getFirstModel();
+            $order->setStatus($status->getValue());
+        }
 
-        /** @var \MusicBundle\Entity\Order $order */
-        $order = $status->getFirstModel();
-        $order->setStatus($status->getValue());
+        $em->flush();
 
-        $this->getDoctrine()->getEntityManager()
-            ->flush();
-
-        $this->get('event_dispatcher')->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
-
-        // you have order and payment status
-        // so you can do whatever you want for example you can just print status and payment details.
+        $this->get('event_dispatcher')
+            ->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
 
         return $this->render('MusicBundle:Music:order_complete.html.twig', [
             'order' => $order,

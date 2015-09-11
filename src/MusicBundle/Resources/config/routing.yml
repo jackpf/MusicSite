@@ -45,3 +45,9 @@ music_order:
 music_order_purchase:
     path:     /order-purchase/{id}
     defaults: { _controller: MusicBundle:Payment:purchase, id: null }
+
+music_order_duplicate:
+    path: /order-duplicate
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    MusicBundle:Music:order_duplicate.html.twig

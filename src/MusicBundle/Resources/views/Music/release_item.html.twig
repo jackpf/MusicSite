@@ -21,7 +21,7 @@
                     {% endfor %}
                 </div>
                 <div class="col-sm-4" style="padding-top: 50px;">
-                    {% for variant in item.ReleaseVariants %}
+                    {% for variant in item.releaseVariants %}
                         {{ variant.type.name }}{% if variant.type.description is not empty %}<sup>[<a href="#" onclick="javascript: return false;" class="js-tooltip" title="{{ variant.type.description }}">?</a>]</sup>{% endif %}:
                         {% if variant.price == 0 %}
                             Free<br />

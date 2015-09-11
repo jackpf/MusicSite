@@ -11,7 +11,7 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
-        <one-to-many target-entity="MusicBundle\Entity\ReleaseVariant" mapped-by="mediaItem" field="ReleaseVariants" orphan-removal="true">
+        <one-to-many target-entity="MusicBundle\Entity\ReleaseVariant" mapped-by="mediaItem" field="releaseVariants" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

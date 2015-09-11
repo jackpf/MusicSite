@@ -60,4 +60,12 @@ class ReleaseVariant
     {
         $this->isAvailable = $isAvailable;
     }
+
+    public function __toString()
+    {
+        return sprintf('%s: %s',
+            $this->getMediaItem() ? $this->getMediaItem()->getTitle() : '?',
+            $this->getType() ? $this->getType()->getName() : '?'
+        );
+    }
 }

@@ -11,6 +11,6 @@
         </id>
         <field name="name" />
         <field name="shippingPrice" column="shipping_price" type="float" nullable="true" />
-        <field name="description" type="text" />
+        <field name="description" type="text" nullable="true" />
     </entity>
 </doctrine-mapping>

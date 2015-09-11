@@ -8,12 +8,12 @@ class ReleaseItem extends MediaItem
 {
     private $mediaFiles;
 
-    private $ReleaseVariants;
+    private $releaseVariants;
 
     public function __construct()
     {
         $this->mediaFiles = new ArrayCollection();
-        $this->ReleaseVariants = new ArrayCollection();
+        $this->releaseVariants = new ArrayCollection();
     }
 
     public function getMediaFiles()
@@ -42,24 +42,24 @@ class ReleaseItem extends MediaItem
 
     public function getReleaseVariants()
     {
-        return $this->ReleaseVariants;
+        return $this->releaseVariants;
     }
 
-    public function setReleaseVariants($ReleaseVariants)
+    public function setReleaseVariants($releaseVariants)
     {
-        $this->ReleaseVariants = $ReleaseVariants;
+        $this->releaseVariants = $releaseVariants;
     }
 
-    public function addReleaseVariant($ReleaseVariant)
+    public function addReleaseVariant($releaseVariants)
     {
-        $this->ReleaseVariants[] = $ReleaseVariant;
+        $this->releaseVariants[] = $releaseVariants;
     }
 
-    public function removeReleaseVariant($ReleaseVariant)
+    public function removeReleaseVariant($releaseVariants)
     {
-        foreach ($this->ReleaseVariant as $key => $variant) {
-            if ($ReleaseVariant->getId() == $variant->getId()) {
-                unset($this->ReleaseVariant[$key]);
+        foreach ($this->releaseVariants as $key => $variant) {
+            if ($releaseVariants->getId() == $variant->getId()) {
+                unset($this->releaseVariants[$key]);
             }
         }
     }
@@ -67,10 +67,15 @@ class ReleaseItem extends MediaItem
     public function onPreFlush()
     {
         // Doctrine doesn't seem to be setting the inverse relation
-        foreach (array_merge($this->mediaFiles->toArray(), $this->ReleaseVariants->toArray()) as $object) {
+        foreach (array_merge($this->mediaFiles->toArray(), $this->releaseVariants->toArray()) as $object) {
             if ($object) {
                 $object->setMediaItem($this);
             }
         }
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

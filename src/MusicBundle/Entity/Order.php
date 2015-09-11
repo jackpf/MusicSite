@@ -85,4 +85,15 @@ class Order extends ArrayObject
     {
         $this->updatedAt = $updatedAt;
     }
+
+    public function getDetails()
+    {
+        $details = '';
+
+        foreach ($this as $key => $value) {
+           $details .= $key . ': ' . $value . "\n";
+        }
+
+        return $details;
+    }
 }

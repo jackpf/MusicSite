@@ -24,6 +24,7 @@
         </service>
         <service id="music.email_listener" class="MusicBundle\Email\EmailListener">
             <argument type="service" id="music.mailer" />
+            <argument>%mailer_user%</argument>
             <tag name="kernel.event_listener" event="event.order" method="orderEvent" />
         </service>
     </services>

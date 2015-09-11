@@ -11,9 +11,12 @@ class EmailListener
 
     private $mailer;
 
-    public function __construct(Mailer $mailer)
+    private $mailerUser;
+
+    public function __construct(Mailer $mailer, $mailerUser)
     {
         $this->mailer = $mailer;
+        $this->mailerUser = $mailerUser;
     }
 
     public function orderEvent(GenericEvent $event)
@@ -21,5 +24,6 @@ class EmailListener
         $order = $event->getArgument('order');
 
         $this->mailer->send($order->getUser()->getEmail(), 'MusicBundle:Email:order.html.twig', ['order' => $order]);
+        $this->mailer->send($this->mailerUser, 'MusicBundle:Email:order_admin.html.twig', ['order' => $order]);
     }
 }

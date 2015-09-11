@@ -110,4 +110,15 @@
             </constraint>
         </property>
     </class>
+    <class name="MusicBundle\Entity\ReleaseType">
+        <property name="name">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="shippingPrice">
+            <constraint name="NotBlank" />
+            <constraint name="Regex">
+                <option name="pattern">/[0-9]+\.[0-9]+|0/</option>
+            </constraint>
+        </property>
+    </class>
 </constraint-mapping>

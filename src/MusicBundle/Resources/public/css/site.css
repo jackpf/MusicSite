@@ -201,7 +201,7 @@ label {
 }
 label + input {
     width: 30%;
-    margin: 0 30% 0 4%;
+    margin-right: 30%;
 }
 input + input {
     float: right;
@@ -209,11 +209,8 @@ input + input {
 form div.submit {
     margin-top: 10px;
 }
-.profile-info {
-    text-align: left;
-}
 .profile-info ul {
-    padding: 0;
+    text-align: left;
 }
 
 .single-item {
@@ -249,7 +246,6 @@ form div.submit {
     text-align: right;
 }
 .order-pagination {
-    float: right;
 }
 
 /* Audio JS fix */

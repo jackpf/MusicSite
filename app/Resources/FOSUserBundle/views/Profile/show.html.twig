@@ -3,14 +3,7 @@
 {% block title %} | Profile{% endblock %}
 
 {% block content %}
-    <div class="col-sm-6 fos_user_content centered profile-info">
-        <div class="row">
-            <div class="col-xs-4">
-                {% include 'FOSUserBundle:Profile:profile_sidebar.html.twig' %}
-            </div>
-            <div class="col-xs-8">
-                {% include "FOSUserBundle:Profile:show_content.html.twig" %}
-            </div>
-        </div>
+    <div class="col-xs-10 col-md-6 fos_user_content centered profile-info">
+        {% include "FOSUserBundle:Profile:show_content.html.twig" %}
     </div>
 {% endblock %}

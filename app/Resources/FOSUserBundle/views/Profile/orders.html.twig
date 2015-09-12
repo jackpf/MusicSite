@@ -3,36 +3,30 @@
 {% block title %} | Profile{% endblock %}
 
 {% block content %}
-    <div class="col-sm-6 fos_user_content centered profile-info">
-        <div class="row">
-            <div class="col-xs-4">
-                {% include 'FOSUserBundle:Profile:profile_sidebar.html.twig' %}
-            </div>
-            <div class="col-xs-8">
-                <div class="row">
-                    <ul>
-                        {% for order in orders %}
-                            <li>
-                            {% if order.status == 'authorized' %}
-                                <a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">
-                                    <img src="{{ asset('bundles/music/images/download.png') }}" />
-                                    {{ order.releaseVariant.mediaItem.title }}
-                                </a>
-                            {% else %}
-                                ({{ order.status == 'new' ? 'unpaid' : 'payment ' ~ order.status }})
-                                {{ order.releaseVariant.mediaItem.title }}
-                            {% endif %}
-                            <em style="color: grey;">{{ order.createdAt|date('d/m/Y') }}</em>
-                            </li>
-                        {% else %}
-                            <li>You have no orders to show.</li>
-                        {% endfor %}
-                    </ul>
-                    <div class="order-pagination">
-                        {{ knp_pagination_render(orders) }}
-                    </div>
-                </div>
-            </div>
+    <div class="col-xs-10 col-md-6 fos_user_content centered profile-info">
+        <ul>
+            {% for order in orders %}
+                <li>
+                {% if order.status == 'authorized' %}
+                    <a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">
+                        <img src="{{ asset('bundles/music/images/download.png') }}" />
+                        {{ order.releaseVariant.mediaItem.title }}
+                    </a>
+                {% else %}
+                    <img src="{{ asset('bundles/music/images/download.png') }}" />
+                    <span style="color: grey;">
+                        {{ order.releaseVariant.mediaItem.title }}
+                        ({{ order.status == 'new' ? 'unpaid' : 'payment ' ~ order.status }})
+                    </span>
+                {% endif %}
+                <em style="color: grey;">{{ order.createdAt|date('d/m/Y') }}</em>
+                </li>
+            {% else %}
+                <li>You have no orders to show.</li>
+            {% endfor %}
+        </ul>
+        <div class="order-pagination">
+            {{ knp_pagination_render(orders) }}
         </div>
     </div>
 {% endblock %}

@@ -121,4 +121,9 @@
             </constraint>
         </property>
     </class>
+    <class name="MusicBundle\Entity\NewsCategory">
+        <property name="title">
+            <constraint name="NotBlank" />
+        </property>
+    </class>
 </constraint-mapping>

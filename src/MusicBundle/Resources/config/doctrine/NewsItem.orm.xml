@@ -7,5 +7,7 @@
 
     <entity name="MusicBundle\Entity\NewsItem" table="media">
         <many-to-one field="author" target-entity="Application\Sonata\UserBundle\Entity\User" />
+        <many-to-many field="categories" target-entity="MusicBundle\Entity\NewsCategory">
+        </many-to-many>
     </entity>
 </doctrine-mapping>

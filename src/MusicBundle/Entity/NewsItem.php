@@ -12,8 +12,6 @@ class NewsItem extends MediaItem
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->categories = new ArrayCollection();
     }
 

@@ -3,13 +3,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.admin.news" class="Application\Sonata\AdminBundle\Admin\NewsAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="News Item"/>
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="News Items"/>
             <argument />
             <argument>MusicBundle\Entity\NewsItem</argument>
             <argument />
         </service>
         <service id="sonata.admin.release" class="Application\Sonata\AdminBundle\Admin\ReleaseAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="Release Item"/>
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Release Items"/>
             <argument />
             <argument>MusicBundle\Entity\ReleaseItem</argument>
             <argument />
@@ -18,25 +18,25 @@
             </call>
         </service>
         <service id="sonata.admin.mix" class="Application\Sonata\AdminBundle\Admin\MixAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="Mix Item"/>
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Mix Items"/>
             <argument />
             <argument>MusicBundle\Entity\MixItem</argument>
             <argument />
         </service>
         <service id="sonata.admin.media_file" class="Application\Sonata\AdminBundle\Admin\MediaFileAdmin">
-            <tag name="sonata.admin" manager_type="orm" label="Media File" show_in_dashboard="false"/>
+            <tag name="sonata.admin" manager_type="orm" label="Media Files" show_in_dashboard="false"/>
             <argument />
             <argument>MusicBundle\Entity\MediaFile</argument>
             <argument />
         </service>
         <service id="sonata.admin.news_category" class="Application\Sonata\AdminBundle\Admin\NewsCategoryAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="News Category"/>
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="News Categories"/>
             <argument />
             <argument>MusicBundle\Entity\NewsCategory</argument>
             <argument />
         </service>
         <service id="sonata.admin.media_variant" class="Application\Sonata\AdminBundle\Admin\ReleaseVariantAdmin">
-            <tag name="sonata.admin" manager_type="orm" label="Media Variant" show_in_dashboard="false"/>
+            <tag name="sonata.admin" manager_type="orm" label="Media Variants" show_in_dashboard="false"/>
             <argument />
             <argument>MusicBundle\Entity\ReleaseVariant</argument>
             <argument />

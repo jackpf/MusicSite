@@ -17,7 +17,7 @@
                     <br />
                     Tagged in:
                     {% for category in item.categories %}
-                        <a href="#">{{ category }}</a>{{ category != item.categories.last ? ', ' : '' }}
+                        <a href="{{ path('music_news_category', {slug: category.slug}) }}">{{ category }}</a>{{ category != item.categories.last ? ', ' : '' }}
                     {% endfor %}
                 {% endif %}
             </div>

@@ -1,6 +1,6 @@
 music_homepage:
     path:     /
-    defaults: { _controller: MusicBundle:Main:index }
+    defaults: { _controller: MusicBundle:Main:index, repo: MediaItem }
 
 music_about:
     path:     /about
@@ -8,18 +8,22 @@ music_about:
 
 music_news:
     path:     /news/
-    defaults: { _controller: MusicBundle:Main:index, type: news }
+    defaults: { _controller: MusicBundle:Main:index, repo: NewsItem }
 
 music_release:
     path:     /releases/
-    defaults: { _controller: MusicBundle:Main:index, type: release }
+    defaults: { _controller: MusicBundle:Main:index, repo: ReleaseItem }
 
 music_mix:
     path:     /mixes/
-    defaults: { _controller: MusicBundle:Main:index, type: mix }
+    defaults: { _controller: MusicBundle:Main:index, repo: MixItem }
+
+music_news_category:
+    path:     /news/category/{slug}
+    defaults: { _controller: MusicBundle:Main:newsCategory }
 
 music_news_item:
-    path:     /news/{slug}
+    path:     /news/item/{slug}
     defaults: { _controller: MusicBundle:Main:news }
 
 music_release_item:

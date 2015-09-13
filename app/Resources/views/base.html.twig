@@ -86,7 +86,7 @@
                         <li><a class="nav-link {{ route in ['music_mix', 'music_mix_item'] ? 'active' : '' }}" href="{{ path('music_mix') }}">mixes</a></li>
                         <li>|</li>
                         <li class="categories">
-                            <a class="nav-link {{ route in ['music_news', 'music_news_item'] ? 'active' : '' }}" href="{{ path('music_news') }}">news</a>
+                            <a class="nav-link {{ route in ['music_news', 'music_news_item', 'music_news_category'] ? 'active' : '' }}" href="{{ path('music_news') }}">news</a>
                             {% render(controller('MusicBundle:Main:newsCategoriesFragment')) %}
                         </li>
                         <li>|</li>

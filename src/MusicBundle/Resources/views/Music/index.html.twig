@@ -17,6 +17,10 @@
                 <div class="item-background" style="background-image: url({{ upload_path(item.background) }});"></div>
             {% endif %}
         </div>
+    {% else %}
+        <div class="col-xs-6 single-item">
+            No items found.
+        </div>
     {% endfor %}
 {% endblock %}
 

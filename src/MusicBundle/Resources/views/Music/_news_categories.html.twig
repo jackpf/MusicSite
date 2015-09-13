@@ -1,5 +1,5 @@
 <ul class="fallback">
     {% for category in categories %}
-        <li>#<a href="#">{{ category|lower }}</a></li>
+        <li>#<a href="{{ path('music_news_category', {slug: category.slug}) }}">{{ category|lower }}</a></li>
     {% endfor %}
 </ul>

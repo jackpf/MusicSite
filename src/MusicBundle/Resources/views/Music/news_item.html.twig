@@ -12,7 +12,16 @@
                 {{ item.content|nl2br }}
             </div>
             <br clear="both" />
-            <div class="col-lg-12 author">
+            <div class="col-xs-6 category-info">
+                {% if item.categories|length > 0 %}
+                    <br />
+                    Tagged in:
+                    {% for category in item.categories %}
+                        <a href="#">{{ category }}</a>{{ category != item.categories.last ? ', ' : '' }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-xs-6 author-info">
                 {% if item.author %}
                     {% set createdAt = item.createdAt|date('jS \\of F, Y') %}
                     {% set updatedAt = item.updatedAt|date('jS \\of F, Y') %}

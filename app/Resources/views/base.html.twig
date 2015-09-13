@@ -81,15 +81,18 @@
                 <div class="row nav visible-md visible-lg">
                     <ul class="row list-inline">
                         {% set route = app.request.attributes.get('_route') %}
-                       <li><a {{ route in ['music_release', 'music_release_item'] ? 'class="active"' : '' }} href="{{ path('music_release') }}">releases</a></li>
+                       <li><a class="nav-link {{ route in ['music_release', 'music_release_item'] ? 'active' : '' }}" href="{{ path('music_release') }}">releases</a></li>
                         <li>|</li>
-                        <li><a {{ route in ['music_mix', 'music_mix_item'] ? 'class="active"' : '' }} href="{{ path('music_mix') }}">mixes</a></li>
+                        <li><a class="nav-link {{ route in ['music_mix', 'music_mix_item'] ? 'active' : '' }}" href="{{ path('music_mix') }}">mixes</a></li>
                         <li>|</li>
-                        <li><a {{ route in ['music_news', 'music_news_item'] ? 'class="active"' : '' }} href="{{ path('music_news') }}">news</a></li>
+                        <li class="categories">
+                            <a class="nav-link {{ route in ['music_news', 'music_news_item'] ? 'active' : '' }}" href="{{ path('music_news') }}">news</a>
+                            {% render(controller('MusicBundle:Main:newsCategoriesFragment')) %}
+                        </li>
                         <li>|</li>
-                        <li><a href="#" id="search-link">search</a></li>
+                        <li><a class="nav-link" href="#" id="search-link">search</a></li>
                         <li>|</li>
-                        <li><a href="{{ path('music_about') }}">about</a></li>
+                        <li><a class="nav-link" href="{{ path('music_about') }}">about</a></li>
                     </ul>
                     <form class="row" id="search-box" style="" action="{{ path('music_homepage') }}" method="get">
                         <input class="col-xs-2" type="text" name="search" value="{{ app.request.query.get('search') }}" />

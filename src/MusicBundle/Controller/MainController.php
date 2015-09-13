@@ -7,6 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
+    public function newsCategoriesFragmentAction()
+    {
+        $categories = $this->getDoctrine()->getManager()
+            ->getRepository('MusicBundle:NewsCategory')
+            ->findAll();
+
+        return $this->render('MusicBundle:Music:_news_categories.html.twig', ['categories' => $categories]);
+    }
+
     public function indexAction(Request $request, $type = null)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -21,7 +30,7 @@ class MainController extends Controller
             $repo = 'MediaItem';
         }
 
-        $qb = $em->getRepository(sprintf('MusicBundle\Entity\%s', $repo))
+        $qb = $em->getRepository(sprintf('MusicBundle:%s', $repo))
             ->createQueryBuilder('i')
             ->select('i')
             ->orderBy('i.createdAt', 'desc');
@@ -43,7 +52,7 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $item = $em->getRepository('MusicBundle\Entity\NewsItem')
+        $item = $em->getRepository('MusicBundle:NewsItem')
             ->findOneBySlug($slug);
 
         if (!$item) {
@@ -60,7 +69,7 @@ class MainController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $tokenManager = $this->get('music.token_manager');
 
-        $item = $em->getRepository('MusicBundle\Entity\ReleaseItem')
+        $item = $em->getRepository('MusicBundle:ReleaseItem')
             ->findOneBySlug($slug);
 
         if (!$item) {
@@ -80,7 +89,7 @@ class MainController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $tokenManager = $this->get('music.token_manager');
 
-        $item = $em->getRepository('MusicBundle\Entity\MixItem')
+        $item = $em->getRepository('MusicBundle:MixItem')
             ->findOneBySlug($slug);
 
         if (!$item) {

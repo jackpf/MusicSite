@@ -17,14 +17,14 @@ class PaymentController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $variant = $em->getRepository('MusicBundle\Entity\ReleaseVariant')
+        $variant = $em->getRepository('MusicBundle:ReleaseVariant')
             ->find($id);
 
         if (!$variant) {
             throw $this->createNotFoundException('Variant not found');
         }
 
-        $existingOrders = $em->getRepository('MusicBundle\Entity\Order')
+        $existingOrders = $em->getRepository('MusicBundle:Order')
             ->findBy([
                 'user' => $this->get('security.context')->getToken()->getUser(),
                 'releaseVariant' => $variant,
@@ -36,7 +36,7 @@ class PaymentController extends Controller
         }
 
         $storage = $this->get('payum')
-            ->getStorage('MusicBundle\Entity\Order');
+            ->getStorage('MusicBundle:Order');
 
         /** @var \MusicBundle\Entity\Order $order */
         $order = $storage->create();
@@ -80,7 +80,7 @@ class PaymentController extends Controller
 
         // Free download?
         if ($id != null) {
-            $order = $em->getRepository('MusicBundle\Entity\Order')
+            $order = $em->getRepository('MusicBundle:Order')
                 ->find($id);
 
             if ($order && $order->getReleaseVariant()->getPrice() == 0) {

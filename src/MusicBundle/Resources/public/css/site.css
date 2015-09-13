@@ -72,20 +72,42 @@ nav ul li ul.fallback {
 nav ul li:hover ul.fallback {
     display: block;
 }
+.categories ul {
+    text-align: left;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 8px 0;
+    padding: 0 0 10px;
+    z-index: 999;
+    color: grey;
+}
+.categories ul li {
+    margin: 0;
+    width: 100%;
+}
+.categories ul li:hover a {
+    color: white !important;
+}
+.categories ul.fallback {
+    display: none;
+}
+.categories:hover ul.fallback {
+    display: block;
+}
 
 /* Nav */
 .nav {
     text-align: center;
     margin: 10px;
 }
-.nav a {
+.nav a.nav-link {
     color: black;
     padding: 10px;
     background: rgba(255, 255, 255, 0.5);
 }
-.nav a:hover, .nav .active {
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
+.nav a.nav-link:hover, .nav .active {
+    color: white !important;
+    background: rgba(0, 0, 0, 0.5) !important;
 }
 #search-box input:focus {
     outline: 0;
@@ -239,10 +261,14 @@ form div.submit {
 .variants {
     margin-top: 50px;
 }
-.author {
-    float: right;
+.author-info, .category-info {
     font-style: italic;
     font-size: 0.8em;
+}
+.category-info {
+    text-align: left;
+}
+.author-info {
     text-align: right;
 }
 .order-pagination {

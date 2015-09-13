@@ -56,4 +56,27 @@ $(document).ready(function() {
             $('ul', this).stop().slideUp(200);
         }
     );
+
+    $('.categories ul').hide().removeClass('fallback');
+    $('.categories').hover(
+        function () {
+            $('ul', this).stop().fadeIn();
+        },
+        function () {
+            $('ul', this).stop().fadeOut(200);
+        }
+    );
+    var alreadyActive = false;
+    $('.categories ul').hover(
+        function() {
+            var link = $('.categories a').first();
+            alreadyActive = link.hasClass('active');
+            link.addClass('active');
+        },
+        function() {
+            if (!alreadyActive) {
+                $('.categories a').first().removeClass('active');
+            }
+        }
+    );
 });

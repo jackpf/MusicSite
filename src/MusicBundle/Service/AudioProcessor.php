@@ -24,7 +24,7 @@ class AudioProcessor
         ), $o, $returnCode);
 
         if ($returnCode != 0) {
-            throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', $returnCode, implode("\n", $output)));
+            throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', $returnCode, $output));
         }
     }
 

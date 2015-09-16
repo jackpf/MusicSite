@@ -36,7 +36,4 @@
 # Build data
 /build/
 
-# Composer PHAR
-/composer.phar
-
 .idea/

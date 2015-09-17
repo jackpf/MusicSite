@@ -235,9 +235,6 @@ form input + input {
 form div.submit {
     margin-top: 10px;
 }
-.profile-info ul {
-    text-align: left;
-}
 
 .single-item {
     text-align: center;

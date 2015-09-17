@@ -28,6 +28,11 @@
             <tag name="kernel.event_listener" event="event.order" method="orderEvent" />
             <tag name="kernel.event_listener" event="event.dispatch" method="dispatchEvent" />
         </service>
+        <service id="music.kernel_listener" class="MusicBundle\EventListener\KernelListener">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="router" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
     </services>
 
 </container>

@@ -49,3 +49,9 @@ music_order:
 music_order_purchase:
     path:     /order-purchase/{id}
     defaults: { _controller: MusicBundle:Payment:purchase, id: null }
+
+music_error:
+    path: /error
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    /error.html.twig

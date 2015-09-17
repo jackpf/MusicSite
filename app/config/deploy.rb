@@ -11,6 +11,9 @@ set :scm,         :git
 set :model_manager, "doctrine"
 # Or: `propel`
 
+set :permission_method,   :acl
+set :use_set_permissions, true
+
 role :web,        domain                         # Your HTTP server, Apache/etc
 role :app,        domain, :primary => true       # This may be the same as your `Web` server
 
@@ -22,10 +25,5 @@ set  :keep_releases,  3
 
 set :shared_files,      ["app/config/parameters.yml"]
 set :dump_assetic_assets, true
-
-after 'deploy:create_symlink' do
-    run "cd #{deploy_to}/current && setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs && setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX app/cache app/logs"
-    run "cd #{deploy_to}/current && php app/console doctrine:schema:update --force --env=prod"
-end
 
 after "deploy:update", "deploy:cleanup"

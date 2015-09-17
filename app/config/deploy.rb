@@ -11,9 +11,6 @@ set :scm,         :git
 set :model_manager, "doctrine"
 # Or: `propel`
 
-set :permission_method,   :acl
-set :use_set_permissions, true
-
 role :web,        domain                         # Your HTTP server, Apache/etc
 role :app,        domain, :primary => true       # This may be the same as your `Web` server
 
@@ -24,6 +21,13 @@ set  :keep_releases,  3
 #logger.level = Logger::MAX_LEVEL
 
 set :shared_files,      ["app/config/parameters.yml"]
+set :shared_children,   [app_path + "/logs", web_path + "/uploads", web_path + "/media"]
+
+set :writable_dirs,       ["app/cache", "app/logs", "web/uploads", "web/media"]
+set :webserver_user,      "www-data"
+set :permission_method,   :acl
+set :use_set_permissions, true
+
 set :dump_assetic_assets, true
 
 after "deploy:update", "deploy:cleanup"

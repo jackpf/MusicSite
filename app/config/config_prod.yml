@@ -16,9 +16,10 @@ imports:
 monolog:
     handlers:
         main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
+            type:   pushover
+            token:  acYP6MHexYCt6UDXRThGMsjzrrX9UN
+            user:   uBMhxDWbb1tTcg2yigX2DQMLDjCSwA
+            level:  warning
         nested:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"

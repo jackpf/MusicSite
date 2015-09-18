@@ -11,9 +11,14 @@ class OrderController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
 
+        $criteria = ['user' => $user];
+        if (!$request->query->get('incomplete')) {
+            $criteria['status'] = 'authorized';
+        }
+
         $orders = $this->getDoctrine()->getEntityManager()
             ->getRepository('MusicBundle\Entity\Order')
-            ->findByUser($user, ['createdAt' => 'desc']);
+            ->findBy($criteria, ['createdAt' => 'desc']);
 
         $orders = $this->get('knp_paginator')
             ->paginate($orders, $request->get('page', 1), 10);

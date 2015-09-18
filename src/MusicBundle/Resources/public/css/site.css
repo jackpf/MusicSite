@@ -218,18 +218,18 @@ body {
 form {
     margin: 0 auto;
 }
-label, input {
+form label, form input {
     display: inline-block;
 }
-label {
+form label {
     width: 30%;
     text-align: right;
 }
-label + input {
+form label + input {
     width: 30%;
     margin-right: 30%;
 }
-input + input {
+form input + input {
     float: right;
 }
 form div.submit {

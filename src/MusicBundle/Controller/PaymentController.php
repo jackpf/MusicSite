@@ -24,19 +24,8 @@ class PaymentController extends Controller
             throw $this->createNotFoundException('Variant not found');
         }
 
-        $existingOrder = $em->getRepository('MusicBundle:Order')
-            ->findOneBy([
-                'user' => $this->get('security.context')->getToken()->getUser(),
-                'releaseVariant' => $variant,
-                'status' => 'authorized'
-            ]);
-
         $storage = $this->get('payum')
             ->getStorage('MusicBundle\Entity\Order');
-
-        if ($existingOrder && $existingOrder->getStatus() == GetHumanStatus::STATUS_AUTHORIZED) {
-            return $this->redirectToRoute('music_order_duplicate');
-        }
 
         $storage = $this->get('payum')
             ->getStorage('MusicBundle\Entity\Order');

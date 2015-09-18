@@ -1,18 +1,18 @@
 {% extends '::email.html.twig' %}
 
-{% block subject %}Order placed{% endblock %}
+{% block subject %}Order dispatched{% endblock %}
 
 {% block body %}
     Hi {{ order.user.username }},<br /><br />
 
-    Thank you for your order with Regulation XVII:<br /><br />
+    Your order has been dispatched:<br /><br />
 
     <strong style="font-size: 1.2em;">{{ order.releaseVariant.mediaItem.title }}</strong><br />
     Media type: {{ order.releaseVariant.type.name }}<br />
     Price: &pound;{{ order.price|number_format(2) }}<br />
     Shipping: &pound;{{ order.releaseVariant.type.shippingPrice|number_format(2) }}<br /><br />
 
-    Once payment has been received, applicable downloads will be available in your <a href="{{ path('user_orders') }}">orders &amp; downloads</a>, and any shipments will be dispatched shortly.<br /><br />
+    Your items should be delivered in 2-3 working days.<br /><br />
 
     If there are any problems with your order, please <a href="mailto: ">get in touch</a>.<br /><br />
 

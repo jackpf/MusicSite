@@ -1,4 +1,4 @@
-<ul class="fallback">
+<ul class="categories-list fallback">
     {% for category in categories %}
         <li>#<a href="{{ path('music_news_category', {slug: category.slug}) }}">{{ category|lower }}</a></li>
     {% endfor %}

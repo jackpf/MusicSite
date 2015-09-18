@@ -21,6 +21,18 @@ class Order extends ArrayObject
 
     private $updatedAt;
 
+    private $dispatchStatus;
+
+    const DISPATCH_STATUS_PROCESSING    = 0,
+        DISPATCH_STATUS_DISPATCHED      = 1,
+        DISPATCH_STATUS_UNDISPATCHABLE  = 2;
+
+    public static $DISPATCH_STATUS = [
+        self::DISPATCH_STATUS_PROCESSING      => 'processing',
+        self::DISPATCH_STATUS_DISPATCHED      => 'dispatched',
+        self::DISPATCH_STATUS_UNDISPATCHABLE  => 'n/a'
+    ];
+
     public function getId()
     {
         return $this->id;
@@ -95,5 +107,20 @@ class Order extends ArrayObject
         }
 
         return $details;
+    }
+
+    public function setDispatchStatus($dispatchStatus)
+    {
+        $this->dispatchStatus = $dispatchStatus;
+    }
+
+    public function getDispatchStatus()
+    {
+        return $this->dispatchStatus;
+    }
+
+    public function getDispatchStatusString()
+    {
+        return self::$DISPATCH_STATUS[$this->getDispatchStatus()];
     }
 }

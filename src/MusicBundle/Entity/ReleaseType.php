@@ -8,6 +8,8 @@ class ReleaseType
 
     private $name;
 
+    private $shippable;
+
     private $shippingPrice;
 
     private $description;
@@ -25,6 +27,16 @@ class ReleaseType
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getShippable()
+    {
+        return $this->shippable;
+    }
+
+    public function setShippable($shippable)
+    {
+        $this->shippable = $shippable;
     }
 
     public function getShippingPrice()

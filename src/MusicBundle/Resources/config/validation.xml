@@ -47,7 +47,7 @@
         <property name="mediaFiles">
             <constraint name="Valid" />
         </property>
-        <property name="ReleaseVariants">
+        <property name="releaseVariants">
             <constraint name="Valid" />
         </property>
     </class>

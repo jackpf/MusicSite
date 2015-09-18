@@ -10,6 +10,7 @@
             <generator strategy="AUTO" />
         </id>
         <field name="name" />
+        <field name="shippable" type="boolean" />
         <field name="shippingPrice" column="shipping_price" type="float" nullable="true" />
         <field name="description" type="text" nullable="true" />
     </entity>

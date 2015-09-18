@@ -94,6 +94,9 @@ nav ul li:hover ul.fallback {
 .categories:hover ul.fallback {
     display: block;
 }
+.categories-list li {
+    padding: 0 2px;
+}
 
 /* Nav */
 .nav {

@@ -15,6 +15,7 @@ class ReleaseTypeAdmin extends Admin
     {
         $formMapper
             ->add('name')
+            ->add('shippable')
             ->add('shippingPrice')
             ->add('description')
         ;

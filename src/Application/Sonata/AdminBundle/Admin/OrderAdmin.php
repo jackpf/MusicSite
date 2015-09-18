@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\AdminBundle\Admin;
 
+use MusicBundle\Entity\Order;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -26,6 +27,11 @@ class OrderAdmin extends Admin
     {
         $datagridMapper
             ->add('status', null, [], 'choice', ['choices' => ['authorized' => 'authorized']])
+            ->add('dispatchStatus', null, [], 'choice', ['choices' => [
+                Order::DISPATCH_STATUS_PROCESSING => Order::$DISPATCH_STATUS[Order::DISPATCH_STATUS_PROCESSING],
+                Order::DISPATCH_STATUS_DISPATCHED => Order::$DISPATCH_STATUS[Order::DISPATCH_STATUS_DISPATCHED],
+                Order::DISPATCH_STATUS_UNDISPATCHABLE => Order::$DISPATCH_STATUS[Order::DISPATCH_STATUS_UNDISPATCHABLE],
+            ]])
         ;
     }
 
@@ -37,6 +43,7 @@ class OrderAdmin extends Admin
             ->add('releaseVariant')
             ->add('user')
             ->add('status')
+            ->add('dispatchStatusString', null, ['label' => 'Dispatch Status'])
             ->add('createdAt')
         ;
     }
@@ -52,5 +59,17 @@ class OrderAdmin extends Admin
             ->add('details')
             ->add('createdAt')
         ;
+    }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        $actions['dispatch'] = array(
+            'label'            => 'Mark as dispatched',
+            'ask_confirmation' => true, // by default always true
+        );
+
+        return $actions;
     }
 }

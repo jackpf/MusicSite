@@ -2,12 +2,12 @@
 
 namespace MusicBundle\Controller;
 
+use MusicBundle\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Payum\Core\Request\GetHumanStatus;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PaymentController extends Controller
 {
@@ -24,26 +24,33 @@ class PaymentController extends Controller
             throw $this->createNotFoundException('Variant not found');
         }
 
-        $existingOrders = $em->getRepository('MusicBundle:Order')
-            ->findBy([
+        $existingOrder = $em->getRepository('MusicBundle:Order')
+            ->findOneBy([
                 'user' => $this->get('security.context')->getToken()->getUser(),
                 'releaseVariant' => $variant,
                 'status' => 'authorized'
             ]);
 
-        if (count($existingOrders) > 0) {
+        $storage = $this->get('payum')
+            ->getStorage('MusicBundle\Entity\Order');
+
+        if ($existingOrder && $existingOrder->getStatus() == GetHumanStatus::STATUS_AUTHORIZED) {
             return $this->redirectToRoute('music_order_duplicate');
         }
 
         $storage = $this->get('payum')
-            ->getStorage('MusicBundle:Order');
+            ->getStorage('MusicBundle\Entity\Order');
 
-        /** @var \MusicBundle\Entity\Order $order */
         $order = $storage->create();
 
         $order->setUser($this->get('security.context')->getToken()->getUser());
         $order->setReleaseVariant($variant);
         $order->setPrice($variant->getPrice());
+        if ($variant->getType()->getShippable()) {
+            $order->setDispatchStatus(Order::DISPATCH_STATUS_PROCESSING);
+        } else {
+            $order->setDispatchStatus(Order::DISPATCH_STATUS_UNDISPATCHABLE);
+        }
 
         $order['L_PAYMENTREQUEST_0_NAM0']       = $order->getReleaseVariant()->getMediaItem()->getTitle();
         $order['L_PAYMENTREQUEST_0_NUMBER0']    = $order->getReleaseVariant()->getMediaItem()->getId();

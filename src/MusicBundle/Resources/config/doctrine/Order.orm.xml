@@ -8,7 +8,7 @@
 
     <entity name="MusicBundle\Entity\Order" table="orders">
         <unique-constraints>
-            <unique-constraint columns="user_id,release_variant_id" />
+            <!--<unique-constraint columns="user_id,release_variant_id" />-->
         </unique-constraints>
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
@@ -17,6 +17,7 @@
         <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="user" />
         <field name="price" type="float" />
         <field name="status" />
+        <field name="dispatchStatus" column="dispatch_status" type="integer" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -82,7 +82,7 @@ class StoreNotificationAction extends GatewayAwareAction
             $notification[$name] = $value;
         }
 
-        //$order->setNotification($notification);
+        $order->setNotification($notification);
 
         if (!$this->verify($order->getNotification())) {
             throw new \RuntimeException('PayPal did not verify this notification');

@@ -14,7 +14,7 @@
 
     {% if order.status == 'authorized' %}
         Your payment has been successfully received.<br />
-        Click <a href="">here</a> to download your purchase.<br /><br />
+        Click <a href="{{ path('music_download', {id: order.releaseVariant.mediaItem.id}) }}">here</a> to download your purchase.<br /><br />
         You can view your order history and access your downloads by clicking <a href="{{ path('user_orders') }}">here</a>.<br />
     {% else %}
         The status of this order has been updated to "{{ order.status }}".<br />

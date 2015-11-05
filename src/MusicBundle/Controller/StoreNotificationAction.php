@@ -23,10 +23,14 @@ class StoreNotificationAction extends GatewayAwareAction
         $postData = 'cmd=_notify-validate';
 
         foreach ($notification as $key => $value) {
-            $postData .= '&' . $key . '=' . $value;
+            $postData .= '&' . $key . '=' . urlencode($value);
         }
 
         $ch = curl_init();
+
+        if (!isset($notification['test_ipn'])) {
+            throw new \RuntimeException('Unable to determine test mode');
+        }
 
         curl_setopt($ch, CURLOPT_URL, $notification['test_ipn'] ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr');
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -78,9 +82,9 @@ class StoreNotificationAction extends GatewayAwareAction
             $notification[$name] = $value;
         }
 
-        $order->setNotification($notification);
+        //$order->setNotification($notification);
 
-        if (!$this->verify($notification)) {
+        if (!$this->verify($order->getNotification())) {
             throw new \RuntimeException('PayPal did not verify this notification');
         }
 

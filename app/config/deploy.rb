@@ -1,6 +1,6 @@
 set :application, "Regulation17"
 set :domain,      "185.116.212.11"
-set :user,        "jack"
+set :user,        "www-data"
 set :deploy_to,   "/home/#{user}/websites/#{domain}"
 set :app_path,    "app"
 
@@ -30,4 +30,5 @@ set :use_set_permissions, true
 
 set :dump_assetic_assets, true
 
+before "symfony:cache:warmup", "symfony:doctrine:schema:update"
 after "deploy:update", "deploy:cleanup"

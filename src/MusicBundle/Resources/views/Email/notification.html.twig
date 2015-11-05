@@ -1,0 +1,29 @@
+{% extends '::email.html.twig' %}
+
+{% block subject %}Your order has been updated{% endblock %}
+
+{% block body %}
+    Hi {{ order.user.username }},<br /><br />
+
+    Regarding item:<br /><br />
+
+    <strong style="font-size: 1.2em;">{{ order.releaseVariant.mediaItem.title }}</strong><br />
+    Media type: {{ order.releaseVariant.type.name }}<br />
+    Price: &pound;{{ order.price|number_format(2) }}<br />
+    Shipping: &pound;{{ order.releaseVariant.type.shippingPrice|number_format(2) }}<br /><br />
+
+    {% if order.status == 'authorized' %}
+        Your payment has been successfully received.<br />
+        Click <a href="">here</a> to download your purchase.<br /><br />
+        You can view your order history and access your downloads by clicking <a href="{{ path('user_orders') }}">here</a>.<br />
+    {% else %}
+        The status of this order has been updated to "{{ order.status }}".<br />
+        If you believe this is in error or are unsure what this means, please contact us.<br />
+    {% endif %}
+
+    If there are any problems with your order, please <a href="mailto: ">get in touch</a>.<br /><br />
+
+    Enjoy :)<br /><br />
+
+    Regulation XVII
+{% endblock %}

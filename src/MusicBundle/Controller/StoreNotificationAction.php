@@ -92,6 +92,9 @@ class StoreNotificationAction extends GatewayAwareAction
 
         $this->container->get('doctrine.orm.entity_manager')
             ->flush();
+
+        $this->container->get('event_dispatcher')
+            ->dispatch('event.notification', new GenericEvent(null, ['order' => $order]));
     }
 
     public function supports($request)

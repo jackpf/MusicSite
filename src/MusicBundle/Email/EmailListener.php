@@ -27,6 +27,14 @@ class EmailListener
         $this->mailer->send($this->mailerUser, 'MusicBundle:Email:order_admin.html.twig', ['order' => $order]);
     }
 
+    public function notificationEvent(GenericEvent $event)
+    {
+        $order = $event->getArgument('order');
+
+        $this->mailer->send($order->getUser()->getEmail(), 'MusicBundle:Email:notification.html.twig', ['order' => $order]);
+        $this->mailer->send($this->mailerUser, 'MusicBundle:Email:notification_admin.html.twig', ['order' => $order]);
+    }
+
     public function dispatchEvent(GenericEvent $event)
     {
         $order = $event->getArgument('order');

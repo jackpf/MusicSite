@@ -1,0 +1,20 @@
+{% extends '::email.html.twig' %}
+
+{% block subject %}Order placed{% endblock %}
+
+{% block body %}
+    Hi,<br /><br />
+
+    A new notification has been received:<br /><br />
+
+    <strong style="font-size: 1.2em;">{{ order.releaseVariant.mediaItem.title }}</strong><br />
+    Media type: {{ order.releaseVariant.type.name }}<br />
+    Price: &pound;{{ order.releaseVariant.price|number_format(2) }}<br />
+    Shipping: &pound;{{ order.releaseVariant.type.shippingPrice|number_format(2) }}<br /><br />
+
+    Status updated to "{{ order.status }}".<br />
+
+    <a href="{{ path('admin_music_order_show', {id: order.id}) }}">View order info</a>.<br /><br />
+
+    Regulation XVII
+{% endblock %}

@@ -12,7 +12,8 @@
     Price: &pound;{{ order.price|number_format(2) }}<br />
     Shipping: &pound;{{ order.releaseVariant.type.shippingPrice|number_format(2) }}<br /><br />
 
-    Once payment has been received, applicable downloads will be available in your <a href="{{ path('user_orders') }}">orders &amp; downloads</a>, and any shipments will be dispatched shortly.<br /><br />
+    You will receive another email once payment has been received with relevent download links and shipping information.<br />
+    Applicable downloads will be available in your <a href="{{ path('user_orders') }}">orders &amp; downloads</a> upon successful payment, and any shippable items will be dispatched shortly.<br /><br />
 
     If there are any problems with your order, please <a href="mailto: ">get in touch</a>.<br /><br />
 

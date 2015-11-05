@@ -103,8 +103,10 @@ class PaymentController extends Controller
 
         $em->flush();
 
-        $this->get('event_dispatcher')
-            ->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
+        if (in_array($order->getStatus(), [GetHumanStatus::STATUS_CAPTURED, GetHumanStatus::STATUS_AUTHORIZED, GetHumanStatus::STATUS_NEW, GetHumanStatus::STATUS_PENDING])) {
+            $this->get('event_dispatcher')
+                ->dispatch('event.order', new GenericEvent(null, ['order' => $order]));
+        }
 
         return $this->render('MusicBundle:Music:order_complete.html.twig', [
             'order' => $order,

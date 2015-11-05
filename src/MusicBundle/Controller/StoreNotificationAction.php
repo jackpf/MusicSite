@@ -28,7 +28,7 @@ class StoreNotificationAction extends GatewayAwareAction
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->container->getParameter('paypal_sandbox') ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr');
+        curl_setopt($ch, CURLOPT_URL, $notification['test_ipn'] ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -80,7 +80,7 @@ class StoreNotificationAction extends GatewayAwareAction
 
         $order->setNotification($notification);
 
-        if (!$this->verify($order->getNotification())) {
+        if (!$this->verify($notification)) {
             throw new \RuntimeException('PayPal did not verify this notification');
         }
 

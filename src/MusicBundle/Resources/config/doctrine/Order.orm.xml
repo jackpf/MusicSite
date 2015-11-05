@@ -17,6 +17,7 @@
         <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="user" />
         <field name="price" type="float" />
         <field name="status" />
+        <field name="notification" type="array" nullable="true" />
         <field name="dispatchStatus" column="dispatch_status" type="integer" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

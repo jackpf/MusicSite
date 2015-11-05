@@ -33,6 +33,9 @@
             <argument type="service" id="router" />
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
+        <service id="music.payum.action.paypal_notification" class="MusicBundle\Controller\StoreNotificationAction">
+            <tag name="payum.action" gateway="paypal" />
+        </service>
     </services>
 
 </container>

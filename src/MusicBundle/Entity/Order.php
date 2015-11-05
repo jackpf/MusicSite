@@ -17,6 +17,8 @@ class Order extends ArrayObject
 
     private $status = GetHumanStatus::STATUS_NEW;
 
+    private $notification;
+
     private $createdAt;
 
     private $updatedAt;
@@ -76,6 +78,16 @@ class Order extends ArrayObject
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    public function getNotification()
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(array $notification = null)
+    {
+        $this->notification = $notification;
     }
 
     public function getCreatedAt()

@@ -4,6 +4,8 @@ namespace MusicBundle\Controller;
 
 use Payum\Core\Action\GatewayAwareAction;
 use Payum\Core\Request\Notify;
+use Payum\Core\Storage\StorageInterface;
+use Payum\Core\Request\GetHttpRequest;
 
 class StoreNotificationAction extends GatewayAwareAction
 {
@@ -16,18 +18,17 @@ class StoreNotificationAction extends GatewayAwareAction
 
     public function execute($request)
     {
-        $notification = $this->notificationStorage->create();
+        $order = $request->getModel();
 
         $this->gateway->execute($getHttpRequest = new GetHttpRequest);
 
-        foreach ($getHttpRequest->query as $name => $value) {
-            $notification[$name] = $value;
-        }
-        foreach ($getHttpRequest->request as $name => $value) {
+        $notification = [];
+
+        foreach (array_merge($getHttpRequest->query, $getHttpRequest->request) as $name => $value) {
             $notification[$name] = $value;
         }
 
-        $this->notificationStorage->update($notification);
+        $order->setNotification($notification);
     }
 
     public function supports($request)

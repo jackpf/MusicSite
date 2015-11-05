@@ -27,9 +27,6 @@ class PaymentController extends Controller
         $storage = $this->get('payum')
             ->getStorage('MusicBundle\Entity\Order');
 
-        $storage = $this->get('payum')
-            ->getStorage('MusicBundle\Entity\Order');
-
         $order = $storage->create();
 
         $order->setUser($this->get('security.context')->getToken()->getUser());
@@ -50,9 +47,10 @@ class PaymentController extends Controller
         $order['PAYMENTREQUEST_0_AMT']          = $order->getPrice() + $order->getReleaseVariant()->getType()->getShippingPrice();
         $order['PAYMENTREQUEST_0_SHIPPINGAMT']  = $order->getReleaseVariant()->getType()->getShippingPrice();
 
-        $notifyToken = $this->get('payum.security.token_factory')
-            ->createNotifyToken(self::GATEWAY_NAME, $order);
-        $order['NOTIFYURL'] = $notifyToken->getTargetUrl();
+        $storage->update($order); // Need to store order before notification token is generated
+
+        $order['NOTIFYURL'] = $this->get('payum.security.token_factory')
+            ->createNotifyToken(self::GATEWAY_NAME, $order)->getTargetUrl();
 
         $storage->update($order);
 
@@ -62,7 +60,7 @@ class PaymentController extends Controller
             $route = $this->get('payum.security.token_factory')->createCaptureToken(
                 self::GATEWAY_NAME,
                 $order,
-                'music_order_purchase' // the route to redirect after capture;
+                'music_order_purchase'
             )->getTargetUrl();
         }
 

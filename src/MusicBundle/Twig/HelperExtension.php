@@ -22,6 +22,7 @@ class HelperExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('item_path', array($this, 'itemPath')),
             new \Twig_SimpleFunction('upload_path', array($this, 'uploadPath')),
+            new \Twig_SimpleFunction('version', array($this, 'version')),
         );
     }
 
@@ -43,6 +44,11 @@ class HelperExtension extends \Twig_Extension
     public function uploadPath($path)
     {
         return '/uploads/' . $path;
+    }
+
+    public function version()
+    {
+        return substr(exec('git rev-parse HEAD'), 0, 7);
     }
 
     public function getName()

@@ -8,6 +8,7 @@ use Payum\Core\Request\Notify;
 use Payum\Core\Request\GetHttpRequest;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Payum\Core\Request\GetHumanStatus;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreNotificationAction extends GatewayAwareAction
 {
@@ -92,6 +93,9 @@ class StoreNotificationAction extends GatewayAwareAction
 
         $this->container->get('doctrine.orm.entity_manager')
             ->flush();
+
+        $response = new Response();
+        $response->send(); // Send this instead of the 204 payum sends
     }
 
     public function supports($request)

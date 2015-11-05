@@ -8,6 +8,7 @@ use Payum\Core\Request\Notify;
 use Payum\Core\Request\GetHttpRequest;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Payum\Core\Request\GetHumanStatus;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class StoreNotificationAction extends GatewayAwareAction
 {

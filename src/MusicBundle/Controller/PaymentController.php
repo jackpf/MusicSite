@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Payum\Core\Request\GetHumanStatus;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class PaymentController extends Controller
 {

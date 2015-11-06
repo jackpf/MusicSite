@@ -29,7 +29,9 @@ class KernelListener
         if ($this->kernel->getEnvironment() != 'dev') {
             $exception = $event->getException();
 
-            $this->logger->error($exception->getMessage());
+            if (!($exception instanceof HttpException)) {
+                $this->logger->error($exception->getMessage());
+            }
 
             $event->setResponse(
                 new RedirectResponse($this->router->generate('music_error', ['code' => $event->getException() instanceof HttpException ? $exception->getStatusCode() : 500]))

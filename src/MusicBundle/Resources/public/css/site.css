@@ -43,6 +43,7 @@ img.header-logo {
 }
 .header-nav {
     text-align: right;
+    top: 5px; /* Could do with centering things properly really */
 }
 nav ul li ul {
     text-align: left;

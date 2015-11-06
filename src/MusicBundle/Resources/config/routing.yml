@@ -54,4 +54,4 @@ music_error:
     path: /error
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    /error.html.twig
+        template:    MusicBundle:Music:error.html.twig

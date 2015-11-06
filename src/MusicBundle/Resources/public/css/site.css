@@ -24,6 +24,9 @@ h1, h2, h3 {
     color: white;
     padding: 10px;
 }
+.header-desktop .header-nav {
+    top: 5px; /* Should center things properly... */
+}
 .header a {
     color: #EBECE4;
 }
@@ -43,7 +46,6 @@ img.header-logo {
 }
 .header-nav {
     text-align: right;
-    top: 5px; /* Could do with centering things properly really */
 }
 nav ul li ul {
     text-align: left;

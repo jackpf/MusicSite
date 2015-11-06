@@ -1,7 +1,7 @@
 set :application, "Regulation17"
 set :domain,      "regulation17.com"
 set :user,        "jack"
-set :deploy_to,   "/home/#{user}/websites/#{domain}"
+set :deploy_to,   "/var/www/#{domain}"
 set :app_path,    "app"
 
 set :repository,  "https://github.com/jackpf/Regulation17.git"

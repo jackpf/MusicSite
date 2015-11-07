@@ -13,7 +13,7 @@ class AudioProcessor
         }
 
         $cmd = sprintf(
-            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d',
+            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d 2>&1',
             $watermark,
             $watermarkTime,
             $input,

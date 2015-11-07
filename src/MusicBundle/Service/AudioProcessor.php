@@ -12,7 +12,7 @@ class AudioProcessor
             throw new FileNotFoundException($watermark);
         }
 
-        exec(sprintf(
+        $cmd = sprintf(
             'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d',
             $watermark,
             $watermarkTime,
@@ -21,10 +21,13 @@ class AudioProcessor
             $fadeTime,
             $time,
             $fadeTime
-        ), $o, $returnCode);
+        );
+
+        $o = [];
+        exec($cmd, $o, $returnCode);
 
         if ($returnCode != 0) {
-            throw new \RuntimeException(sprintf('soc return error code: %d, "%s"', $returnCode, $output));
+            throw new \RuntimeException(sprintf('"%s" returned error code: %d. "%s"', $cmd, $returnCode, implode("\n", $o)));
         }
     }
 

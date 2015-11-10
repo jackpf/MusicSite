@@ -164,7 +164,7 @@ class MediaFile
         $this->delete($this->getPreviewPath());
     }
 
-    private function delete($filename)
+    protected function delete($filename)
     {
         $path = Data::getUploadPath() . '/' . $filename;
 

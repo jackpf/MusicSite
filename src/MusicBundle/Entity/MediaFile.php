@@ -139,22 +139,6 @@ class MediaFile
 
     public function lifecycleFileUpload()
     {
-        if ($this->getFile()) {
-            $path = DownloadManager::createPath($this->getFile()->getClientOriginalName());
-
-            $this->getFile()->move(
-                Data::getUploadPath(),
-                $path
-            );
-
-            $this->delete($this->getPath());
-            $this->delete($this->getPreviewPath());
-
-            $this->setPath($path);
-            $this->setPreviewFile($this->getFile()); // Handled later
-            $this->setFile(null);
-        }
-
         if ($this->getLosslessFile()) {
             $path = DownloadManager::createPath($this->getLosslessFile()->getClientOriginalName());
 
@@ -164,17 +148,20 @@ class MediaFile
             );
 
             $this->delete($this->getLosslessPath());
+            $this->delete($this->getPath());
+            $this->delete($this->getPreviewPath());
 
             $this->setLosslessPath($path);
+            $this->setFile($this->getLosslessFile()); // Handled later
             $this->setLosslessFile(null);
         }
     }
 
     public function lifecycleFileDelete()
     {
+        $this->delete($this->getLosslessPath());
         $this->delete($this->getPath());
         $this->delete($this->getPreviewPath());
-        $this->delete($this->getLosslessPath());
     }
 
     private function delete($filename)

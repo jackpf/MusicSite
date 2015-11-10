@@ -14,8 +14,6 @@ class ReleaseAdmin extends MediaAdmin
 {
     private $em;
 
-    private $ap;
-
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -64,33 +62,27 @@ class ReleaseAdmin extends MediaAdmin
     {
         parent::postPersist($object);
 
-        $this->createPreview($object);
+        $this->processAudio($object);
     }
 
     public function postUpdate($object)
     {
         parent::postUpdate($object);
 
-        $this->createPreview($object);
+        $this->processAudio($object);
     }
 
-    public function createPreview($object)
+    protected function processAudio($object)
     {
         foreach ($object->getMediaFiles() as $file) {
-            if ($file->getPreviewFile()) {
-                $parts = explode('.', $file->getPath());
-                $previewPath = $parts[0] . '-preview.' . $parts[1];
-
+            if ($file->getFile()) { // File is set after MediaFile has processed uploaded lossless file
                 AudioProcessor::process(
-                    Data::getUploadPath() . '/' . $file->getPath(),
-                    Data::getUploadPath() . '/' . $previewPath,
+                    $file,
                     150,
                     2,
-                    Data::getUploadPath() . '/watermark.mp3',
+                    'watermark.mp3',
                     15
                 );
-
-                $file->setPreviewPath($previewPath);
             }
         }
 

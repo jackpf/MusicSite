@@ -12,7 +12,7 @@
         </id>
         <many-to-one target-entity="MusicBundle\Entity\MediaItem" field="mediaItem" />
         <field name="name" />
-        <field name="path" />
+        <field name="path" nullable="true" /><!-- Needs to be null to be post-updated -->
         <field name="previewPath" column="preview_path" nullable="true" /><!-- Needs to be null to be post-updated -->
         <field name="losslessPath" column="lossless_path" />
         <field name="createdAt" column="created_at" type="datetime">

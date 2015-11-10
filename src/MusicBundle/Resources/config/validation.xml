@@ -55,7 +55,7 @@
         <property name="name">
             <constraint name="NotBlank" />
         </property>
-        <property name="file">
+        <!--<property name="file">
             <constraint name="File">
                 <option name="mimeTypes">
                     <value>audio/mp3</value>
@@ -70,7 +70,7 @@
                     <value>320</value>
                 </option>
             </constraint>
-        </property>
+        </property>-->
         <property name="losslessFile">
             <constraint name="File">
                 <option name="mimeTypes">
@@ -79,17 +79,17 @@
                     <value>audio/wav</value>
                     <value>audio/x-wav</value>
                 </option>
-                <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
+                <option name="mimeTypesMessage">Please upload a valid AIF or WAV file.</option>
             </constraint>
         </property>
-        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
+        <!--<constraint name="MusicBundle\Validation\FileRequiredConstraint">
             <option name="file">
                 <value>file</value>
             </option>
             <option name="path">
                 <value>path</value>
             </option>
-        </constraint>
+        </constraint>-->
         <constraint name="MusicBundle\Validation\FileRequiredConstraint">
             <option name="file">
                 <value>losslessFile</value>

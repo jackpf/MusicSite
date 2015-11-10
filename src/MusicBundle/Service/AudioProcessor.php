@@ -2,33 +2,56 @@
 
 namespace MusicBundle\Service;
 
+use MusicBundle\Data\Data;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class AudioProcessor
 {
-    public static function process($input, $output, $time, $fadeTime, $watermark, $watermarkTime)
+    private static function run($cmd)
     {
-        if (!file_exists($watermark)) {
-            throw new FileNotFoundException($watermark);
-        }
-
-        $cmd = sprintf(
-            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d 2>&1',
-            $watermark,
-            $watermarkTime,
-            $input,
-            $output,
-            $fadeTime,
-            $time,
-            $fadeTime
-        );
-
         $o = [];
         exec($cmd, $o, $returnCode);
 
         if ($returnCode != 0) {
             throw new \RuntimeException(sprintf('"%s" returned error code: %d. "%s"', $cmd, $returnCode, implode("\n", $o)));
         }
+
+        return $returnCode;
+    }
+
+    public static function process($inputFile, $time, $fadeTime, $watermark, $watermarkTime)
+    {
+        if (!file_exists(Data::getUploadPath() . '/' . $watermark)) {
+            throw new FileNotFoundException(Data::getUploadPath() . '/' . $watermark);
+        }
+
+        $path = $inputFile->getLosslessPath();
+        $parts = explode('.', $inputFile->getLosslessPath());
+        $ext = array_pop($parts);
+        $mp3Path = implode('.', $parts) . '.mp3';
+        $previewPath = implode('.', $parts) . '-preview.mp3';
+
+        // Create MP3
+        self::run(sprintf(
+            'sox "%s" -C 320 "%s" 2>&1',
+            Data::getUploadPath() . '/' . $path,
+            Data::getUploadPath() . '/' . $mp3Path
+        ));
+
+        // Create preview
+        self::run(sprintf(
+            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d 2>&1',
+            Data::getUploadPath() . '/' . $watermark,
+            $watermarkTime,
+            Data::getUploadPath() . '/' . $mp3Path,
+            Data::getUploadPath() . '/' . $previewPath,
+            $fadeTime,
+            $time,
+            $fadeTime
+        ));
+
+        $inputFile->setPath($mp3Path);
+        $inputFile->setPreviewPath($previewPath);
     }
 
     public static function getMP3BitRateSampleRate($filename)

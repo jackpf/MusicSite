@@ -21,14 +21,14 @@ class AudioProcessor extends Processor
 
         // Create MP3
         self::run(sprintf(
-            'sox "%s" -C 320 "%s" 2>&1',
+            'sox "%s" -C 320 "%s"',
             Data::getUploadPath() . '/' . $path,
             Data::getUploadPath() . '/' . $mp3Path
         ));
 
         // Create preview
         self::run(sprintf(
-            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d 2>&1',
+            'sox -m --combine mix-power \'|sox "%s" -p pad %d\' "%s" "%s" fade %d %d %d',
             Data::getUploadPath() . '/' . $watermark,
             $watermarkTime,
             Data::getUploadPath() . '/' . $mp3Path,

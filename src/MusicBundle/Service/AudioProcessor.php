@@ -5,20 +5,8 @@ namespace MusicBundle\Service;
 use MusicBundle\Data\Data;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
-class AudioProcessor
+class AudioProcessor extends Processor
 {
-    private static function run($cmd)
-    {
-        $o = [];
-        exec($cmd, $o, $returnCode);
-
-        if ($returnCode != 0) {
-            throw new \RuntimeException(sprintf('"%s" returned error code: %d. "%s"', $cmd, $returnCode, implode("\n", $o)));
-        }
-
-        return $returnCode;
-    }
-
     public static function process($inputFile, $time, $fadeTime, $watermark, $watermarkTime)
     {
         if (!file_exists(Data::getUploadPath() . '/' . $watermark)) {

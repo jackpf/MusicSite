@@ -23,6 +23,7 @@
                 </div>
                 <nav>
                     <ul class="list-inline col-xs-3 header-nav">
+                        <li>Basket: <span id="basket-size">{{ basket.size }}</span></li>
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li><a href="{{ path('fos_user_security_login') }}">login</a></li>
                             <li>|</li>

@@ -40,6 +40,8 @@
                                 <a href="{{ path('music_order', {id: variant.id}) }}">
                                     <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
                                 </a>
+                                <br />
+                                <a class="js-order-add" href="{{ path('music_basket_add', {id: variant.id}) }}">Add to order</a>
                             {% else %}
                                 <em style="color: grey;">Currently unavailable</em>
                             {% endif %}

@@ -6,10 +6,11 @@ use MusicBundle\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Payum\Core\Request\GetHumanStatus;
 
-class PaymentController extends Controller
+class OrderController extends Controller
 {
     const GATEWAY_NAME = 'paypal';
 

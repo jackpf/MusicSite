@@ -44,11 +44,15 @@ music_download:
 
 music_order:
     path:     /order/{id}
-    defaults: { _controller: MusicBundle:Payment:order }
+    defaults: { _controller: MusicBundle:Order:order, id: null }
 
 music_order_purchase:
-    path:     /order-purchase/{id}
-    defaults: { _controller: MusicBundle:Payment:purchase, id: null }
+    path:     /order/purchase/{id}
+    defaults: { _controller: MusicBundle:Order:purchase, id: null }
+
+music_basket_add:
+    path:     /basket/add/{id}
+    defaults: { _controller: MusicBundle:Basket:add }
 
 music_error:
     path: /error

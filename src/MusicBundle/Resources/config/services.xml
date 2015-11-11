@@ -13,6 +13,9 @@
         </service>
         <service id="music.audio.processor" class="MusicBundle\Service\AudioProcessor"></service>
         <service id="music.download_manager" class="MusicBundle\Service\DownloadManager"></service>
+        <service id="music.basket" class="MusicBundle\Service\Basket">
+            <argument type="service" id="session" />
+        </service>
         <service id="music.token_manager" class="MusicBundle\Service\PlayTokenManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>

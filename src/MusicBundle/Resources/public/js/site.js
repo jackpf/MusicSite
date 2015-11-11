@@ -80,3 +80,20 @@ $(document).ready(function() {
         }
     );
 });
+
+// Ajax stuff
+$('.js-order-add').click(function(e) {
+    $.get($(this).attr('href'))
+        .done(function(data) {
+            $('body').animate({
+                scrollTop: 0
+            }, 500, 'swing', function() {
+                $('#basket-size').html(data.count);
+            });
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert('Error adding item to order: ' + errorThrown);
+        });
+
+    e.preventDefault();
+});

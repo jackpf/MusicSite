@@ -38,6 +38,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         mailerUser: %mailer_user%
+        basket: @music.basket
 
 # Assetic Configuration
 assetic:

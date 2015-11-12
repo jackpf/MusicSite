@@ -66,7 +66,7 @@ class ReleaseItem extends MediaItem
 
     public function onPreFlush()
     {
-        // Doctrine doesn't seem to be setting the inverse relation
+        // Doctrine doesn't seem to be setting the inverse relation, currently unsupported by doctrine?
         foreach (array_merge($this->mediaFiles->toArray(), $this->releaseVariants->toArray()) as $object) {
             if ($object) {
                 $object->setMediaItem($this);

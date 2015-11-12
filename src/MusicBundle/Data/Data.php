@@ -15,7 +15,20 @@ class Data
             $parser = new Parser();
 
             // Bit hacky...
-            $parameters = $parser->parse(file_get_contents(getcwd() . '/../app/config/parameters.yml'))['parameters'];
+            $paths = [
+                getcwd() . '/app/config/parameters.yml',
+                getcwd() . '/../app/config/parameters.yml'
+            ];
+
+            foreach ($paths as $path) {
+                if (file_exists($path)) {
+                    $parametersPath = $path;
+                }
+            }
+
+            if (!isset($parametersPath)) {
+                throw new \RuntimeException('Unable to locate parameters.yml from ' . getcwd());
+            }
 
             if (!isset($parameters['upload_path'])) {
                 throw new ParameterNotFoundException('upload_path');

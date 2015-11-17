@@ -1,10 +1,11 @@
-set :application, "Regulation17"
-set :domain,      "regulation17.com"
+set :application, "Buffalo Sessions"
+set :domain,      "buffalo-sessions.com"
 set :user,        "jack"
 set :deploy_to,   "/var/www/#{domain}"
 set :app_path,    "app"
 
 set :repository,  "https://github.com/jackpf/Regulation17.git"
+set :branch,      "buffalo-sessions"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 

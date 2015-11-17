@@ -153,7 +153,7 @@ abstract class MediaItem
         if ($this->getImageFile()) {
             $path = DownloadManager::createPath($this->getImageFile()->getClientOriginalName());
 
-            $this->delete($this->getImage());
+            $this->delete($this->getImageReal());
 
             $this->getImageFile()->move(Data::getUploadPath(), $path);
             $this->setImage($path);
@@ -163,7 +163,7 @@ abstract class MediaItem
         if ($this->getBackgroundFile()) {
             $path = DownloadManager::createPath($this->getBackgroundFile()->getClientOriginalName());
 
-            $this->delete($this->getBackground());
+            $this->delete($this->getBackgroundReal());
 
             $this->getBackgroundFile()->move(Data::getUploadPath(), $path);
             $this->setBackground($path);
@@ -173,8 +173,8 @@ abstract class MediaItem
 
     public function lifecycleFileDelete()
     {
-        $this->delete($this->getImage());
-        $this->delete($this->getBackground());
+        $this->delete($this->getImageReal());
+        $this->delete($this->getBackgroundReal());
     }
 
     private function delete($filename)
@@ -184,6 +184,16 @@ abstract class MediaItem
         if ($filename != null && file_exists($path)) {
             unlink($path);
         }
+    }
+
+    public final function getImageReal()
+    {
+        return $this->image;
+    }
+
+    public final function getBackgroundReal()
+    {
+        return $this->background;
     }
 
     public abstract function getMediaFiles();

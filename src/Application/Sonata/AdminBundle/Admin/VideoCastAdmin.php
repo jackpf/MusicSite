@@ -22,8 +22,10 @@ class VideoCastAdmin extends MediaAdmin
         parent::configureFormFields($formMapper);
 
         $formMapper
+            ->add('useVideoIconAsImage')
+            ->add('audioDownloadLink')
             ->add('videoFile', 'sonata_type_admin', [
-                'required' => true,
+                'required' => false,
                 'cascade_validation' => true,
             ])
         ;

@@ -23,9 +23,10 @@
             {% if item.downloadLink and item.mediaFiles|length > 0 %}
                 <a href="{{ path('music_download', {id: item.id}) }}">Download mix</a>
             {% else %}
-                Download not available
+                <span style="color: grey;">Download not available</span>
             {% endif %}
             <br clear="both" />
         </div>
     </div>
+    {% include 'MusicBundle:Music:_disqus.html.twig' %}
 {% endblock %}

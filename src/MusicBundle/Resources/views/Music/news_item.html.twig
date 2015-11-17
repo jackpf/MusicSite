@@ -3,51 +3,35 @@
 {% block title %} | {{ item.title }}{% endblock %}
 
 {%block content %}
-        <div class="col-md-9 single-item">
-            <h1 class="title">{{ item.title }}</h1>
-            <div class="item-content">
-                {% if item.image %}
-                    <a class="fancybox" href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) | imagine_filter('item') }}" /></a>
-                {% endif %}
-                {{ item.content|nl2br }}
-            </div>
-            <br clear="both" />
-            <div class="col-xs-6 category-info">
-                {% if item.categories|length > 0 %}
-                    <br />
-                    Tagged in:
-                    {% for category in item.categories %}
-                        <a href="{{ path('music_news_category', {slug: category.slug}) }}">{{ category }}</a>{{ category != item.categories.last ? ', ' : '' }}
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-6 author-info">
-                {% if item.author %}
-                    {% set createdAt = item.createdAt|date('jS \\of F, Y') %}
-                    {% set updatedAt = item.updatedAt|date('jS \\of F, Y') %}
-                    Published by {{ item.author.username }} on the {{ createdAt }}.
-                    {% if item.createdAt != item.updatedAt %}
-                        <br />Last edited on the {{ updatedAt }}.
-                    {% endif %}
-                {% endif %}
-            </div>
-            <br clear="both" />
+    <div class="col-md-9 single-item">
+        <h1 class="title">{{ item.title }}</h1>
+        <div class="item-content">
+            {% if item.image %}
+                <a class="fancybox" href="{{ upload_path(item.image) }}"><img class="image" src="{{ upload_path(item.image) | imagine_filter('item') }}" /></a>
+            {% endif %}
+            {{ item.content|nl2br }}
         </div>
-    </div> <!-- Bit of a hack... -->
-    <div class="row">
-        <div class="col-md-9 single-item">
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES * * */
-                var disqus_shortname = 'regulationxvii';
-
-                /* * * DON'T EDIT BELOW THIS LINE * * */
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        <br clear="both" />
+        <div class="col-xs-6 category-info">
+            {% if item.categories|length > 0 %}
+                <br />
+                Tagged in:
+                {% for category in item.categories %}
+                    <a href="{{ path('music_news_category', {slug: category.slug}) }}">{{ category }}</a>{{ category != item.categories.last ? ', ' : '' }}
+                {% endfor %}
+            {% endif %}
         </div>
+        <div class="col-xs-6 author-info">
+            {% if item.author %}
+                {% set createdAt = item.createdAt|date('jS \\of F, Y') %}
+                {% set updatedAt = item.updatedAt|date('jS \\of F, Y') %}
+                Published by {{ item.author.username }} on the {{ createdAt }}.
+                {% if item.createdAt != item.updatedAt %}
+                    <br />Last edited on the {{ updatedAt }}.
+                {% endif %}
+            {% endif %}
+        </div>
+        <br clear="both" />
+    </div>
+    {% include 'MusicBundle:Music:_disqus.html.twig' %}
 {% endblock %}

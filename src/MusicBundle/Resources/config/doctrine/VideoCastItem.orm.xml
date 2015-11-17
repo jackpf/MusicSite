@@ -12,5 +12,7 @@
             </cascade>
             <join-column on-delete="SET NULL" />
         </one-to-one>
+        <field name="useVideoIconAsImage" column="use_video_icon_as_image" type="boolean" />
+        <field name="audioDownloadLink" column="audio_download_link" type="boolean" />
     </entity>
 </doctrine-mapping>

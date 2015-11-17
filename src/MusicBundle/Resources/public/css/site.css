@@ -277,6 +277,26 @@ form div.submit {
 }
 .order-pagination {
 }
+.video {
+    width: 320px;
+    height: 240px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.expanded {
+    width: 640px !important;
+    height: 480px !important;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.container-expanded {
+    width: 704px !important;
+    height: 528px !important;
+}
 
 /* Audio JS fix */
 .play-pause {

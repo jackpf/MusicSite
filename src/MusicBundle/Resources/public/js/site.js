@@ -97,3 +97,20 @@ $('.js-order-add').click(function(e) {
 
     e.preventDefault();
 });
+
+$('.js-expand-video').click(function(e) {
+    $container = $('.image');
+    $video = $('video');
+
+    if (!$video.hasClass('expanded')) {
+        $video.addClass('expanded');
+        $container.addClass('container-expanded');
+        $(this).html('-');
+    } else {
+        $video.removeClass('expanded');
+        $container.removeClass('container-expanded');
+        $(this).html('+');
+    }
+
+    e.preventDefault();
+});

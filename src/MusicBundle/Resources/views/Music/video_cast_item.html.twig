@@ -9,15 +9,24 @@
             {% if item.videoFile is not null %}
                 <div class="image">
                     {% if item.videoFile.processedPath is not empty %}
-                        <video width="320" height="240" controls>
+                        <video class="video" controls>
                             <source src="{{ path('music_play', {id: item.videoFile.id, token: tokens[item.videoFile.id].token}) }}" type="video/mp4">
                         </video>
 
-                        {% if item.audioDownloadLink and item.videoFile.audioPath is not empty %}
-                            <a href="{{ path('music_download', {id: item.id}) }}">Download audio</a>
-                        {% else %}
-                            <span style="color: grey;">Audio download not available</span>
-                        {% endif %}
+                        <br />
+
+                        <div class="row">
+                            <div class="col-xs-9">
+                                {% if item.audioDownloadLink and item.videoFile.audioPath is not empty %}
+                                    <a href="{{ path('music_download', {id: item.id}) }}">Download audio</a>
+                                {% else %}
+                                    <span style="color: grey;">Audio download not available</span>
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-3" style="text-align: center; font-weight: bold;">
+                                <a class="js-expand-video" href="#">+</a>
+                            </div>
+                        </div>
                     {% else %}
                         <span style="color: grey;">Video is awaiting processing</span>
                     {% endif %}

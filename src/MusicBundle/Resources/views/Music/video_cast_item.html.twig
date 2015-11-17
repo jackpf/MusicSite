@@ -6,16 +6,20 @@
     <div class="col-md-9 single-item">
         <h1 class="title">{{ item.title }}</h1>
         <div class="item-content">
-            {% if item.videoFile is not null and item.videoFile.processedPath is not empty %}
+            {% if item.videoFile is not null %}
                 <div class="image">
-                    <video width="320" height="240" controls>
-                        <source src="{{ path('music_play', {id: item.videoFile.id, token: tokens[item.videoFile.id].token}) }}" type="video/mp4">
-                    </video>
+                    {% if item.videoFile.processedPath is not empty %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ path('music_play', {id: item.videoFile.id, token: tokens[item.videoFile.id].token}) }}" type="video/mp4">
+                        </video>
 
-                    {% if item.audioDownloadLink and item.videoFile.audioPath is not empty %}
-                        <a href="{{ path('music_download', {id: item.id}) }}">Download audio</a>
+                        {% if item.audioDownloadLink and item.videoFile.audioPath is not empty %}
+                            <a href="{{ path('music_download', {id: item.id}) }}">Download audio</a>
+                        {% else %}
+                            <span style="color: grey;">Audio download not available</span>
+                        {% endif %}
                     {% else %}
-                        <span style="color: grey;">Audio download not available</span>
+                        <span style="color: grey;">Video is awaiting processing</span>
                     {% endif %}
                 </div>
             {% endif %}

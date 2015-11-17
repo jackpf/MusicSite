@@ -10,6 +10,7 @@
 
 namespace Application\Sonata\UserBundle;
 
+use Application\Sonata\UserBundle\DependencyInjection\ApplicationSonataUserExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -28,5 +29,10 @@ class ApplicationSonataUserBundle extends Bundle
     public function getParent()
     {
         return 'SonataUserBundle';
+    }
+
+    public function getContainerExtension()
+    {
+        return new ApplicationSonataUserExtension();
     }
 }

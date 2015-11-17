@@ -185,4 +185,6 @@ abstract class MediaItem
             unlink($path);
         }
     }
+
+    public abstract function getMediaFiles();
 }

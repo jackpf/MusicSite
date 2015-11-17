@@ -28,8 +28,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    protected $orders;
-
     /**
      * Get id
      *
@@ -38,15 +36,5 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-
-    public function setOrders($orders)
-    {
-        $this->orders = $orders;
     }
 }

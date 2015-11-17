@@ -14,7 +14,7 @@ class PlayToken
 
     public function __construct(MediaFile $mediaFile)
     {
-        $this->token = sha1($mediaFile->getPath() + microtime() + rand());
+        $this->token = sha1($mediaFile->getId() + microtime() + rand());
         $this->mediaFile = $mediaFile;
         $this->createdAt = new \DateTime();
     }

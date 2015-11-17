@@ -3,8 +3,10 @@
 namespace MusicBundle\Controller;
 
 use MusicBundle\Data\Data;
+use MusicBundle\Entity\AudioFile;
 use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\ReleaseItem;
+use MusicBundle\Entity\VideoFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +18,7 @@ class MediaController extends Controller
     public function playAction(Request $request, $id, $token)
     {
         $file = $this->getDoctrine()->getEntityManager()
-            ->getRepository('MusicBundle\Entity\MediaFile')
+            ->getRepository('MusicBundle:MediaFile')
             ->find($id);
 
         if (!$file) {
@@ -27,12 +29,18 @@ class MediaController extends Controller
             throw $this->createAccessDeniedException('Invalid token');
         }
 
-        $response = new BinaryFileResponse(Data::getUploadPath() . '/' . $file->getPreviewPath());
+        if ($file instanceof AudioFile) {
+            $path = $file->getPreviewPath();
+        } else if ($file instanceof VideoFile) {
+            $path = $file->getProcessedPath();
+        }
+
+        $response = new BinaryFileResponse(Data::getUploadPath() . '/' . $path);
         $response->trustXSendfileTypeHeader();
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_INLINE,
-            $file->getPreviewPath(),
-            iconv('UTF-8', 'ASCII//TRANSLIT', $file->getPreviewPath())
+            $path,
+            iconv('UTF-8', 'ASCII//TRANSLIT', $path)
         );
 
         return $response;
@@ -44,7 +52,7 @@ class MediaController extends Controller
         $key = $request->query->get('key');
 
         $item = $this->getDoctrine()->getEntityManager()
-            ->getRepository('MusicBundle\Entity\MediaItem')
+            ->getRepository('MusicBundle:MediaItem')
             ->find($id);
 
         if (!$item) {

@@ -44,4 +44,9 @@ class NewsItem extends MediaItem
     {
         return $this->categories;
     }
+
+    public function getMediaFiles()
+    {
+        return [];
+    }
 }

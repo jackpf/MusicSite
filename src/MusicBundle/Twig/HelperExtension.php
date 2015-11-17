@@ -6,6 +6,7 @@ use MusicBundle\Entity\MediaItem;
 use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\NewsItem;
 use MusicBundle\Entity\ReleaseItem;
+use MusicBundle\Entity\VideoCastItem;
 use Symfony\Component\Routing\Router;
 
 class HelperExtension extends \Twig_Extension
@@ -34,8 +35,10 @@ class HelperExtension extends \Twig_Extension
             $path = 'music_release_item';
         } else if ($item instanceof MixItem) {
             $path = 'music_mix_item';
+        } else if ($item instanceof VideoCastItem) {
+            $path = 'music_video_cast_item';
         } else {
-            return '';
+            throw new \RuntimeException('Unsupported media type');
         }
 
         return $this->router->generate($path, ['slug' => $item->getSlug()]);

@@ -70,28 +70,12 @@ class MainController extends Controller
         ]);
     }
 
-    public function newsAction($slug)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $item = $em->getRepository('MusicBundle:NewsItem')
-            ->findOneBySlug($slug);
-
-        if (!$item) {
-            throw $this->createNotFoundException('Item not found');
-        }
-
-        return $this->render('MusicBundle:Music:news_item.html.twig', [
-            'item' => $item
-        ]);
-    }
-
-    public function releaseAction($slug)
+    public function itemAction($slug, $repo, $tpl)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $tokenManager = $this->get('music.token_manager');
 
-        $item = $em->getRepository('MusicBundle:ReleaseItem')
+        $item = $em->getRepository(sprintf('MusicBundle:%s', $repo))
             ->findOneBySlug($slug);
 
         if (!$item) {
@@ -100,27 +84,7 @@ class MainController extends Controller
 
         $tokens = $tokenManager->createTokens($item);
 
-        return $this->render('MusicBundle:Music:release_item.html.twig', [
-            'item' => $item,
-            'tokens' => $tokens,
-        ]);
-    }
-
-    public function mixAction($slug)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $tokenManager = $this->get('music.token_manager');
-
-        $item = $em->getRepository('MusicBundle:MixItem')
-            ->findOneBySlug($slug);
-
-        if (!$item) {
-            throw $this->createNotFoundException('Item not found');
-        }
-
-        $tokens = $tokenManager->createTokens($item);
-
-        return $this->render('MusicBundle:Music:mix_item.html.twig', [
+        return $this->render(sprintf('MusicBundle:Music:%s.html.twig', $tpl), [
             'item' => $item,
             'tokens' => $tokens,
         ]);

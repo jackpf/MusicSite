@@ -21,4 +21,9 @@ class VideoCastItem extends MediaItem
     {
         $this->videoFile = $videoFile;
     }
+
+    public function getMediaFiles()
+    {
+        return [$this->getVideoFile()];
+    }
 }

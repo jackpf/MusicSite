@@ -5,7 +5,10 @@ namespace MusicBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use MusicBundle\Entity\MediaFile;
 use MusicBundle\Entity\MediaItem;
+use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\PlayToken;
+use MusicBundle\Entity\ReleaseItem;
+use MusicBundle\Entity\VideoCastItem;
 
 class PlayTokenManager
 {
@@ -19,6 +22,10 @@ class PlayTokenManager
     public function createTokens(MediaItem $item)
     {
         $tokens = [];
+
+        if (!($item instanceof ReleaseItem || $item instanceof MixItem || $item instanceof VideoCastItem)) {
+            return $tokens;
+        }
 
         foreach ($item->getMediaFiles() as $file) {
             $tokens[$file->getId()] = new PlayToken($file);

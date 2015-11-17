@@ -18,21 +18,29 @@ music_mix:
     path:     /mixes/
     defaults: { _controller: MusicBundle:Main:index, repo: MixItem }
 
+music_video_cast:
+    path:     /video-casts/
+    defaults: { _controller: MusicBundle:Main:index, repo: VideoCastItem }
+
 music_news_category:
     path:     /news/category/{slug}
     defaults: { _controller: MusicBundle:Main:newsCategory }
 
 music_news_item:
     path:     /news/item/{slug}
-    defaults: { _controller: MusicBundle:Main:news }
+    defaults: { _controller: MusicBundle:Main:item, repo: NewsItem, tpl: news_item }
 
 music_release_item:
     path:     /releases/{slug}
-    defaults: { _controller: MusicBundle:Main:release }
+    defaults: { _controller: MusicBundle:Main:item, repo: ReleaseItem, tpl: release_item }
 
 music_mix_item:
     path:     /mixes/{slug}
-    defaults: { _controller: MusicBundle:Main:mix }
+    defaults: { _controller: MusicBundle:Main:item, repo: MixItem, tpl: mix_item }
+
+music_video_cast_item:
+    path:     /video-casts/{slug}
+    defaults: { _controller: MusicBundle:Main:item, repo: VideoCastItem, tpl: video_cast_item }
 
 music_play:
     path:     /play/{id}/{token}

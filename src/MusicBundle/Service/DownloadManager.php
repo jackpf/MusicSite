@@ -14,10 +14,10 @@ class DownloadManager
         return $name . substr($path, strrpos($path, '.'));
     }
 
-    public static function createPath($original)
+    public static function createPath($original, $newExt = null)
     {
         $parts = explode('.', $original);
-        $ext = end($parts);
+        $ext = $newExt != null ? $newExt : end($parts);
         return sha1($original + rand()) . '.' . $ext;
     }
 

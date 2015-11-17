@@ -99,7 +99,7 @@
             </option>
         </constraint>
     </class>
-    <class name="BuffaloBundle\Entity\VideoFile">
+    <class name="MusicBundle\Entity\VideoFile">
         <property name="audioFile">
             <constraint name="File">
                 <option name="mimeTypes">

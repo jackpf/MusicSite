@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="MusicBundle\Entity\VideoFile" table="files">
+        <one-to-one target-entity="MusicBundle\Entity\VideoCastItem" field="mediaItem" />
+        <field name="audioPath" column="audio_path" />
+        <field name="videoPath" column="video_path" />
+        <field name="processedPath" column="processed_path" nullable="true" />
+        <field name="iconPath" column="icon_path" nullable="true" />
+        <field name="audioDelay" column="audio_delay" type="float" nullable="true" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="lifecycleFileUpload"/>
+            <lifecycle-callback type="preUpdate" method="lifecycleFileUpload"/>
+            <lifecycle-callback type="postRemove" method="lifecycleFileDelete"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

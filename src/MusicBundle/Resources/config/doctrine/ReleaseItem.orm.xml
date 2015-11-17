@@ -6,7 +6,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="MusicBundle\Entity\ReleaseItem" table="media">
-        <one-to-many target-entity="MusicBundle\Entity\MediaFile" mapped-by="mediaItem" field="mediaFiles" orphan-removal="true">
+        <one-to-many target-entity="MusicBundle\Entity\AudioFile" mapped-by="mediaItem" field="mediaFiles" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

@@ -33,6 +33,7 @@
             <discriminator-mapping value="0" class="MusicBundle\Entity\NewsItem"/>
             <discriminator-mapping value="1" class="MusicBundle\Entity\ReleaseItem"/>
             <discriminator-mapping value="2" class="MusicBundle\Entity\MixItem"/>
+            <discriminator-mapping value="3" class="MusicBundle\Entity\VideoCastItem"/>
         </discriminator-map>
         
         <lifecycle-callbacks>

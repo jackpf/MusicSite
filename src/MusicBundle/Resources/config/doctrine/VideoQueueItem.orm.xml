@@ -6,21 +6,17 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="MusicBundle\Entity\MediaFile" table="files" inheritance-type="SINGLE_TABLE">
+    <entity name="MusicBundle\Entity\VideoQueueItem" table="video_queue">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <one-to-one field="file" target-entity="MusicBundle\Entity\VideoFile">
+            <join-column on-delete="CASCADE" />
+        </one-to-one>
+        <field name="state" type="integer" />
+        <field name="result" type="integer" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
-        <field name="updatedAt" column="updated_at" type="datetime">
-            <gedmo:timestampable on="update"/>
-        </field>
-
-        <discriminator-column name="type" type="integer" />
-        <discriminator-map>
-            <discriminator-mapping value="0" class="MusicBundle\Entity\AudioFile"/>
-            <discriminator-mapping value="1" class="MusicBundle\Entity\VideoFile"/>
-        </discriminator-map>
     </entity>
 </doctrine-mapping>

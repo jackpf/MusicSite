@@ -5,7 +5,7 @@ namespace MusicBundle\Entity;
 use MusicBundle\Data\Data;
 use MusicBundle\Service\DownloadManager;
 
-class MediaItem
+abstract class MediaItem
 {
     protected $id;
 

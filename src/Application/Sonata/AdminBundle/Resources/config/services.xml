@@ -23,10 +23,16 @@
             <argument>MusicBundle\Entity\MixItem</argument>
             <argument />
         </service>
-        <service id="sonata.admin.media_file" class="Application\Sonata\AdminBundle\Admin\MediaFileAdmin">
-            <tag name="sonata.admin" manager_type="orm" label="Media Files" show_in_dashboard="false"/>
+        <service id="sonata.admin.audio_file" class="Application\Sonata\AdminBundle\Admin\AudioFileAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Audio Files" show_in_dashboard="false"/>
             <argument />
-            <argument>MusicBundle\Entity\MediaFile</argument>
+            <argument>MusicBundle\Entity\AudioFile</argument>
+            <argument />
+        </service>
+        <service id="sonata.admin.video_file" class="Application\Sonata\AdminBundle\Admin\VideoFileAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Video Files" show_in_dashboard="false"/>
+            <argument />
+            <argument>MusicBundle\Entity\VideoFile</argument>
             <argument />
         </service>
         <service id="sonata.admin.news_category" class="Application\Sonata\AdminBundle\Admin\NewsCategoryAdmin">
@@ -52,6 +58,15 @@
             <argument />
             <argument>MusicBundle\Entity\Order</argument>
             <argument>ApplicationSonataAdminBundle:OrderAdmin</argument>
+        </service>
+        <service id="sonata.admin.video_cast" class="Application\Sonata\AdminBundle\Admin\VideoCastAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Video Casts"/>
+            <argument />
+            <argument>MusicBundle\Entity\VideoCastItem</argument>
+            <argument />
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
         </service>
 
         <service id="sonata.kernel_listener" class="Application\Sonata\AdminBundle\EventListener\KernelListener">

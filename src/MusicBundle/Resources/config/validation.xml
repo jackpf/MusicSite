@@ -51,7 +51,7 @@
             <constraint name="Valid" />
         </property>
     </class>
-    <class name="MusicBundle\Entity\MediaFile">
+    <class name="MusicBundle\Entity\AudioFile">
         <property name="name">
             <constraint name="NotBlank" />
         </property>
@@ -98,6 +98,42 @@
                 <value>losslessPath</value>
             </option>
         </constraint>
+    </class>
+    <class name="BuffaloBundle\Entity\VideoFile">
+        <property name="audioFile">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>audio/wav</value>
+                    <value>audio/x-wav</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid WAV file.</option>
+            </constraint>
+        </property>
+        <!--<property name="videoFile">
+            <constraint name="File">
+                <option name="mimeTypes">
+                    <value>video/h264</value>
+                    <value>video/mp4</value>
+                </option>
+                <option name="mimeTypesMessage">Please upload a valid H264 encoded file.</option>
+            </constraint>
+        </property>-->
+        <!--<constraint name="MusicBundle\Validation\FileRequiredConstraint">
+            <option name="file">
+                <value>file</value>
+            </option>
+            <option name="path">
+                <value>path</value>
+            </option>
+        </constraint>
+        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
+            <option name="file">
+                <value>losslessFile</value>
+            </option>
+            <option name="path">
+                <value>losslessPath</value>
+            </option>
+        </constraint>-->
     </class>
     <class name="MusicBundle\Entity\ReleaseVariant">
         <property name="type">

@@ -44,6 +44,9 @@
             </call>
             <tag name="payum.action" gateway="paypal" />
         </service>
+        <service id="music.video_processor" class="MusicBundle\Service\VideoProcessor">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 
 </container>

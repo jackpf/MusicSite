@@ -135,12 +135,6 @@ $('.js-favourite').click(function(e) {
 });
 
 $('.js-expand-video').click(function(e) {
-    if (!isLoggedIn) {
-        return;
-    } else {
-        e.preventDefault();
-    }
-
     $container = $('.image');
     $video = $('video');
 

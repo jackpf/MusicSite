@@ -31,8 +31,7 @@
                 {% endif %}
             {% endif %}
         </div>
-        <br clear="both" />
+        {% include 'MusicBundle:Music:_item_navigation.html.twig' %}
     </div>
-    {% include 'MusicBundle:Music:_item_navigation.html.twig' %}
     {% include 'MusicBundle:Music:_disqus.html.twig' %}
 {% endblock %}

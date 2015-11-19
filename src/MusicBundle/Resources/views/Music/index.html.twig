@@ -1,5 +1,7 @@
 {% extends 'MusicBundle:Music:base.html.twig' %}
 
+{% block title %}{{ title is not empty ? ' | ' ~ title : '' }}{% endblock %}
+
 {%block content %}
     {% for item in items %}
         <div class="col-md-4 item-container">
@@ -12,6 +14,7 @@
                 {% endif %}
                 {{ item.shortContent }}
                 <br clear="both" />
+                <div class="item-info">#{{ item.type }}</div>
             </div>
             {% if item.background is not empty %}
                 <div class="item-background" style="background-image: url({{ upload_path(item.background) }});"></div>

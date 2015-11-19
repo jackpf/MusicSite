@@ -49,4 +49,9 @@ class NewsItem extends MediaItem
     {
         return [];
     }
+
+    public function getType()
+    {
+        return 'news';
+    }
 }

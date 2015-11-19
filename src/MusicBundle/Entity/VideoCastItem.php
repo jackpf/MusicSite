@@ -80,4 +80,9 @@ class VideoCastItem extends MediaItem
     {
         $this->audioDownloadLink = $audioDownloadLink;
     }
+
+    public function getType()
+    {
+        return 'videocast';
+    }
 }

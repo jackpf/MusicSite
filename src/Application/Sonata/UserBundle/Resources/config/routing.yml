@@ -1,3 +1,7 @@
 user_orders:
     path:     /profile/orders
-    defaults: { _controller: ApplicationSonataUserBundle:Order:orders }
+    defaults: { _controller: ApplicationSonataUserBundle:Profile:orders }
+
+user_favourites:
+    path:     /profile/favourites
+    defaults: { _controller: ApplicationSonataUserBundle:Profile:favourites, title: 'Favourites' }

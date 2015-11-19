@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -24,9 +25,25 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var integer $id
+     * @var int
      */
     protected $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $orders;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $favourites;
+
+    public function __construct()
+    {
+        $this->favourites = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -36,5 +53,68 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param mixed $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFavourites()
+    {
+        return $this->favourites;
+    }
+
+    /**
+     * @param mixed $favourites
+     */
+    public function setFavourites($favourites)
+    {
+        $this->favourites = $favourites;
+    }
+
+    /**
+     * @param mixed $favourites
+     */
+    public function addFavourite($favourite)
+    {
+        $this->favourites->add($favourite);
+    }
+
+    /**
+     * @param mixed $favourites
+     */
+    public function removeFavourite($favourite)
+    {
+        $this->favourites->removeElement($favourite);
+    }
+
+    /**
+     * @param $favouriteToFind
+     * @return bool
+     */
+    public function hasFavourite($favouriteToFind)
+    {
+        foreach ($this->getFavourites() as $favourite) {
+            if ($favourite->getId() == $favouriteToFind->getId()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

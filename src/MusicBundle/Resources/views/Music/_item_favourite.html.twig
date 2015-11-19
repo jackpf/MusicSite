@@ -1,0 +1,1 @@
+<a class="js-favourite {{ app.user is not null and app.user.hasFavourite(item) ? 'js-in-favourites' : '' }}" href="{{ path('music_favourite', {id: item.id}) }}">{{ app.user is null or not app.user.hasFavourite(item) ? 'Add to favourites' : 'Remove from favourites' }}</a>

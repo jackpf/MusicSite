@@ -297,6 +297,12 @@ form div.submit {
     width: 704px !important;
     height: 528px !important;
 }
+.item-info {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    color: grey;
+}
 
 /* Audio JS fix */
 .play-pause {

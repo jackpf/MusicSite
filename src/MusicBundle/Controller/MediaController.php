@@ -8,10 +8,13 @@ use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\ReleaseItem;
 use MusicBundle\Entity\VideoFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use JMS\SecurityExtraBundle\Security\Authorization\Expression\Expression;
 
 class MediaController extends Controller
 {
@@ -71,5 +74,34 @@ class MediaController extends Controller
         $response->setContent(file_get_contents($path));
 
         return $response;
+    }
+
+    /**
+     * @PreAuthorize("hasRole('A') or (hasRole('B') and hasRole('C'))")
+     */
+    public function favouriteAction($id)
+    {
+        $item = $this->getDoctrine()->getEntityManager()
+            ->getRepository('MusicBundle:MediaItem')
+            ->find($id);
+
+        if (!$item) {
+            throw $this->createNotFoundException('Media not found');
+        }
+
+        $user = $this->get('security.token_storage')
+            ->getToken()
+            ->getUser();
+
+        if (!$user->hasFavourite($item)) {
+            $user->addFavourite($item);
+        } else {
+            $user->removeFavourite($item);
+        }
+
+        $this->getDoctrine()->getManager()
+            ->flush();
+
+        return new RedirectResponse($this->get('music.twig.helper_extension')->itemPath($item));
     }
 }

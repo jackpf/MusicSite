@@ -78,4 +78,9 @@ class ReleaseItem extends MediaItem
     {
         return $this->getTitle();
     }
+
+    public function getType()
+    {
+        return 'release';
+    }
 }

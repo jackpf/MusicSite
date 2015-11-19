@@ -197,4 +197,6 @@ abstract class MediaItem
     }
 
     public abstract function getMediaFiles();
+
+    public abstract function getType();
 }

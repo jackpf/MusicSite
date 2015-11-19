@@ -5,7 +5,7 @@ namespace Application\Sonata\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderController extends Controller
+class ProfileController extends Controller
 {
     public function ordersAction(Request $request)
     {
@@ -25,6 +25,21 @@ class OrderController extends Controller
 
         return $this->render('FOSUserBundle:Profile:orders.html.twig',[
             'orders' => $orders,
+        ]);
+    }
+
+    public function favouritesAction(Request $request, $title = null)
+    {
+        $favourites = $this->get('knp_paginator')->paginate(
+            $this->get('security.context')
+                ->getToken()->getUser()
+                ->getFavourites(),
+            $request->get('page', 1), 10
+        );
+
+        return $this->render('MusicBundle:Music:index.html.twig',[
+            'items' => $favourites,
+            'title' => $title,
         ]);
     }
 }

@@ -83,6 +83,12 @@ $(document).ready(function() {
 
 // Ajax stuff
 $('.js-order-add').click(function(e) {
+    if (!isLoggedIn) {
+        return;
+    } else {
+        e.preventDefault();
+    }
+
     $.get($(this).attr('href'))
         .done(function(data) {
             $('body').animate({
@@ -94,11 +100,62 @@ $('.js-order-add').click(function(e) {
         .fail(function(jqXHR, textStatus, errorThrown) {
             alert('Error adding item to order: ' + errorThrown);
         });
+});
 
-    e.preventDefault();
+$('.js-favourite').click(function(e) {
+    if (!isLoggedIn) {
+        return;
+    } else {
+        e.preventDefault();
+    }
+
+    var $link = $(this);
+
+    $.get($(this).attr('href'))
+        .done(function(data) {
+            if (!$link.hasClass('js-in-favourites')) {
+                $link.html('Item added');
+                setTimeout(function() {
+                    $link.html('Remove from favourites');
+                }, 2000);
+            } else {
+                $link.html('Item removed');
+                setTimeout(function() {
+                    $link.html('Add to favourites');
+                }, 2000);
+            }
+            $link.toggleClass('js-in-favourites');
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert('Error favouriting item: ' + errorThrown);
+        });
+});
+
+$('.js-favourite-delete').click(function(e) {
+    if (!isLoggedIn) {
+        return;
+    } else {
+        e.preventDefault();
+    }
+
+    var $link = $(this);
+
+    $.get($(this).attr('href'))
+        .done(function(data) {
+            $link.parent().slideUp();
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert('Error favouriting item: ' + errorThrown);
+        });
 });
 
 $('.js-expand-video').click(function(e) {
+    if (!isLoggedIn) {
+        return;
+    } else {
+        e.preventDefault();
+    }
+
     $container = $('.image');
     $video = $('video');
 
@@ -111,6 +168,4 @@ $('.js-expand-video').click(function(e) {
         $container.removeClass('container-expanded');
         $(this).html('+');
     }
-
-    e.preventDefault();
 });

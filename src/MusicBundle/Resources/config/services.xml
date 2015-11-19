@@ -6,8 +6,7 @@
 
     <services>
         <service id="music.twig.helper_extension"
-                 class="MusicBundle\Twig\HelperExtension"
-                 public="false">
+                 class="MusicBundle\Twig\HelperExtension">
             <tag name="twig.extension" />
             <argument type="service" id="router" />
         </service>

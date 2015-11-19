@@ -4,7 +4,7 @@ namespace MusicBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class BasketController extends Controller
 {
@@ -25,6 +25,6 @@ class BasketController extends Controller
 
         $basket->store();
 
-        return new JsonResponse(['count' => $basket->size()]);
+        return new RedirectResponse($this->get('music.twig.helper_extension')->itemPath($variant->getMediaItem()));
     }
 }

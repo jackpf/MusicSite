@@ -17,7 +17,7 @@ class MainController extends Controller
         return $this->render('MusicBundle:Music:_news_categories.html.twig', ['categories' => $categories]);
     }
 
-    public function indexAction(Request $request, $repo = null)
+    public function indexAction(Request $request, $repo = null, $title = null)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -35,11 +35,12 @@ class MainController extends Controller
             ->paginate($qb->getQuery(), $request->get('page', 1), 9);
 
         return $this->render('MusicBundle:Music:index.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'title' => $title,
         ]);
     }
 
-    public function newsCategoryAction(Request $request, $slug)
+    public function newsCategoryAction(Request $request, $slug, $title = null)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -66,7 +67,8 @@ class MainController extends Controller
             ->paginate($qb->getQuery(), $request->get('page', 1), 9);
 
         return $this->render('MusicBundle:Music:index.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'title' => $title,
         ]);
     }
 

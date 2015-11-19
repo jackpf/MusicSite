@@ -8,6 +8,10 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="HandheldFriendly" content="true" />
+
+        <script>
+            var isLoggedIn = {{ is_granted('IS_AUTHENTICATED_FULLY') ? 'true' : 'false' }};
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -35,8 +39,9 @@
                                     <img class="menu-icon" src="{{ asset('bundles/music/images/menu.png') }}" />
                                 </a>
                                 <ul class="fallback">
-                                    <li><a href="{{ path('fos_user_profile_edit') }}"><img style="width:16px;height:16px;" src="{{ asset('bundles/music/images/profile.png') }}" /> update profile</a></li>
-                                    <li><a href="{{ path('user_orders') }}"><img style="width:16px;height:16px;" src="{{ asset('bundles/music/images/downloads.png') }}" /> orders</a></li>
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">update profile</a></li>
+                                    <li><a href="{{ path('user_orders') }}">orders</a></li>
+                                    <li><a href="{{ path('user_favourites') }}">favourites</a></li>
                                 </ul>
                             </li>
                             <li>|</li>
@@ -119,6 +124,9 @@
                 <a href="mailto: {{ mailerUser }}">contact</a>
             </div>
         </div>
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
         {% block javascripts %}
             {% javascripts '@MusicBundle/Resources/public/js/*' %}

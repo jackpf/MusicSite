@@ -8,23 +8,23 @@ music_about:
 
 music_news:
     path:     /news/
-    defaults: { _controller: MusicBundle:Main:index, repo: NewsItem }
+    defaults: { _controller: MusicBundle:Main:index, repo: NewsItem, title: 'News' }
 
 music_release:
     path:     /releases/
-    defaults: { _controller: MusicBundle:Main:index, repo: ReleaseItem }
+    defaults: { _controller: MusicBundle:Main:index, repo: ReleaseItem, title: 'Releases' }
 
 music_mix:
     path:     /mixes/
-    defaults: { _controller: MusicBundle:Main:index, repo: MixItem }
+    defaults: { _controller: MusicBundle:Main:index, repo: MixItem, title: 'Mixes' }
 
 music_video_cast:
     path:     /video-casts/
-    defaults: { _controller: MusicBundle:Main:index, repo: VideoCastItem }
+    defaults: { _controller: MusicBundle:Main:index, repo: VideoCastItem, title: 'Video Casts' }
 
 music_news_category:
     path:     /news/category/{slug}
-    defaults: { _controller: MusicBundle:Main:newsCategory }
+    defaults: { _controller: MusicBundle:Main:newsCategory, title: 'News' }
 
 music_news_item:
     path:     /news/item/{slug}
@@ -61,6 +61,10 @@ music_order_purchase:
 music_basket_add:
     path:     /basket/add/{id}
     defaults: { _controller: MusicBundle:Basket:add }
+
+music_favourite:
+    path:     /favourite/{id}
+    defaults: { _controller: MusicBundle:Media:favourite }
 
 music_error:
     path: /error

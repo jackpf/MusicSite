@@ -58,4 +58,9 @@ class MixItem extends MediaItem
             }
         }
     }
+
+    public function getType()
+    {
+        return 'mix';
+    }
 }

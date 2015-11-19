@@ -196,6 +196,11 @@ abstract class MediaItem
         return $this->background;
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     public abstract function getMediaFiles();
 
     public abstract function getType();

@@ -10,43 +10,27 @@ class AudioFile extends MediaFile
 {
     private $name;
 
-    private $path;
-
     private $previewPath;
 
-    private $losslessPath;
-
-    private $mediaItem;
-
-    private $file;
+    private $mp3Path;
 
     private $previewFile;
 
-    private $losslessFile;
-
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
+    private $mp3File;
 
     public function getPreviewPath()
     {
         return $this->previewPath;
     }
 
-    public function getLosslessPath()
+    public function getMp3Path()
     {
-        return $this->losslessPath;
+        return $this->mp3Path;
     }
 
-    public function setLosslessPath($losslessPath)
+    public function setMp3Path($mp3Path)
     {
-        $this->losslessPath = $losslessPath;
+        $this->mp3Path = $mp3Path;
     }
 
     public function setPreviewPath($previewPath)
@@ -64,27 +48,6 @@ class AudioFile extends MediaFile
         $this->name = $name;
     }
 
-    public function getMediaItem()
-    {
-        return $this->mediaItem;
-    }
-
-    public function setMediaItem($mediaItem)
-    {
-        $this->mediaItem = $mediaItem;
-    }
-
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    public function getFile()
-    {
-        return $this->file;
-    }
-
     public function getPreviewFile()
     {
         return $this->previewFile;
@@ -95,50 +58,13 @@ class AudioFile extends MediaFile
         $this->previewFile = $previewFile;
     }
 
-    public function getLosslessFile()
+    public function getMp3File()
     {
-        return $this->losslessFile;
+        return $this->mp3File;
     }
 
-    public function setLosslessFile(UploadedFile $losslessFile = null)
+    public function setMp3File(UploadedFile $mp3File = null)
     {
-        $this->losslessFile = $losslessFile;
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    public function lifecycleFileUpload()
-    {
-        if ($this->getLosslessFile()) {
-            $path = DownloadManager::createPath($this->getLosslessFile()->getClientOriginalName());
-
-            $this->getLosslessFile()->move(
-                Data::getUploadPath(),
-                $path
-            );
-
-            $this->delete($this->getLosslessPath());
-            $this->delete($this->getPath());
-            $this->delete($this->getPreviewPath());
-
-            $this->setLosslessPath($path);
-            $this->setFile($this->getLosslessFile()); // Handled later
-            $this->setLosslessFile(null);
-        }
-    }
-
-    public function lifecycleFileDelete()
-    {
-        $this->delete($this->getLosslessPath());
-        $this->delete($this->getPath());
-        $this->delete($this->getPreviewPath());
-    }
-
-    protected function delete($filename)
-    {
-        $path = Data::getUploadPath() . '/' . $filename;
-
-        if ($filename != null && file_exists($path)) {
-            unlink($path);
-        }
+        $this->mp3File = $mp3File;
     }
 }

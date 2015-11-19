@@ -17,15 +17,12 @@ class VideoProcessor extends Processor
 
     public function process(MediaFile $file)
     {
-        $audioPath = $file->getAudioPath();
-        $videoPath = $file->getVideoPath();
-        $processedPath = DownloadManager::createPath($videoPath, 'mp4');
+        $path = $file->getPath();
+        $processedPath = DownloadManager::createPath($path, 'mp4');
 
         $result = self::run(sprintf(
-            'ffmpeg -itsoffset %f -i %s -i %s -strict -2 %s -c:v libx264 -preset ultrafast -crf 23 -y -movflags +faststart',
-            (float) $file->getAudioDelay(),
-            Data::getUploadPath() . '/' . $audioPath,
-            Data::getUploadPath() . '/' . $videoPath,
+            'ffmpeg -i %s -strict -2 %s -preset ultrafast -crf 23 -y -movflags +faststart',
+            Data::getUploadPath() . '/' . $path,
             Data::getUploadPath() . '/' . $processedPath
         ));
 
@@ -35,11 +32,11 @@ class VideoProcessor extends Processor
 
         $file->setProcessedPath($processedPath);
 
-        $iconPath = DownloadManager::createPath($processedPath, 'jpg');
+        $iconPath = DownloadManager::createPath($file->getPath(), 'jpg');
 
         self::run(sprintf(
             'ffmpeg -ss 1.0 -i %s -vframes 1 -s 640x480 -f image2 %s',
-            Data::getUploadPath() . '/' . $processedPath,
+            Data::getUploadPath() . '/' . $file->getPath(),
             Data::getUploadPath() . '/' . $iconPath
         ));
 

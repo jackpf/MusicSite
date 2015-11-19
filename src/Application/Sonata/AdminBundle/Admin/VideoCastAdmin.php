@@ -71,7 +71,7 @@ class VideoCastAdmin extends MediaAdmin
     {
         $file = $object->getVideoFile();
 
-        if ($file->getAudioFile() || $file->getVideoFile()) {
+        if ($file->getFile() != null) {
             $videoQueueItem = $this->em->getRepository('MusicBundle:VideoQueueItem')
                 ->findBy(['file' => $file, 'state' => VideoQueueItem::STATE_UNPROCESSED]);
 

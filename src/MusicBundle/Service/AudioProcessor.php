@@ -13,8 +13,8 @@ class AudioProcessor extends Processor
             throw new FileNotFoundException(Data::getUploadPath() . '/' . $watermark);
         }
 
-        $path = $inputFile->getLosslessPath();
-        $parts = explode('.', $inputFile->getLosslessPath());
+        $path = $inputFile->getPath();
+        $parts = explode('.', $path);
         $ext = array_pop($parts);
         $mp3Path = implode('.', $parts) . '.mp3';
         $previewPath = implode('.', $parts) . '-preview.mp3';
@@ -38,8 +38,9 @@ class AudioProcessor extends Processor
             $fadeTime
         ));
 
-        $inputFile->setPath($mp3Path);
+        $inputFile->setMp3Path($mp3Path);
         $inputFile->setPreviewPath($previewPath);
+        $inputFile->setFile(null); // Prevents the upload triggering again
     }
 
     public static function getMP3BitRateSampleRate($filename)

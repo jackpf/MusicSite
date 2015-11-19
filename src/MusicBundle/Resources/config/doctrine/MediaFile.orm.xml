@@ -10,6 +10,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="path" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -22,5 +23,11 @@
             <discriminator-mapping value="0" class="MusicBundle\Entity\AudioFile"/>
             <discriminator-mapping value="1" class="MusicBundle\Entity\VideoFile"/>
         </discriminator-map>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="lifecycleFileUpload"/>
+            <lifecycle-callback type="preUpdate" method="lifecycleFileUpload"/>
+            <lifecycle-callback type="postRemove" method="lifecycleFileDelete"/>
+        </lifecycle-callbacks>
     </entity>
 </doctrine-mapping>

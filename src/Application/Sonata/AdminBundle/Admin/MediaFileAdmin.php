@@ -7,14 +7,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class AudioFileAdmin extends MediaFileAdmin
+class MediaFileAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
+            ->add('file', 'file')
         ;
-
-        parent::configureFormFields($formMapper);
     }
 }

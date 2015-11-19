@@ -51,27 +51,16 @@
             <constraint name="Valid" />
         </property>
     </class>
+    <class name="MusicBundle\Entity\VideoCastItem">
+        <property name="videoFile">
+            <constraint name="Valid" />
+        </property>
+    </class>
     <class name="MusicBundle\Entity\AudioFile">
         <property name="name">
             <constraint name="NotBlank" />
         </property>
-        <!--<property name="file">
-            <constraint name="File">
-                <option name="mimeTypes">
-                    <value>audio/mp3</value>
-                    <value>audio/mpeg</value>
-                    <value>audio/mpeg3</value>
-                    <value>audio/x-mpeg-3</value>
-                </option>
-                <option name="mimeTypesMessage">Please upload a valid MP3 file.</option>
-            </constraint>
-            <constraint name="MusicBundle\Validation\Mp3QualityConstraint">
-                <option name="minBitRate">
-                    <value>320</value>
-                </option>
-            </constraint>
-        </property>-->
-        <property name="losslessFile">
+        <property name="file">
             <constraint name="File">
                 <option name="mimeTypes">
                     <value>audio/aiff</value>
@@ -82,43 +71,25 @@
                 <option name="mimeTypesMessage">Please upload a valid AIF or WAV file.</option>
             </constraint>
         </property>
-        <!--<constraint name="MusicBundle\Validation\FileRequiredConstraint">
+        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
             <option name="file">
                 <value>file</value>
             </option>
             <option name="path">
                 <value>path</value>
-            </option>
-        </constraint>-->
-        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
-            <option name="file">
-                <value>losslessFile</value>
-            </option>
-            <option name="path">
-                <value>losslessPath</value>
             </option>
         </constraint>
     </class>
     <class name="MusicBundle\Entity\VideoFile">
-        <property name="audioFile">
+        <!--<property name="file">
             <constraint name="File">
                 <option name="mimeTypes">
-                    <value>audio/wav</value>
-                    <value>audio/x-wav</value>
+                    <value>video/mpeg</value>
                 </option>
-                <option name="mimeTypesMessage">Please upload a valid WAV file.</option>
-            </constraint>
-        </property>
-        <!--<property name="videoFile">
-            <constraint name="File">
-                <option name="mimeTypes">
-                    <value>video/h264</value>
-                    <value>video/mp4</value>
-                </option>
-                <option name="mimeTypesMessage">Please upload a valid H264 encoded file.</option>
+                <option name="mimeTypesMessage">Please upload a valid MPEG file.</option>
             </constraint>
         </property>-->
-        <!--<constraint name="MusicBundle\Validation\FileRequiredConstraint">
+       <constraint name="MusicBundle\Validation\FileRequiredConstraint">
             <option name="file">
                 <value>file</value>
             </option>
@@ -126,14 +97,6 @@
                 <value>path</value>
             </option>
         </constraint>
-        <constraint name="MusicBundle\Validation\FileRequiredConstraint">
-            <option name="file">
-                <value>losslessFile</value>
-            </option>
-            <option name="path">
-                <value>losslessPath</value>
-            </option>
-        </constraint>-->
     </class>
     <class name="MusicBundle\Entity\ReleaseVariant">
         <property name="type">

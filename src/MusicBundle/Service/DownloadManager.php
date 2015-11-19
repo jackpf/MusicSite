@@ -48,9 +48,9 @@ class DownloadManager
 
         foreach ($item->getMediaFiles() as $file) {
             if ($type == '320') {
-                $filePath = $file->getPath();
+                $filePath = $file->getMp3Path();
             } else if ($type == 'lossless') {
-                $filePath = $file->getLosslessPath();
+                $filePath = $file->getPath();
             } else {
                 throw new \RuntimeException(sprintf('Unsupported type: "%s"', $type));
             }

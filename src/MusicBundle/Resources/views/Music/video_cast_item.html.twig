@@ -8,7 +8,7 @@
         <div class="item-content">
             <div class="image">
                 {% if item.videoFile is not null %}
-                    {% if item.videoFile.processedPath is not empty %}
+                    {% if item.videoFile.path is not empty %}
                         <video class="video" controls>
                             <source src="{{ path('music_play', {id: item.videoFile.id, token: tokens[item.videoFile.id].token}) }}" type="video/mp4">
                         </video>

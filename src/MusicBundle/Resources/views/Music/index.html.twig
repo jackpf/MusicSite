@@ -15,6 +15,9 @@
                 {{ item.shortContent }}
                 <br clear="both" />
                 <div class="item-info">#{{ item.type }}</div>
+                {% if app.user and app.user.hasFavourite(item) %}
+                    <img class="heart heart-item" src="{{ asset('/bundles/music/images/heart-full.png') }}" />
+                {% endif %}
             </div>
             {% if item.background is not empty %}
                 <div class="item-background" style="background-image: url({{ upload_path(item.background) }});"></div>

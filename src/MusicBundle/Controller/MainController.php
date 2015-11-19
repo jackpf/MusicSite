@@ -76,18 +76,36 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $tokenManager = $this->get('music.token_manager');
+        $repo = $em->getRepository(sprintf('MusicBundle:%s', $repo));
 
-        $item = $em->getRepository(sprintf('MusicBundle:%s', $repo))
-            ->findOneBySlug($slug);
+        $item = $repo->findOneBySlug($slug);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
         }
 
+        $nextItem = $repo->createQueryBuilder('i')
+            ->select('i')
+            ->where('i.id > :id')
+            ->orderBy('i.id', 'asc')
+            ->setParameter('id', $item->getId())
+            ->setMaxResults(1)
+            ->getQuery()->getResult();
+
+        $previousItem = $repo->createQueryBuilder('i')
+            ->select('i')
+            ->where('i.id < :id')
+            ->orderBy('i.id', 'desc')
+            ->setParameter('id', $item->getId())
+            ->setMaxResults(1)
+            ->getQuery()->getResult();
+
         $tokens = $tokenManager->createTokens($item);
 
         return $this->render(sprintf('MusicBundle:Music:%s.html.twig', $tpl), [
             'item' => $item,
+            'nextItem' => count($nextItem) > 0 ? $nextItem[0] : null,
+            'previousItem' => count($previousItem) > 0 ? $previousItem[0] : null,
             'tokens' => $tokens,
         ]);
     }

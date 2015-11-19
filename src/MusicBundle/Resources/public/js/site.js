@@ -110,39 +110,24 @@ $('.js-favourite').click(function(e) {
     }
 
     var $link = $(this);
+    var $heart = $('.heart');
 
     $.get($(this).attr('href'))
         .done(function(data) {
             if (!$link.hasClass('js-in-favourites')) {
                 $link.html('Item added');
+                $heart.attr('src', '/bundles/music/images/heart-full.png');
                 setTimeout(function() {
                     $link.html('Remove from favourites');
                 }, 2000);
             } else {
                 $link.html('Item removed');
+                $heart.attr('src', '/bundles/music/images/heart-empty.png');
                 setTimeout(function() {
                     $link.html('Add to favourites');
                 }, 2000);
             }
             $link.toggleClass('js-in-favourites');
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            alert('Error favouriting item: ' + errorThrown);
-        });
-});
-
-$('.js-favourite-delete').click(function(e) {
-    if (!isLoggedIn) {
-        return;
-    } else {
-        e.preventDefault();
-    }
-
-    var $link = $(this);
-
-    $.get($(this).attr('href'))
-        .done(function(data) {
-            $link.parent().slideUp();
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             alert('Error favouriting item: ' + errorThrown);

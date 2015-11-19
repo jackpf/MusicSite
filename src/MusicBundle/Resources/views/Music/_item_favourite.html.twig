@@ -1,1 +1,7 @@
-<a class="js-favourite {{ app.user is not null and app.user.hasFavourite(item) ? 'js-in-favourites' : '' }}" href="{{ path('music_favourite', {id: item.id}) }}">{{ app.user is null or not app.user.hasFavourite(item) ? 'Add to favourites' : 'Remove from favourites' }}</a>
+{% if app.user is not null and app.user.hasFavourite(item) %}
+    <img class="heart" src="{{ asset('/bundles/music/images/heart-full.png') }}">
+    <a class="js-favourite js-in-favourites" href="{{ path('music_favourite', {id: item.id}) }}">Remove from favourites</a>
+{% else %}
+    <img class="heart" src="{{ asset('/bundles/music/images/heart-empty.png') }}">
+    <a class="js-favourite" href="{{ path('music_favourite', {id: item.id}) }}">Add to favourites</a>
+{% endif %}

@@ -1,0 +1,13 @@
+<div class="row pagination-container">
+    <div class="pagination">
+        {% if nextItem is not null %}
+            <span class="next"><a href="{{ item_path(nextItem) }}"><< {{ nextItem }}</a></span>
+            {% if previousItem is not null %}
+                |
+            {% endif %}
+        {% endif %}
+        {% if previousItem is not null %}
+            <span class="previous"><a href="{{ item_path(previousItem) }}">{{ previousItem }} >></a></span>
+        {% endif %}
+    </div>
+</div>

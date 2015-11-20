@@ -10,6 +10,8 @@ class VideoFile extends MediaFile
 {
     private $processedPath;
 
+    private $audioPath;
+
     private $iconPath;
 
     /**
@@ -26,6 +28,22 @@ class VideoFile extends MediaFile
     public function setProcessedPath($processedPath)
     {
         $this->processedPath = $processedPath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAudioPath()
+    {
+        return $this->audioPath;
+    }
+
+    /**
+     * @param mixed $audioPath
+     */
+    public function setAudioPath($audioPath)
+    {
+        $this->audioPath = $audioPath;
     }
 
     /**

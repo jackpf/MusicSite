@@ -10,5 +10,6 @@
         <one-to-one target-entity="MusicBundle\Entity\VideoCastItem" field="mediaItem" />
         <field name="iconPath" column="icon_path" nullable="true" />
         <field name="processedPath" column="processed_path" nullable="true" />
+        <field name="audioPath" column="audio_path" nullable="true" />
     </entity>
 </doctrine-mapping>

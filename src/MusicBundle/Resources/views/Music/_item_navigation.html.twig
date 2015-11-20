@@ -1,6 +1,6 @@
 {% if nextItem is not null or previousItem is not null %}
     <div class="row" style="margin-top: 10px;">
-        <div class="col-xs-6">
+        <div class="col-xs-6" style="text-align: left;">
             {% if nextItem is not null %}
                 <a href="{{ item_path(nextItem) }}"><< {{ nextItem }}</a>
             {% endif %}

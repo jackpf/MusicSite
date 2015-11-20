@@ -10,9 +10,9 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <one-to-one field="file" target-entity="MusicBundle\Entity\VideoFile">
+        <many-to-one field="file" target-entity="MusicBundle\Entity\VideoFile">
             <join-column on-delete="CASCADE" />
-        </one-to-one>
+        </many-to-one>
         <field name="state" type="integer" />
         <field name="result" type="integer" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">

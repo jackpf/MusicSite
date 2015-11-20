@@ -10,9 +10,14 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 abstract class MediaAdmin extends Admin
 {
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
+
+    protected $datagridValues = [
+        '_sort_by'      => 'createdAt',
+        '_sort_order'   => 'DESC',
+    ];
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

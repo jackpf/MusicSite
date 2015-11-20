@@ -6,6 +6,7 @@ use MusicBundle\Data\Data;
 use MusicBundle\Entity\MediaItem;
 use MusicBundle\Entity\MixItem;
 use MusicBundle\Entity\ReleaseItem;
+use MusicBundle\Entity\VideoCastItem;
 
 class DownloadManager
 {
@@ -27,6 +28,8 @@ class DownloadManager
             return $this->getReleasePath($item, $type);
         } else if ($item instanceof MixItem) {
             return $this->getMixPath($item, $type);
+        } else if ($item instanceof VideoCastItem) {
+            return $this->getVideoAudioPath($item, $type);
         } else {
             throw new \RuntimeException(sprintf('Unsupported media: "%s"', get_class($item)));
         }
@@ -82,6 +85,14 @@ class DownloadManager
         return [
             Data::getUploadPath() . '/' . $file->getPath(),
             self::createName($file->getPath(), $file->getName())
+        ];
+    }
+
+    public function getVideoAudioPath(VideoCastItem $item)
+    {
+        return [
+            Data::getUploadPath() . '/' . $item->getVideoFile()->getAudioPath(),
+            self::createName($item->getVideoFile()->getAudioPath(), $item->getTitle())
         ];
     }
 }

@@ -4,17 +4,9 @@ namespace MusicBundle\Service;
 
 use MusicBundle\Entity\MediaFile;
 use MusicBundle\Data\Data;
-use Doctrine\ORM\EntityManagerInterface;
 
 class VideoProcessor extends Processor
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-
     public function process(MediaFile $file)
     {
         $path = $file->getPath();
@@ -46,7 +38,19 @@ class VideoProcessor extends Processor
 
         $file->setIconPath($iconPath);
 
-        $this->em->flush();
+        $audioPath = DownloadManager::createPath($file->getPath(), 'mp3');
+
+        self::run(sprintf(
+            'ffmpeg -i %s %s',
+            Data::getUploadPath() . '/' . $file->getPath(),
+            Data::getUploadPath() . '/' . $audioPath
+        ));
+
+        if ($file->getAudioPath() != null) {
+            $file->delete($file->getAudioPath());
+        }
+
+        $file->setAudioPath($audioPath);
 
         return $result;
     }

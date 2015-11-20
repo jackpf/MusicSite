@@ -8,7 +8,7 @@
         <div class="item-content">
             <div class="image">
                 {% if item.videoFile is not null %}
-                    {% if item.videoFile.path is not empty %}
+                    {% if item.videoFile.processedPath is not empty %}
                         <video class="video" controls>
                             <source src="{{ path('music_play', {id: item.videoFile.id, token: tokens[item.videoFile.id].token}) }}" type="video/mp4">
                         </video>
@@ -28,11 +28,11 @@
                             </div>
                         </div>
                     {% else %}
-                        <span style="color: grey;">Video is awaiting processing</span>
+                        <span style="color: grey;">Video is awaiting processing</span><br />
                     {% endif %}
                     {% include 'MusicBundle:Music:_item_favourite.html.twig' %}
                 {% else %}
-                    <span style="color: grey;">No video</span>
+                    <span style="color: grey;">No video</span><br />
                     {% include 'MusicBundle:Music:_item_favourite.html.twig' %}
                 {% endif %}
             </div>

@@ -109,9 +109,4 @@ class MainController extends Controller
             'tokens' => $tokens,
         ]);
     }
-
-    public function aboutAction()
-    {
-        return $this->render('MusicBundle:Music:about.html.twig');
-    }
 }

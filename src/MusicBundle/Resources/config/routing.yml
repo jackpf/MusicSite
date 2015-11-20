@@ -3,8 +3,10 @@ music_homepage:
     defaults: { _controller: MusicBundle:Main:index, repo: MediaItem }
 
 music_about:
-    path:     /about
-    defaults: { _controller: MusicBundle:Main:about }
+    path: /about
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    MusicBundle:Music:about.html.twig
 
 music_news:
     path:     /news/
